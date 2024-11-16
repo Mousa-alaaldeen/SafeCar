@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Services extends Model
 {
     use HasFactory;
-    /**
-     * Get the contacts that owns the services.
-     */
+    
+    protected $fillable=['name'];
     public function contacts() 
     {
         return $this->belongsTo(Contact::class);

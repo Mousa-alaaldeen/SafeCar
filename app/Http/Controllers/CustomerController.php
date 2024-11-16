@@ -27,10 +27,7 @@ public function register()
     {
         return view('customer.about');
     }
-    public function services()
-    {
-        return view("customer.services");
-    }
+ 
     public function contact()
     {
        $services= Services::all();
@@ -49,6 +46,7 @@ public function register()
 
 
         $validateData = $request->validated();
+     
         Contact::create($validateData);
         return back()->with('status', 'Your message has been sent successfully!');
     }

@@ -66,7 +66,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form action="{{route('customer.contact.store')}}" method="post">
+                    <form action="{{route('contact.store')}}" method="post">
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-6">

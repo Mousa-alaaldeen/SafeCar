@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,16 +27,20 @@ Route::controller(CustomerController::class)->name('customer.')->group(function(
 
     Route::get('/','home')->name('home');
     Route::get('/about','about')->name('about');
-    Route::get('/services','services')->name('services');
     Route::get('/contact','contact')->name('contact');
-    Route::post('/contact/store','store')->name('contact.store');
+    // Route::post('/contact/store','store')->name('contact.store');
     Route::get('/displayContacts','display')->name('display');
     // Route::get('/login','login')->name('login');
     // Route::get('/register','register')->name('register');
 
 });
+Route::get('/services',[ServiceController::class,'services'])->name('services');
+Route::post('/contact/store',[ContactController::class,'store'])->name('contact.store');
 
 
+
+//post Route
+Route::resource('posts',PostController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

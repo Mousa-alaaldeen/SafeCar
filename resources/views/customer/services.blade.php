@@ -1,3 +1,6 @@
+<?php
+ $services=App\Models\Services:: take(4)-> get();
+?>
 @extends('customer.master')
 @section('contact')
 @section('services-active', 'active')
@@ -31,12 +34,20 @@
         <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
             <div class="col-lg-4">
                 <div class="nav w-100 nav-pills me-4">
-                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4 active"
+                    @if (count($services)>0)
+                    @foreach ($services as $service )
+
+                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4 "
                         data-bs-toggle="pill" data-bs-target="#tab-pane-1" type="button">
                         <i class="fa fa-car-side fa-2x me-3"></i>
-                        <h4 class="m-0">Diagnostic Test</h4>
+                        <h4 class="m-0">{{$service->name}}</h4>
                     </button>
-                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill"
+                    @endforeach
+                        
+                    @endif
+                    
+                    
+                    <!-- <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill"
                         data-bs-target="#tab-pane-2" type="button">
                         <i class="fa fa-car fa-2x me-3"></i>
                         <h4 class="m-0">Engine Servicing</h4>
@@ -50,7 +61,7 @@
                         data-bs-target="#tab-pane-4" type="button">
                         <i class="fa fa-oil-can fa-2x me-3"></i>
                         <h4 class="m-0">Oil Changing</h4>
-                    </button>
+                    </button> -->
                 </div>
             </div>
             <div class="col-lg-8">

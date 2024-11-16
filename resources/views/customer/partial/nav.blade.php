@@ -10,7 +10,11 @@
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="{{route('customer.home')}}" class="nav-item nav-link @yield('home-active')">Home</a>
             <a href="{{route('customer.about')}}" class="nav-item nav-link  @yield('about-active')">About</a>
-            <a href="{{route('customer.services')}}" class="nav-item nav-link  @yield('services-active')">Services</a>
+            <a href="{{route('services')}}" class="nav-item nav-link  @yield('services-active')">Services</a>
+                     <!-- Button to create a new post -->
+           <a href="{{ route('posts.index') }}" class="nav-item nav-link  @yield('posts-active')">
+                Post
+            </a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu fade-up m-0">
@@ -25,6 +29,10 @@
         @if (auth()->check())
             <!-- If the user is logged in -->
             <span class="navbar-text me-3">Welcome, {{ auth()->user()->name }}</span>
+
+
+
+            <!-- Logout button -->
             <a href="{{ route('logout') }}" class="btn btn-danger py-4 px-lg-5 d-none d-lg-block"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Logout <i class="fa fa-sign-out-alt ms-3"></i>
@@ -32,6 +40,7 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
+
         @else
             <!-- If the user is not logged in -->
             <a href="{{ route('login') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Login <i
