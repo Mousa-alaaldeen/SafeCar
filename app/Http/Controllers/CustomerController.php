@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public function login()
+{
+    return view('customer.login'); 
+}
+
+public function register()
+{
+    return view('customer.register');
+}
+
     public function home()
     {
         return view('customer.home');
