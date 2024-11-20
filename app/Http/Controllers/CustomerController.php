@@ -21,7 +21,7 @@ public function register()
 
     public function home()
     {
-        return view('customer.home');
+        return view('admin.dashboard');
     }
     public function about()
     {
