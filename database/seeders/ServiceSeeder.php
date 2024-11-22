@@ -1,9 +1,7 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\Services;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ServiceSeeder extends Seeder
@@ -13,17 +11,17 @@ class ServiceSeeder extends Seeder
      */
     public function run(): void
     {
-        $services=
-        [ 
-        'Car Wash',
-        'Oil Change',
-        'Tire Replacement',
-        'Engine Maintenance',
-        'Battery Check',
-        'Brake Service'
-    ];
-        foreach ($services as $service){
-            Services::create(['name'=>$service]);
+        $services = [
+            ['name' => 'Car Wash', 'price' => 100],
+            ['name' => 'Oil Change', 'price' => 150],
+            ['name' => 'Tire Replacement', 'price' => 200],
+            ['name' => 'Engine Maintenance', 'price' => 300],
+            ['name' => 'Battery Check', 'price' => 50],
+            ['name' => 'Brake Service', 'price' => 120],
+        ];
+
+        foreach ($services as $service) {
+            Services::create($service);
         }
     }
 }

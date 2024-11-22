@@ -9,9 +9,10 @@ class Services extends Model
 {
     use HasFactory;
     
-    protected $fillable=['name'];
+    protected $fillable = ['name', 'image', 'price', 'description'];
+
     public function contacts() 
     {
-        return $this->belongsTo(Contact::class);
+        return $this->belongsTo(User::class, 'users_id');
     }
 }

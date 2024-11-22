@@ -58,4 +58,3 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
 require __DIR__.'/auth.php';
 
 
-

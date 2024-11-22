@@ -57,4 +57,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'user_id'); // Assuming 'customer_id' is the foreign key in the comments table
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
 }
