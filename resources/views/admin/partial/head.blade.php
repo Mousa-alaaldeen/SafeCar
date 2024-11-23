@@ -4,6 +4,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard - Admin One Tailwind CSS Admin Dashboard</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 
   <!-- Tailwind is included -->
@@ -47,5 +49,6 @@
     gtag('config', 'UA-130795909-1');
   </script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>

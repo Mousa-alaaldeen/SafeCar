@@ -15,4 +15,12 @@ class Services extends Model
     {
         return $this->belongsTo(User::class, 'users_id');
     }
+  
+
+    public function bookingServices()
+    {
+        return $this->hasMany(BookingService::class);
+    }
+
+
 }

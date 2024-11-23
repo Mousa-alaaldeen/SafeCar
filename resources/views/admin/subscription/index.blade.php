@@ -5,9 +5,6 @@
     <h1 class="title">
       Subscriptions
     </h1>
-    <button class="button light" id="addSubscriptionBtn">
-      Add Services
-    </button>
   </div>
 </section>
 

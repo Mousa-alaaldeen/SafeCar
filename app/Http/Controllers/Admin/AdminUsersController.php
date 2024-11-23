@@ -10,30 +10,10 @@ use App\Models\Services;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class AdminUsersController extends Controller
 {
-    public function login()
-{
-    return view('customer.login'); 
-}
 
-public function register()
-{
-    return view('customer.register');
-}
 
-    public function home()
-    {
-    
-        
-        $users = User::paginate(5);;
-       
-        return view('customer.home',compact('users'));
-    }
-    public function about()
-    {
-        return view('customer.about');
-    }
  
     public function index()
     {

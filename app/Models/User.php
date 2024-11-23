@@ -47,7 +47,7 @@ class User extends Authenticatable
      */
     public function posts()
     {
-        return $this->hasMany(Post::class, 'user_id'); // Assuming 'user_id' is the foreign key in the posts table
+        return $this->hasMany(Post::class, 'user_id');
     }
 
     /**
@@ -55,12 +55,16 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'user_id'); // Assuming 'customer_id' is the foreign key in the comments table
+        return $this->hasMany(Comment::class, 'user_id');
     }
 
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
+    }
+    public function car()
+    {
+        return $this->hasOne(Car::class);
     }
 
 }

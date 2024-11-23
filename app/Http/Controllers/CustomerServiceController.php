@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class CustomerServiceController extends Controller
 {
-    public function services()
+    public function  index()
     {
         return view("customer.services");
     }

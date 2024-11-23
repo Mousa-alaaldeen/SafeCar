@@ -12,12 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cars', function (Blueprint $table) {
-            $table->id(); 
-            $table->unsignedBigInteger('user_id'); 
-            $table->enum('size', ['Small', 'Medium', 'Large'])->nullable(false);
-            $table->string('model', 50)->nullable();
-            $table->timestamps(); 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cars'); // اسم الجدول الصحيح
+        Schema::dropIfExists('cars');
     }
 };

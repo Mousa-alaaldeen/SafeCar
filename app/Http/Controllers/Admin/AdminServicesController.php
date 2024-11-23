@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Services;
 use Illuminate\Http\Request;
 
-class ServicesController extends Controller
+class AdminServicesController extends Controller
 {
     /**
      * Display a listing of the resource.

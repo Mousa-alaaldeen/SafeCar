@@ -10,7 +10,7 @@ use App\Models\Services;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class AdminPController extends Controller
 {
     public function login()
 {
@@ -28,7 +28,7 @@ public function register()
         
         $users = User::paginate(5);;
        
-        return view('customer.home',compact('users'));
+        return view('admin.users.index',compact('users'));
     }
     public function about()
     {

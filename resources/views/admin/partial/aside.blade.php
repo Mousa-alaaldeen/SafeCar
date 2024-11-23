@@ -4,43 +4,68 @@
       Admin <b class="font-black">One</b>
     </div>
   </div>
-  <div class="menu is-menu-main">
+  <div class="menu is-menu-main" style="max-height: 90vh; overflow-y: auto;">
+
     <p class="menu-label">General</p>
     <ul class="menu-list">
       <li class="active">
         <a href="index.html">
-          <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
+          <span class="icon"><i class="mdi mdi-view-dashboard"></i></span>
           <span class="menu-item-label">Dashboard</span>
         </a>
       </li>
     </ul>
-    <p class="menu-label">Examples</p>
+
+ 
+    <p class="menu-label">Management</p>
     <ul class="menu-list">
-      <li class="--set-active-tables-html">
-        <a href="">
-          <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+      <li>
+        <a href="{{route('customer.index')}}">
+          <span class="icon"><i class="mdi mdi-account-group"></i></span>
           <span class="menu-item-label">Users</span>
         </a>
       </li>
-      <li class="--set-active-tables-html">
-        <a href="">
-          <span class="icon"><i class="mdi mdi-briefcase"></i></span>
+      <li>
+        <a href="{{route('services.index')}}">
+          <span class="icon"><i class="mdi mdi-tools"></i></span>
           <span class="menu-item-label">Services</span>
         </a>
       </li>
-
-      <li class="--set-active-forms-html">
-        <a href="">
-          <span class="icon"><i class="mdi mdi-checkbox-marked-circle-outline"></i></span>
+      <li>
+        <a href="{{ route('subscription.index') }}">
+          <span class="icon"><i class="mdi mdi-newspaper"></i></span>
           <span class="menu-item-label">Subscription</span>
         </a>
       </li>
-      <li class="--set-active-profile-html">
-        <a href="">
-          <span class="icon"><i class="mdi mdi-account-circle"></i></span>
+      <li>
+        <a href="{{ route('employees.index') }}">
+          <span class="icon"><i class="mdi mdi-account-tie"></i></span>
+          <span class="menu-item-label">Employees</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{route('bookings.index')}}">
+          <span class="icon"><i class="mdi mdi-calendar-check"></i></span>
           <span class="menu-item-label">Booking</span>
         </a>
       </li>
+      <li>
+        <a href="{{route('bookings-services.index')}}">
+          <span class="icon"><i class="mdi mdi-calendar-multiple-check"></i></span>
+          <span class="menu-item-label">Booking Services</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('package.index') }}">
+          <span class="icon"><i class="mdi mdi-package"></i></span>
+          <span class="menu-item-label">Packages</span>
+        </a>
+      </li>
+    </ul>
+
+    
+    <p class="menu-label">Functionalities</p>
+    <ul class="menu-list">
       <li>
         <a href="login.html">
           <span class="icon"><i class="mdi mdi-lock"></i></span>
@@ -49,41 +74,45 @@
       </li>
       <li>
         <a class="dropdown">
-          <span class="icon"><i class="mdi mdi-view-list"></i></span>
+          <span class="icon"><i class="mdi mdi-menu"></i></span>
           <span class="menu-item-label">Submenus</span>
-          <span class="icon"><i class="mdi mdi-plus"></i></span>
+          <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
         </a>
         <ul>
           <li>
             <a href="#void">
+              <span class="icon"><i class="mdi mdi-subdirectory-arrow-right"></i></span>
               <span>Sub-item One</span>
             </a>
           </li>
           <li>
             <a href="#void">
+              <span class="icon"><i class="mdi mdi-subdirectory-arrow-right"></i></span>
               <span>Sub-item Two</span>
             </a>
           </li>
         </ul>
       </li>
     </ul>
+
+ 
     <p class="menu-label">About</p>
     <ul class="menu-list">
       <li>
         <a href="https://justboil.me" onclick="alert('Coming soon'); return false" target="_blank" class="has-icon">
-          <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
+          <span class="icon"><i class="mdi mdi-credit-card"></i></span>
           <span class="menu-item-label">Premium Demo</span>
         </a>
       </li>
       <li>
         <a href="https://justboil.me/tailwind-admin-templates" class="has-icon">
-          <span class="icon"><i class="mdi mdi-help-circle"></i></span>
+          <span class="icon"><i class="mdi mdi-information"></i></span>
           <span class="menu-item-label">About</span>
         </a>
       </li>
       <li>
         <a href="https://github.com/justboil/admin-one-tailwind" class="has-icon">
-          <span class="icon"><i class="mdi mdi-github-circle"></i></span>
+          <span class="icon"><i class="mdi mdi-github"></i></span>
           <span class="menu-item-label">GitHub</span>
         </a>
       </li>

@@ -22,4 +22,9 @@ class Booking extends Model
     {
         return $this->belongsTo(Services::class, 'service_id');
     }
+  
+    public function bookingServices()
+    {
+        return $this->hasMany(BookingService::class);
+    }
 }

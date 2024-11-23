@@ -43,7 +43,283 @@
 
 
 
+<!------------------------------- Start employee   ---------------------->
+<script>
+    document.getElementById("addEmployeeBtn").addEventListener("click", function () {
+        Swal.fire({
+            title: "Add New Employee",
+            html: `
+                <div style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
+                    <label style="font-weight: bold;">Employee Name</label>
+                    <input type="text" id="employeeName" class="swal2-input" style="margin: 0; padding: 10px; border-radius: 5px;" placeholder="Enter employee name">
+                    
+                    <label style="font-weight: bold;">Email</label>
+                    <input type="email" id="employeeEmail" class="swal2-input" style="margin: 0; padding: 10px; border-radius: 5px;" placeholder="Enter email address">
+                    
+                    <label style="font-weight: bold;">Phone</label>
+                    <input type="text" id="employeePhone" class="swal2-input" style="margin: 0; padding: 10px; border-radius: 5px;" placeholder="Enter phone number">
+                    
+                    <label style="font-weight: bold;">Salary</label>
+                    <input type="number" id="employeeSalary" class="swal2-input" style="margin: 0; padding: 10px; border-radius: 5px;" placeholder="Enter salary">
+                    
+                    <label style="font-weight: bold;">Position</label>
+                    <input type="text" id="employeePosition" class="swal2-input" style="margin: 0; padding: 10px; border-radius: 5px;" placeholder="Enter position">
+                    
+                    <label style="font-weight: bold;">Image</label>
+                    <input type="file" id="employeeImage" class="swal2-file" accept="image/*" style="padding: 10px; border-radius: 5px;">
+                </div>
+            `,
+            confirmButtonText: "Save",
+            showCancelButton: true,
+            preConfirm: () => {
+                const name = document.getElementById("employeeName").value;
+                const email = document.getElementById("employeeEmail").value;
+                const phone = document.getElementById("employeePhone").value;
+                const salary = document.getElementById("employeeSalary").value;
+                const position = document.getElementById("employeePosition").value;
+                const image = document.getElementById("employeeImage").files[0];
 
+                if (!name || !email || !phone || !salary || !position) {
+                    Swal.showValidationMessage("Please fill out all fields.");
+                    return false;
+                }
+
+                const formData = new FormData();
+                formData.append("name", name);
+                formData.append("email", email);
+                formData.append("phone", phone);
+                formData.append("salary", salary);
+                formData.append("position", position);
+                if (image) {
+                    formData.append("image", image);
+                }
+
+                return fetch("{{ url('employees') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    },
+                    body: formData,
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            return response.json().then((data) => {
+                                if (response.status === 422) {
+                                 
+                                    let errorMessages = Object.values(data.errors)
+                                        .map((messages) => messages.join(" "))
+                                        .join("<br>");
+                                    throw new Error(errorMessages);
+                                } else {
+                                    throw new Error(data.message || "An unknown error occurred.");
+                                }
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        if (!data.success) {
+                            throw new Error(data.message || "Failed to save employee.");
+                        }
+                        return data;
+                    })
+                    .catch((error) => {
+                        Swal.showValidationMessage(error.message);
+                    });
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Success", "Employee added successfully!", "success").then(() => {
+                    window.location.href = "{{ route('employees.index') }}";
+                });
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+  function showEmployeeDetails(employeeId) {
+    $.ajax({
+      url: '{{ url('employees') }}/' + employeeId,
+      method: 'GET',
+      success: function (response) {
+        if (response.success) {
+          let employeeImage = response.employee.image
+            ? "{{ asset('storage/employees') }}/" + response.employee.image
+            : "{{ asset('assets/img/default-avatar.png') }}";
+
+          Swal.fire({
+            title: 'Employee Details',
+            html: `
+              <div style="text-align: left;">
+                <table style="width: 100%; border-spacing: 0 10px;">
+                  <tr>
+                    <td style="text-align: center; vertical-align: middle; width: 100px;">
+                      <img src="${employeeImage}" 
+                        alt="${response.employee.name}" 
+                        style="max-width: 100px; height: 100px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    </td>
+                    <td>
+                      <input type="file" id="employeeImage" 
+                        accept="image/*" 
+                        style="display: block; width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <label for="employeeName" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Employee Name:</label>
+                      <input type="text" id="employeeName" 
+                        value="${response.employee.name}" 
+                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <label for="employeePosition" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Position:</label>
+                      <input type="text" id="employeePosition" 
+                        value="${response.employee.position}" 
+                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <label for="employeeSalary" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Salary:</label>
+                      <input type="number" id="employeeSalary" 
+                        value="${response.employee.salary}" 
+                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;" min="0" step="0.01">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <label for="employeeEmail" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Email:</label>
+                      <input type="email" id="employeeEmail" 
+                        value="${response.employee.email}" 
+                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <label for="employeePhone" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Phone:</label>
+                      <input type="text" id="employeePhone" 
+                        value="${response.employee.phone}" 
+                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    </td>
+                  </tr>
+                  <tr>
+                   
+                  </tr>
+                </table>
+              </div>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Update',
+            cancelButtonText: 'Close',
+            preConfirm: () => {
+              let updatedName = document.getElementById('employeeName').value;
+              let updatedPosition = document.getElementById('employeePosition').value;
+              let updatedSalary = document.getElementById('employeeSalary').value;
+              let updatedEmail = document.getElementById('employeeEmail').value;
+              let updatedPhone = document.getElementById('employeePhone').value;
+         
+              let imageFile = document.getElementById('employeeImage').files[0];
+
+              // Confirm update action
+              return Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to update this employee?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, update it!',
+                cancelButtonText: 'No, cancel'
+              }).then(result => {
+                if (result.isConfirmed) {
+                  let formData = new FormData();
+                  formData.append('name', updatedName);
+                  formData.append('position', updatedPosition);
+                  formData.append('salary', updatedSalary);
+                  formData.append('email', updatedEmail);
+                  formData.append('phone', updatedPhone);
+                
+
+                  if (imageFile) {
+                    formData.append('image', imageFile);
+                  }
+
+                  formData.append('_token', '{{ csrf_token() }}');
+                  formData.append('_method', 'PUT');
+
+                  // Proceed to update
+                  return $.ajax({
+                    url: '{{ url('employees') }}/' + employeeId,
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (updateResponse) {
+                      if (updateResponse.success) {
+                        Swal.fire({
+                          title: 'Success',
+                          text: 'Employee updated successfully!',
+                          icon: 'success',
+                          confirmButtonText: 'Close'
+                        }).then(() => {
+                          window.location.href = '{{ route('employees.index') }}';
+                        });
+                      }
+                    },
+                    error: function (xhr) {
+                      Swal.fire({
+                        title: 'Error',
+                        text: xhr.responseJSON?.message || 'Failed to update employee.',
+                        icon: 'error',
+                        confirmButtonText: 'Close'
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Employee not found.',
+          icon: 'error',
+          confirmButtonText: 'Close'
+        });
+      }
+    });
+  }
+</script>
+
+
+
+
+
+<script>
+  function confirmDelete(employeeId) {
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This action cannot be undone!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById(`delete-form-${employeeId}`).submit();
+      }
+    });
+  }
+</script>
+<!------------------------------- End employee   ---------------------->
 
 
 
@@ -79,6 +355,26 @@
                   <td colspan="2">
                     <label for="userName">User Name:</label>
                     <input type="text" id="userName" value="${response.user.name}" style="width: 100%; padding: 8px;">
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <label for="carModel">carModel:</label>
+                    <input type="text" id="carModel" value="${response.user.car.model}" style="width: 100%; padding: 8px;">
+                  </td>
+                </tr>
+                 <tr>
+                  <td colspan="2">
+                    <label for="carSize">carSize:</label>
+                    <input type="text" id="carSize" value="${response.user.car.size}" style="width: 100%; padding: 8px;">
+                  </td>
+                </tr>
+                </tr>
+                 <tr>
+                  <td colspan="2">
+                    <label for="carId">carId:</label>
+                    <input type="text" id="carId" value="${response.user.car.carCode}" style="width: 100%; padding: 8px;">
+
                   </td>
                 </tr>
                 <tr>
@@ -405,6 +701,11 @@
   }
 </script>
 <!------------------------------- End services   ---------------------->
+
+
+
+
+
 <!------------------------------- start  SubscriptionBtn  ---------------------->
 <script>
   document.getElementById('addSubscriptionBtn').addEventListener('click', function () {
@@ -688,12 +989,12 @@
 <!------------------------------- start  Booking  ---------------------->
 <script>
   function showBookingDetails(bookingId) {
-    
+
     $.ajax({
       url: '{{ url('bookings') }}/' + bookingId,
       method: 'GET',
       success: function (response) {
-        
+
         if (response.success) {
           Swal.fire({
             title: 'Booking Details',
@@ -739,11 +1040,11 @@
                       <select id="serviceId" 
                           style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
                           ${response.services && response.services.length > 0 ?
-                              response.services.map(service => `
+                response.services.map(service => `
                                   <option value="${service.id}" ${response.booking.service_id === service.id ? 'selected' : ''}>${service.name}</option>
                               `).join('') :
-                              '<option disabled>No services available</option>'
-                            }
+                '<option disabled>No services available</option>'
+              }
                       </select>
                   </td>
               </tr>
@@ -790,8 +1091,6 @@
               let updatedBookingDate = document.getElementById('bookingDate').value;
               let updatedBookingTime = document.getElementById('bookingTime').value;
               let updatedStatus = document.getElementById('bookingStatus').value;
-
-              // دمج التاريخ مع الوقت بصيغة "YYYY-MM-DD HH:MM:SS"
               let timeMapping = {
                 '11-12': '11:00:00',
                 '12-1': '12:00:00',
@@ -812,7 +1111,7 @@
                   let formData = new FormData();
                   formData.append('user_id', updatedUserId);
                   formData.append('service_id', updatedServiceId);
-                  formData.append('booking_date', bookingDatetime); // إرسال التاريخ والوقت المدمج
+                  formData.append('booking_date', bookingDatetime);
                   formData.append('status', updatedStatus);
 
                   formData.append('_token', '{{ csrf_token() }}');
@@ -865,7 +1164,513 @@
 
 
 
-
-
-
 <!------------------------------- End  Booking  ---------------------->
+
+
+<!----------------------------------  Booking Service   --------------------------- -->
+
+<script>
+  document.getElementById('addBookingServiceBtn').addEventListener('click', function () {
+    Swal.fire({
+      title: 'Add New Booking Service',
+      html: `
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <!-- Booking ID -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label for="bookingId" style="font-weight: bold; min-width: 120px;">Booking ID</label>
+          <input type="number" id="bookingId" class="swal2-input" placeholder="Booking ID" style="padding: 10px; font-size: 16px; border: 1px solid #ccc; width: 100%;">
+        </div>
+        <!-- Service ID -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label for="serviceId" style="font-weight: bold; min-width: 120px;">Service</label>
+          <select id="serviceId" class="swal2-input">
+            ${response.services.map(service => `
+              <option value="${service.id}">${service.name}</option>
+            `).join('')}
+          </select>
+        </div>
+      </div>
+    `,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      cancelButtonText: 'Cancel',
+      preConfirm: () => {
+        const bookingId = document.getElementById('bookingId').value;
+        const serviceId = document.getElementById('serviceId').value;
+
+        if (!bookingId || !serviceId) {
+          Swal.showValidationMessage('Please fill out all fields.');
+          return false;
+        }
+
+        const formData = new FormData();
+        formData.append('booking_id', bookingId);
+        formData.append('service_id', serviceId);
+
+        return fetch('{{ url("booking-services") }}', {
+          method: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+          },
+          body: formData
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (!data.success) {
+              throw new Error(data.message || 'Failed to add booking service.');
+            }
+            return data;
+          })
+          .catch(error => {
+            Swal.showValidationMessage(error.message);
+          });
+      }
+    }).then(result => {
+      if (result.isConfirmed) {
+        Swal.fire('Success', 'Booking service added successfully!', 'success').then(() => {
+          window.location.href = '{{ route("bookings-services.index") }}';
+        });
+      }
+    });
+  });
+</script>
+
+
+<script>
+  function showBookingServiceDetails(bookingId, serviceId) {
+    $.ajax({
+      url: `/booking-services/${bookingId}/${serviceId}`,
+      method: 'GET',
+      success: function (response) {
+        if (response.success) {
+          let bookingService = response.bookingService;
+
+          Swal.fire({
+            title: 'Booking Service Details',
+            html: `
+          <form id="updateForm">
+            <table style="width: 100%; text-align: left;">
+            <tr>
+            <td><strong>Service:</strong></td>
+            <td>
+              <select id="serviceId">
+                ${response.services.map(service => `
+                  <option value="${service.id}" ${service.id === bookingService.service_id ? 'selected' : ''}>${service.name}</option>
+                `).join('')}
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>Booking ID:</strong></td>
+            <td>
+              <select id="bookingId">
+                ${response.bookings.map(booking => `
+                  <option value="${booking.id}" ${booking.id === bookingId ? 'selected' : ''}>${booking.id}</option>
+                `).join('')}
+              </select>
+            </td>
+          </tr>
+
+              
+              <tr>
+                <td><strong>Price:</strong></td>
+                <td><input type="text" id="servicePrice" value="${bookingService.price}"></td>
+              </tr>
+              <tr>
+                <td><strong>Description:</strong></td>
+                <td><input type="text" id="serviceDescription" value="${bookingService.description}"></td>
+              </tr>
+              <tr>
+                <td><strong>Booking Date:</strong></td>
+                <td><input type="text" id="serviceBookingDate" value="${bookingService.booking_date}" disabled></td>
+              </tr>
+            </table>
+          </form>
+        `,
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Update',
+            preConfirm: function () {
+              const updatedService = {
+                booking_id: document.getElementById('bookingId').value,
+                service_id: document.getElementById('serviceId').value,
+                price: document.getElementById('servicePrice').value,
+                description: document.getElementById('serviceDescription').value
+              };
+
+
+              console.log('Updated Service:', updatedService);
+
+              return updatedService;
+            }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const updatedService = result.value;
+
+              $.ajax({
+                url: `/booking-services/${bookingId}/${serviceId}`,
+                method: 'PUT',
+                data: JSON.stringify(updatedService),
+                contentType: 'application/json',
+                headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (updateResponse) {
+                  if (updateResponse.success) {
+                    Swal.fire({
+                      title: 'Success',
+                      text: 'Booking service details updated successfully.',
+                      icon: 'success',
+                      confirmButtonText: 'Close'
+                    });
+                  } else {
+                    Swal.fire({
+                      title: 'Error',
+                      text: updateResponse.message || 'Failed to update booking service details.',
+                      icon: 'error',
+                      confirmButtonText: 'Close'
+                    });
+                  }
+                },
+                error: function (xhr) {
+                  console.error('Error response:', xhr.responseText);
+
+                  Swal.fire({
+                    title: 'Error',
+                    text: xhr.responseText || 'Failed to update booking service details. Please try again.',
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                  });
+                }
+              });
+            }
+          });
+        } else {
+          Swal.fire({
+            title: 'Error',
+            text: response.message || 'Failed to load booking service details.',
+            icon: 'error',
+            confirmButtonText: 'Close'
+          });
+        }
+      },
+      error: function (xhr) {
+        console.error('Error response:', xhr.responseText);
+
+        Swal.fire({
+          title: 'Error',
+          text: xhr.responseText || 'Failed to load booking service details.',
+          icon: 'error',
+          confirmButtonText: 'Close'
+        });
+      }
+    });
+  }
+
+</script>
+<script>
+  function deleteBookingService(bookingId, serviceId) {
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This action cannot be undone!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        document.getElementById(`delete-form-${bookingId}-${serviceId}`).submit();
+      }
+    });
+  }
+</script>
+
+
+<!---------------------------------- END Booking Service--------------------------- -->
+   
+
+
+
+
+
+
+
+
+
+
+<!------------------------------- Start package   ---------------------->
+<script>
+  document.getElementById('addPackageBtn').addEventListener('click', function () {
+    Swal.fire({
+      title: 'Add New Package',
+      html: `
+        <div style="text-align: left;">
+          <table style="width: 100%; border-spacing: 0 10px;">
+            <tr>
+              <td colspan="2">
+                <label for="packageName" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Package Name:</label>
+                <input type="text" id="packageName" 
+                       style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <label for="packagePrice" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Price:</label>
+                <input type="number" id="packagePrice" 
+                       style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;" 
+                       min="0" step="0.01">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <label for="packageDescription" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Description:</label>
+                <textarea id="packageDescription" 
+                          style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; height: 100px; resize: vertical;">
+                </textarea>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <label for="packageSize" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Size:</label>
+                <select id="packageSize" class="swal2-input" style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #ccc;">
+                  <option value="Small">Small</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Large">Large</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <label for="packageDuration" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Duration:</label>
+                <select id="packageDuration" class="swal2-input" style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #ccc;">
+                  <option value="Monthly">Monthly</option>
+                  <option value="Yearly">Yearly</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+        </div>
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      cancelButtonText: 'Cancel',
+      preConfirm: () => {
+        const name = document.getElementById('packageName').value.trim();
+        const price = document.getElementById('packagePrice').value.trim();
+        const size = document.getElementById('packageSize').value.trim();
+        const duration = document.getElementById('packageDuration').value.trim();
+        const description = document.getElementById('packageDescription').value.trim();
+
+        if (!name || !price || !size || !duration || !description) {
+          Swal.showValidationMessage('Please fill out all fields.');
+          return false;
+        }
+
+        // Create FormData object to send data
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('size', size);
+        formData.append('duration', duration);
+        formData.append('description', description);
+
+        return fetch('{{ url("package") }}', {
+          method: 'POST',
+          headers: {
+             'X-CSRF-TOKEN': '{{ csrf_token() }}'
+          },
+          body: formData
+        })
+          .then(response => {
+            if (!response.ok) {
+              return response.text().then(text => {
+                throw new Error(`Server Error: ${text}`);
+              });
+            }
+            return response.json();
+          })
+          .then(data => {
+            if (!data.success) {
+              throw new Error(data.message || 'Failed to save package.');
+            }
+            return data;
+          })
+          .catch(error => {
+            Swal.showValidationMessage(error.message);
+            console.error('Error:', error); // Log for debugging
+          });
+      }
+    }).then(result => {
+      if (result.isConfirmed) {
+        Swal.fire('Success', 'Package added successfully!', 'success').then(() => {
+          window.location.href = '{{ route("package.index") }}'; // Reload or redirect
+        });
+      }
+    });
+  });
+</script>
+
+
+
+<script>
+  function showPackageDetails(packageId) {
+    $.ajax({
+      url: '{{ url('package') }}/' + packageId,
+      method: 'GET',
+      success: function(response) {
+        if (response.success) {
+          // Show SweetAlert with package details
+          Swal.fire({
+            title: 'Package Details',
+            html: `
+              <div style="text-align: left;">
+                <table style="width: 100%; border-spacing: 0 10px;">
+                  <tr>
+                    <td colspan="2">
+                      <label for="packageName" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Package Name:</label>
+                      <input type="text" id="packageName" value="${response.package.name}" 
+                             style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <label for="packagePrice" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Price:</label>
+                      <input type="number" id="packagePrice" value="${response.package.price}" 
+                             style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;" 
+                             min="0" step="0.01">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <label for="packageDescription" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Description:</label>
+                      <textarea id="packageDescription" 
+                                style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; height: 100px; resize: vertical;">
+                        ${response.package.description}
+                      </textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <label for="packageSize" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Size:</label>
+                      <select id="packageSize" class="swal2-input" style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc;">
+                        <option value="Small" ${response.package.size === 'Small' ? 'selected' : ''}>Small</option>
+                        <option value="Medium" ${response.package.size === 'Medium' ? 'selected' : ''}>Medium</option>
+                        <option value="Large" ${response.package.size === 'Large' ? 'selected' : ''}>Large</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <label for="packageDuration" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Duration:</label>
+                      <select id="packageDuration" class="swal2-input" style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc;">
+                        <option value="Monthly" ${response.package.duration === 'Monthly' ? 'selected' : ''}>Monthly</option>
+                        <option value="Yearly" ${response.package.duration === 'Yearly' ? 'selected' : ''}>Yearly</option>
+                      </select>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Update',
+            cancelButtonText: 'Close',
+            preConfirm: () => {
+              let updatedName = document.getElementById('packageName').value;
+              let updatedPrice = document.getElementById('packagePrice').value;
+              let updatedDescription = document.getElementById('packageDescription').value;
+              let updatedSize = document.getElementById('packageSize').value;
+              let updatedDuration = document.getElementById('packageDuration').value;
+
+              // Confirm update action
+              return Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to update this package?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, update it!',
+                cancelButtonText: 'No, cancel'
+              }).then(result => {
+                if (result.isConfirmed) {
+                  let formData = new FormData();
+                  formData.append('name', updatedName);
+                  formData.append('price', updatedPrice);
+                  formData.append('description', updatedDescription);
+                  formData.append('size', updatedSize);
+                  formData.append('duration', updatedDuration);
+                  formData.append('_token', '{{ csrf_token() }}');
+                  formData.append('_method', 'PUT');
+
+                  // Proceed to update
+                  return $.ajax({
+                    url: '{{ url('package') }}/' + packageId,
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(updateResponse) {
+                      if (updateResponse.success) {
+                        Swal.fire({
+                          title: 'Success',
+                          text: 'Package updated successfully!',
+                          icon: 'success',
+                          confirmButtonText: 'Close'
+                        }).then(() => {
+                          window.location.href = '{{ route('package.index') }}';
+                        });
+                      }
+                    },
+                    error: function(xhr) {
+                      Swal.fire({
+                        title: 'Error',
+                        text: xhr.responseJSON?.message || 'Failed to update package.',
+                        icon: 'error',
+                        confirmButtonText: 'Close'
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      },
+      error: function(xhr, status, error) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Package not found.',
+          icon: 'error',
+          confirmButtonText: 'Close'
+        });
+      }
+    });
+  }
+</script>
+
+<script>
+  function packageDelete(packageId) {
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This action cannot be undone!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById(`delete-form-${packageId}`).submit();
+      }
+    });
+  }
+</script>
+<!------------------------------- End package   ---------------------->
+
+
+
