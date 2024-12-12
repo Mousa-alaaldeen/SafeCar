@@ -20,7 +20,7 @@
       <table>
         <thead>
           <tr>
-            <th class="image-cell"></th>
+
             <th>Name</th>
             <th>Price</th>
             <th>Description</th>
@@ -30,7 +30,7 @@
           @if (count($packages) > 0)
         @foreach ($packages as $package)
       <tr>
-      
+
       <td data-label="Name">{{$package->name}}</td>
       <td data-label="Name">{{$package->price}}</td>
       <td data-label="Name">{{$package->description}}</td>
@@ -40,15 +40,13 @@
         <span class="icon"><i class="mdi mdi-eye"></i></span>
         </button>
         <form id="delete-form-{{ $package->id }}" action="{{ route('package.destroy', $package->id) }}"
-      method="POST" class="inline">
-  @csrf
-  @method('DELETE')
-</form>
-
-<button type="button" class="button small red" onclick="confirmDelete('{{ $package->id }}')">
-  <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-</button>
-
+        method="POST" class="inline">
+        @csrf
+        @method('DELETE')
+        </form>
+        <button type="button" class="button small red" onclick="confirmDelete('{{ $package->id }}')">
+        <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+        </button>
         </div>
       </td>
       </tr>
@@ -58,7 +56,6 @@
       <td colspan="3">No packages found.</td>
       </tr>
     @endif
-
         </tbody>
       </table>
       <div class="pagination">

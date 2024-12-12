@@ -1,6 +1,7 @@
 @extends('customer.master')
 
 @section('contact')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -64,3 +65,4 @@
     </div>
 </div>
 @endsection
+    

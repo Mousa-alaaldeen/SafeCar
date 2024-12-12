@@ -1,26 +1,32 @@
 <nav id="navbar-main" class="navbar is-fixed-top">
+  <!-- Navbar Left Section -->
   <div class="navbar-brand">
     <a class="navbar-item mobile-aside-button">
       <span class="icon"><i class="mdi mdi-forwardburger mdi-24px"></i></span>
     </a>
     <div class="navbar-item">
-      <div class="control"><input placeholder="Search everywhere..." class="input"></div>
+      <div class="control">
+        <input type="text" placeholder="Search everywhere..." class="input" aria-label="Search">
+      </div>
     </div>
   </div>
+
+  <!-- Navbar Right Section -->
   <div class="navbar-brand is-right">
     <a class="navbar-item --jb-navbar-menu-toggle" data-target="navbar-menu">
       <span class="icon"><i class="mdi mdi-dots-vertical mdi-24px"></i></span>
     </a>
   </div>
+
+  <!-- Navbar Menu -->
   <div class="navbar-menu" id="navbar-menu">
     <div class="navbar-end">
+      <!-- Sample Menu Dropdown -->
       <div class="navbar-item dropdown has-divider">
         <a class="navbar-link">
           <span class="icon"><i class="mdi mdi-menu"></i></span>
           <span>Sample Menu</span>
-          <span class="icon">
-            <i class="mdi mdi-chevron-down"></i>
-          </span>
+          <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
         </a>
         <div class="navbar-dropdown">
           <a href="profile.html" class="navbar-item">
@@ -42,6 +48,8 @@
           </a>
         </div>
       </div>
+
+      <!-- User Dropdown -->
       <div class="navbar-item dropdown has-divider has-user-avatar">
         <a class="navbar-link">
           <div class="user-avatar">
@@ -70,17 +78,19 @@
           </a>
         </div>
       </div>
-      <a href="https://justboil.me/tailwind-admin-templates" class="navbar-item has-divider desktop-icon-only">
+
+      <!-- External Links -->
+      <a href="https://justboil.me/tailwind-admin-templates" class="navbar-item has-divider desktop-icon-only" title="About">
         <span class="icon"><i class="mdi mdi-help-circle-outline"></i></span>
         <span>About</span>
       </a>
-      <a href="https://github.com/justboil/admin-one-tailwind" class="navbar-item has-divider desktop-icon-only">
+      <a href="https://github.com/justboil/admin-one-tailwind" class="navbar-item has-divider desktop-icon-only" title="GitHub">
         <span class="icon"><i class="mdi mdi-github-circle"></i></span>
         <span>GitHub</span>
       </a>
       <a title="Log out" class="navbar-item desktop-icon-only">
         <span class="icon"><i class="mdi mdi-logout"></i></span>
-        <span>Log out</span>
+        <span>Log Out</span>
       </a>
     </div>
   </div>

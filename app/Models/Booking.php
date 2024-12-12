@@ -13,6 +13,7 @@ class Booking extends Model
         'service_id',
         'booking_date',
         'status',
+        
     ];
     public function user()
     {
@@ -26,5 +27,9 @@ class Booking extends Model
     public function bookingServices()
     {
         return $this->hasMany(BookingService::class);
+    }
+    public function subscription()
+    {
+        return $this->belongsTo(Subscription::class,);
     }
 }

@@ -24,9 +24,11 @@ class EmployeeRequest extends FormRequest
                 "unique:employees,email,$employeeId",
             ],
             'phone' => 'required|string|max:15',
-            'position' => 'required|string|max:100',
+            
             'salary' => 'required|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'service_id' => 'required|exists:services,id',
+
         ];
     }
     
@@ -38,7 +40,7 @@ class EmployeeRequest extends FormRequest
             'email.required' => 'Email address is required',
             'email.unique' => 'This email is already registered',
             'phone.required' => 'Phone number is required',
-            'position.required' => 'Position is required',
+           
             'salary.required' => 'Salary is required',
             'salary.min' => 'Salary cannot be negative',
             'image.image' => 'File must be an image',

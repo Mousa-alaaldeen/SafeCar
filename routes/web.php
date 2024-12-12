@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminBookingController;
 use App\Http\Controllers\Admin\AdminBookingServiceController;
+use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminEmployeeController;
 use App\Http\Controllers\Admin\AdminPackageController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -92,6 +94,9 @@ Route::put('/booking-services/{bookingId}/{serviceId}', [AdminBookingServiceCont
 Route::put('/booking-services/{bookingId}/{serviceId}', [AdminBookingServiceController::class, 'store'])->name('booking-services.store');
 Route::resource('/employees',AdminEmployeeController::class);
 Route::resource('/package',PackageController::class);
+Route::get('admin/contact', [AdminContactController::class, 'index'])->name('admin-contact');
+Route::resource('/review',ReviewController::class);
+
 
 
 require __DIR__.'/auth.php';

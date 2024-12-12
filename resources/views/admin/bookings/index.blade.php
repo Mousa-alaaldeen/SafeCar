@@ -5,9 +5,9 @@
     <h1 class="title">
       Bookings
     </h1>
-    <button class="button light" id="addBookingBtn">
+    <!-- <button class="button light" id="addBookingBtn">
       Add Booking
-    </button>
+    </button> -->
   </div>
 </section>
 

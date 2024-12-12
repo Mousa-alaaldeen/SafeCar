@@ -5,9 +5,9 @@
         <h1 class="title">
             Booking Services
         </h1>
-        <button class="button light" id="addBookingServiceBtn">
+        <!-- <button class="button light" id="addBookingServiceBtn">
             Add Booking Service
-        </button>
+        </button> -->
     </div>
 </section>
 
@@ -17,7 +17,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th class="image-cell"></th>
+        
                         <th>User Name</th>
                         <th>Service</th>
                         <th>Booking Date</th>
@@ -29,12 +29,7 @@
                     @if (count($bookingServices) > 0)
                         @foreach ($bookingServices as $bookingService)
                             <tr>
-                                <td class="image-cell">
-                                    <div class="image">
-                                        <img src="{{ $bookingService->service->image == null ? asset('assets/img/service.png') : asset('storage/services/' . $bookingService->service->image) }}"
-                                            class="rounded-full">
-                                    </div>
-                                </td>
+                            
                                 <td data-label="Customer Name">{{ $bookingService->booking->user->name }}</td>
                                 <td data-label="Service">{{ $bookingService->service->name }}</td>
                                 <td data-label="Booking Date">{{ $bookingService->booking->booking_date }}</td>

@@ -3,8 +3,8 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script type="text/javascript" src="{{asset('assets')}}/js/chart.sample.min.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   !function (f, b, e, v, n, t, s) {
     if (f.fbq) return; n = f.fbq = function () {
@@ -44,11 +44,13 @@
 
 
 <!------------------------------- Start employee   ---------------------->
-<script>
+<!-- <script>
     document.getElementById("addEmployeeBtn").addEventListener("click", function () {
         Swal.fire({
             title: "Add New Employee",
             html: `
+
+            
                 <div style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
                     <label style="font-weight: bold;">Employee Name</label>
                     <input type="text" id="employeeName" class="swal2-input" style="margin: 0; padding: 10px; border-radius: 5px;" placeholder="Enter employee name">
@@ -136,8 +138,7 @@
         });
     });
 
-</script>
-
+</script> -->
 
 <script>
   function showEmployeeDetails(employeeId) {
@@ -1674,3 +1675,62 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ================================ -->
+
+<!-- Employee -->
+<script>
+  // Trigger SweetAlert for confirmation before updating
+  document.querySelectorAll('.updateEmployeeBtn').forEach(button => {
+    button.addEventListener('click', function (e) {
+      e.preventDefault(); // Prevent default form submission
+
+      const employeeId = this.dataset.employeeId; // Get employee id from the button
+
+      Swal.fire({
+        title: 'Are you sure you want to update?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, update it!',
+        cancelButtonText: 'Cancel',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // If confirmed, submit the form
+          document.getElementById(`updateForm-${employeeId}`).submit();
+        }
+      });
+    });
+  });
+
+  // Display SweetAlert success message after updating
+  @if (session('success'))
+    Swal.fire({
+    title: 'Updated!',
+    text: '{{ session('success') }}',
+    icon: 'success',
+    confirmButtonText: 'OK'
+    });
+  @endif
+</script>
+<script>
+  function confirmDelete(employeeId) {
+    if (confirm("Are you sure you want to delete this employee?")) {
+      document.getElementById(`delete-form-${employeeId}`).submit();
+    }
+  }
+</script>

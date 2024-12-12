@@ -19,6 +19,12 @@
  
     <p class="menu-label">Management</p>
     <ul class="menu-list">
+    <li>
+        <a href="{{ route('employees.index') }}">
+          <span class="icon"><i class="mdi mdi-account-tie"></i></span>
+          <span class="menu-item-label">Employees</span>
+        </a>
+      </li>
       <li>
         <a href="{{route('customer.index')}}">
           <span class="icon"><i class="mdi mdi-account-group"></i></span>
@@ -31,24 +37,12 @@
           <span class="menu-item-label">Services</span>
         </a>
       </li>
-      <li>
-        <a href="{{ route('subscription.index') }}">
-          <span class="icon"><i class="mdi mdi-newspaper"></i></span>
-          <span class="menu-item-label">Subscription</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{ route('employees.index') }}">
-          <span class="icon"><i class="mdi mdi-account-tie"></i></span>
-          <span class="menu-item-label">Employees</span>
-        </a>
-      </li>
-      <li>
+      <!-- <li>
         <a href="{{route('bookings.index')}}">
           <span class="icon"><i class="mdi mdi-calendar-check"></i></span>
           <span class="menu-item-label">Booking</span>
         </a>
-      </li>
+      </li> -->
       <li>
         <a href="{{route('bookings-services.index')}}">
           <span class="icon"><i class="mdi mdi-calendar-multiple-check"></i></span>
@@ -61,7 +55,26 @@
           <span class="menu-item-label">Packages</span>
         </a>
       </li>
+      <li>
+        <a href="{{ route('subscription.index') }}">
+          <span class="icon"><i class="mdi mdi-newspaper"></i></span>
+          <span class="menu-item-label">Subscription</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('review.index') }}">
+          <span class="icon"><i class="mdi mdi-newspaper"></i></span>
+          <span class="menu-item-label">Reviews</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('admin-contact') }}">
+          <span class="icon"><i class="mdi mdi-package"></i></span>
+          <span class="menu-item-label">Contact</span>
+        </a>
+      </li>
     </ul>
+    
 
     
     <p class="menu-label">Functionalities</p>

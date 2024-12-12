@@ -66,5 +66,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Car::class);
     }
+    public function review(){
+        return $this->hasOne(Review::class);
+    }
 
 }
