@@ -42,22 +42,81 @@
       <td data-label="Name">{{$service->description}}</td>
       <td class="actions-cell">
         <div class="buttons right nowrap">
-        <button type="button" class="button small green" onclick="showServiceDetails('{{ $service->id }}')">
+        <button type="button" class="button small green" data-bs-toggle="modal"
+        data-bs-target="#editServiceModal-{{ $service->id }}">
         <span class="icon"><i class="mdi mdi-eye"></i></span>
         </button>
         <form id="delete-form-{{ $service->id }}" action="{{ route('services.destroy', $service->id) }}"
-      method="POST" class="inline">
-  @csrf
-  @method('DELETE')
-</form>
+        method="POST" class="inline">
+        @csrf
+        @method('DELETE')
+        </form>
 
-<button type="button" class="button small red" onclick="confirmDelete('{{ $service->id }}')">
-  <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-</button>
+        <button type="button" class="button small red" onclick="confirmDelete('{{ $service->id }}')">
+        <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+        </button>
 
         </div>
       </td>
       </tr>
+      <!-- Edit Service Modal -->
+      <div class="modal fade" id="editServiceModal-{{ $service->id }}" tabindex="-1"
+      aria-labelledby="editServiceModalLabel-{{ $service->id }}" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered custom-modal-size">
+        <div class="modal-content rounded-3 shadow-lg">
+        <!-- Modal Header -->
+        <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="editServiceModalLabel-{{ $service->id }}">Edit Service</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body">
+        <form action="{{ route('services.update', $service->id) }}" method="POST"
+        id="updateServiceForm-{{ $service->id }}" class="update-form" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <!-- Image -->
+        <div class="mb-3 card">
+          <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="text-align: center;">
+          <img
+          src="{{ $service->image == null ? asset('assets/img/icon-service.jpg') : asset('storage/services/' . $service->image) }}"
+          alt="{{ $service->name }}"
+          style="max-width: 100px; height: 100px; border-radius: 10px; object-fit: cover;">
+          </div>
+          <input type="file" name="image" class="form-control-file" style="flex-grow: 1;">
+          </div>
+        </div>
+        <!-- Service Name -->
+        <div class="mb-3">
+          <label for="service_name" class="form-label">Service Name</label>
+          <input type="text" name="name" class="form-control" value="{{ $service->name }}" required>
+        </div>
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="service_description" class="form-label">Description</label>
+          <textarea name="description" class="form-control" rows="3"
+          required>{{ $service->description }}</textarea>
+        </div>
+        <!-- Price -->
+        <div class="mb-3">
+          <label for="service_price" class="form-label">Price</label>
+          <input type="number" name="price" class="form-control" value="{{ $service->price }}" required>
+        </div>
+
+        <!-- Button Section -->
+        <div class="d-flex justify-content-between">
+          <!-- Cancel Button -->
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <!-- Update Button -->
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+        </form>
+        </div>
+        </div>
+      </div>
+      </div>
+
     @endforeach
       @else
       <tr>

@@ -1,13 +1,23 @@
 /********** Template CSS **********/
 :root {
-    --primary: #3399ff; /* أزرق متوسط */
-    --secondary: #0066cc; /* أزرق داكن */
-    --light: #b3d9f2; /* أزرق باهت */
-    --dark: #111111; /* يبقى نفس اللون الداكن */
+    --primary: #3399ff; 
+    --secondary: #0066cc; 
+    --light: #b3d9f2; 
+    --dark: #111111; 
 }
 
 .fw-medium {
     font-weight: 600 !important;
+}
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.5;
+    height: calc(1.5em * 3); 
+    box-sizing: border-box; 
 }
 
 .back-to-top {

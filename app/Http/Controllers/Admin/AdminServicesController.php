@@ -15,7 +15,7 @@ class AdminServicesController extends Controller
     public function index()
     {
 
-        $services = Services::paginate(20);
+        $services = Services::orderBy('created_at', direction: 'desc')-> paginate(20);
         return view('admin.service.index', compact('services'));
     }
 
@@ -117,11 +117,7 @@ class AdminServicesController extends Controller
         }
     
         $service->save();
-        return response()->json([
-            'success' => true,
-            'message' => 'Service updated successfully!',
-            'service' => $service  
-        ]);
+        return redirect()->route('services.index')->with('success', 'Service updated successfully!');
         
         
     }
