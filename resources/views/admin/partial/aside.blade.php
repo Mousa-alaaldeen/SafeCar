@@ -5,30 +5,12 @@
     </div>
   </div>
   <div class="menu is-menu-main" style="max-height: 90vh; overflow-y: auto;">
-
-    <p class="menu-label">General</p>
+    <p class="menu-label">Admin Management</p>
     <ul class="menu-list">
-      <li class="active">
-        <a href="index.html">
-          <span class="icon"><i class="mdi mdi-view-dashboard"></i></span>
-          <span class="menu-item-label">Dashboard</span>
-        </a>
-      </li>
-    </ul>
-
- 
-    <p class="menu-label">Management</p>
-    <ul class="menu-list">
-    <li>
+      <li>
         <a href="{{ route('employees.index') }}">
           <span class="icon"><i class="mdi mdi-account-tie"></i></span>
           <span class="menu-item-label">Employees</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('customer.index')}}">
-          <span class="icon"><i class="mdi mdi-account-group"></i></span>
-          <span class="menu-item-label">Users</span>
         </a>
       </li>
       <li>
@@ -37,12 +19,6 @@
           <span class="menu-item-label">Services</span>
         </a>
       </li>
-      <!-- <li>
-        <a href="{{route('bookings.index')}}">
-          <span class="icon"><i class="mdi mdi-calendar-check"></i></span>
-          <span class="menu-item-label">Booking</span>
-        </a>
-      </li> -->
       <li>
         <a href="{{route('bookings-services.index')}}">
           <span class="icon"><i class="mdi mdi-calendar-multiple-check"></i></span>
@@ -74,11 +50,14 @@
         </a>
       </li>
     </ul>
-    
-
-    
-    <p class="menu-label">Functionalities</p>
+    <p class="menu-label">User Management</p>
     <ul class="menu-list">
+      <li>
+        <a href="{{route('customer.index')}}">
+          <span class="icon"><i class="mdi mdi-account-group"></i></span>
+          <span class="menu-item-label">Users</span>
+        </a>
+      </li>
       <li>
         <a href="login.html">
           <span class="icon"><i class="mdi mdi-lock"></i></span>
@@ -108,7 +87,7 @@
       </li>
     </ul>
 
- 
+    <!-- قسم "حول" -->
     <p class="menu-label">About</p>
     <ul class="menu-list">
       <li>

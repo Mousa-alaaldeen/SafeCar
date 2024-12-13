@@ -1727,10 +1727,3 @@
     });
   @endif
 </script>
-<script>
-  function confirmDelete(employeeId) {
-    if (confirm("Are you sure you want to delete this employee?")) {
-      document.getElementById(`delete-form-${employeeId}`).submit();
-    }
-  }
-</script>

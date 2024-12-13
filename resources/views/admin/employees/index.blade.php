@@ -104,6 +104,7 @@
                           <label for="employee_position" class="form-label">Position</label>
                           <input type="text" name="position" class="form-control" value="{{ $employee->position }}" required>
                         </div>
+                        
                         <!-- Salary -->
                         <div class="mb-3">
                           <label for="employee_salary" class="form-label">Salary</label>
@@ -201,6 +202,12 @@
               @endforeach
             </select>
           </div>
+<!-- Start Date -->
+          <div class="form-group">
+         <label for="start_date">Start Date</label>
+        <input type="date" id="start_date" name="start_date" class="form-control" value="{{ old('start_date') }}">
+        </div>
+
           <!-- Button Section -->
           <div class="d-flex justify-content-between">
             <!-- Cancel Button -->

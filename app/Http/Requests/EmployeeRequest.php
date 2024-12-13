@@ -24,7 +24,7 @@ class EmployeeRequest extends FormRequest
                 "unique:employees,email,$employeeId",
             ],
             'phone' => 'required|string|max:15',
-            
+            'start_date' => 'nullable|date|before_or_equal:today',
             'salary' => 'required|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'service_id' => 'required|exists:services,id',

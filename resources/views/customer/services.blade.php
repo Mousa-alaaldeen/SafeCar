@@ -23,7 +23,6 @@
 </div>
 <!-- Page Header End -->
 
-
 <!-- Service Start -->
 <div class="container-xxl service py-5">
     <div class="container">
@@ -34,20 +33,12 @@
         <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
             <div class="col-lg-4">
                 <div class="nav w-100 nav-pills me-4">
-                    @if (count($services)>0)
-                    @foreach ($services as $service )
-
-                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4 "
+                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4 active"
                         data-bs-toggle="pill" data-bs-target="#tab-pane-1" type="button">
                         <i class="fa fa-car-side fa-2x me-3"></i>
-                        <h4 class="m-0">{{$service->name}}</h4>
+                        <h4 class="m-0">Diagnostic Test</h4>
                     </button>
-                    @endforeach
-                        
-                    @endif
-                    
-                    
-                    <!-- <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill"
+                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill"
                         data-bs-target="#tab-pane-2" type="button">
                         <i class="fa fa-car fa-2x me-3"></i>
                         <h4 class="m-0">Engine Servicing</h4>
@@ -61,7 +52,7 @@
                         data-bs-target="#tab-pane-4" type="button">
                         <i class="fa fa-oil-can fa-2x me-3"></i>
                         <h4 class="m-0">Oil Changing</h4>
-                    </button> -->
+                    </button>
                 </div>
             </div>
             <div class="col-lg-8">
@@ -112,8 +103,8 @@
                         <div class="row g-4">
                             <div class="col-md-6" style="min-height: 350px;">
                                 <div class="position-relative h-100">
-                                    <img class="position-absolute img-fluid w-100 h-100" src="img/service-3.jpg"
-                                        style="object-fit: cover;" alt="">
+                                    <img class="position-absolute img-fluid w-100 h-100"
+                                        src="{{asset('assets')}}/img/service-3.jpg" style="object-fit: cover;" alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -133,8 +124,8 @@
                         <div class="row g-4">
                             <div class="col-md-6" style="min-height: 350px;">
                                 <div class="position-relative h-100">
-                                    <img class="position-absolute img-fluid w-100 h-100" src="img/service-4.jpg"
-                                        style="object-fit: cover;" alt="">
+                                    <img class="position-absolute img-fluid w-100 h-100"
+                                        src="{{asset('assets')}}/img/service-4.jpg" style="object-fit: cover;" alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">

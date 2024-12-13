@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AdminBookingController;
 use App\Http\Controllers\Admin\AdminBookingServiceController;
 use App\Http\Controllers\Admin\AdminContactController;
@@ -37,7 +38,7 @@ Route::controller(CustomerController::class)->name('customer.')->group(function(
 
     Route::get('/','home')->name('home');
     
-    Route::get('/about','about')->name('about');
+   
     Route::get('/contact','contact')->name('contact');
     // Route::post('/contact/store','store')->name('contact.store');
     Route::get('/displayContacts','display')->name('display');
@@ -48,8 +49,9 @@ Route::controller(CustomerController::class)->name('customer.')->group(function(
 });
 
 
-Route::post('/contact/store',[ContactController::class,'store'])->name('contact.store');
 
+Route::post('/contact/store',[ContactController::class,'store'])->name('contact.store');
+Route::get('/about',[AboutController::class,'index'])->name('about');
 
 
 //post Route

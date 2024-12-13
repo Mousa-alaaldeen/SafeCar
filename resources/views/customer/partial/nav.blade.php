@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="{{route('customer.home')}}" class="nav-item nav-link @yield('home-active')">Home</a>
-            <a href="{{route('customer.about')}}" class="nav-item nav-link  @yield('about-active')">About</a>
+            <a href="{{route('about')}}" class="nav-item nav-link  @yield('about-active')">About</a>
             <a href="{{route('customer-services')}}" class="nav-item nav-link  @yield('services-active')">Services</a>
                      <!-- Button to create a new post -->
            <a href="{{ route('posts.index') }}" class="nav-item nav-link  @yield('posts-active')">

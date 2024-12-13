@@ -39,56 +39,55 @@ class AdminEmployeeController extends Controller
 
 
     public function store(EmployeeRequest $request)
-{
-    $validatedData = $request->validated();
-
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = time() . '-' . $image->getClientOriginalName();
-        $image->storeAs('employees', $imageName, 'public');
-        $validatedData['image'] = 'employees/' . $imageName;
-    }
-
-    // Create the employee record
-    Employee::create($validatedData);
-
-    // Redirect back with a success message
-    return redirect()->route('employees.index')->with('success', 'Employee added successfully!');
-}
-
+    {
+        $validatedData = $request->validated();
     
-
-
-
-
-public function update(EmployeeRequest $request, string $id)
-{
-    $validatedData = $request->validated();
-    $employee = Employee::findOrFail($id);
-    
-   
-    $employee->name = $validatedData['name'];
-   
-    $employee->salary = $validatedData['salary'];
-    $employee->email = $validatedData['email'];
-    $employee->phone = $validatedData['phone'];
-    $employee->service_id = $validatedData['service_id']; 
-    
-
-    if ($request->hasFile('image')) {
-   
-        if ($employee->image && file_exists(storage_path('app/public/employees/' . $employee->image))) {
-            unlink(storage_path('app/public/employees/' . $employee->image));
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '-' . $image->getClientOriginalName();
+            $image->storeAs('employees', $imageName, 'public');
+            $validatedData['image'] = 'employees/' . $imageName;
         }
-
-     
-        $imageName = time() . '.' . $request->image->extension();
-        $request->image->storeAs('public/employees', $imageName);
-        $employee->image = $imageName;
+    
+        $validatedData['start_date'] = $validatedData['start_date'] ?? '2020-01-01';
+    
+        Employee::create($validatedData);
+    
+        return redirect()->route('employees.index')->with('success', 'Employee added successfully!');
     }
-    $employee->save();
-    return redirect()->route('employees.index')->with('success', 'Employee updated successfully!');
-}
+    
+    
+
+
+
+
+    public function update(EmployeeRequest $request, string $id)
+    {
+        $validatedData = $request->validated();
+        $employee = Employee::findOrFail($id);
+    
+        $employee->name = $validatedData['name'];
+        $employee->salary = $validatedData['salary'];
+        $employee->email = $validatedData['email'];
+        $employee->phone = $validatedData['phone'];
+        $employee->service_id = $validatedData['service_id'];
+        $employee->start_date = $validatedData['start_date'] ?? $employee->start_date;
+    
+        if ($request->hasFile('image')) {
+            if ($employee->image && file_exists(storage_path('app/public/employees/' . $employee->image))) {
+                unlink(storage_path('app/public/employees/' . $employee->image));
+            }
+    
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->storeAs('public/employees', $imageName);
+            $employee->image = $imageName;
+        }
+    
+        $employee->save();
+    
+        return redirect()->route('employees.index')->with('success', 'Employee updated successfully!');
+    }
+    
 
     public function destroy(string $id)
     {

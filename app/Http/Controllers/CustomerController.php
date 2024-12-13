@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreContactRequest;
 use App\Models\Car;
 use App\Models\Contact;
+use App\Models\Employee;
 use App\Models\Services;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,10 +31,7 @@ public function register()
        
         return view('customer.home',compact('users'));
     }
-    public function about()
-    {
-        return view('customer.about');
-    }
+  
  
     public function index()
     {
