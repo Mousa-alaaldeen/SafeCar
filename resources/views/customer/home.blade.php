@@ -67,8 +67,9 @@
                     <i class="fa fa-water fa-3x text-primary flex-shrink-0"></i>
                     <div class="ps-4">
                         <h5 class="mb-3">Water-Saving Techniques</h5>
-                        <p>We use advanced techniques to minimize water usage, ensuring that every wash is as eco-friendly as possible.</p>
-                        
+                        <p>We use advanced techniques to minimize water usage, ensuring that every wash is as
+                            eco-friendly as possible.</p>
+
                     </div>
                 </div>
             </div>
@@ -78,7 +79,8 @@
                     <i class="fa fa-leaf fa-3x text-primary flex-shrink-0"></i>
                     <div class="ps-4">
                         <h5 class="mb-3">Biodegradable Cleaning Solutions</h5>
-                        <p>Our eco-friendly cleaning products break down naturally, leaving no harmful residues behind, ensuring a greener future.</p>
+                        <p>Our eco-friendly cleaning products break down naturally, leaving no harmful residues behind,
+                            ensuring a greener future.</p>
                     </div>
                 </div>
             </div>
@@ -88,7 +90,8 @@
                     <i class="fa fa-recycle fa-3x text-primary flex-shrink-0"></i>
                     <div class="ps-4">
                         <h5 class="mb-3">Responsible Waste Disposal</h5>
-                        <p>We prioritize environmental safety by ensuring all waste, from water to chemicals, is disposed of responsibly and sustainably.</p>
+                        <p>We prioritize environmental safety by ensuring all waste, from water to chemicals, is
+                            disposed of responsibly and sustainably.</p>
                     </div>
                 </div>
             </div>
@@ -103,20 +106,28 @@
         <div class="row g-5">
             <div class="col-lg-6 pt-4" style="min-height: 400px;">
                 <div class="position-relative h-100 wow fadeIn" data-wow-delay="0.1s">
+
                     <img class="position-absolute img-fluid w-100 h-100"
-                        src="https://velikorodnov.com/html/cleansy/images/982x905_img1.png" style="object-fit: cover;"
-                        alt="">
+                        src="https://velikorodnov.com/html/cleansy/images/982x905_img1.png"
+                        alt="Eco-Friendly Expertise">
+
                     <div class="position-absolute top-0 end-0 mt-n4 me-n4 py-4 px-5"
                         style="background: rgba(0, 0, 0, .08);">
-                        <h1 class="display-4 text-white mb-0">15 <span class="fs-4">Years</span></h1>
-                        <h4 class="text-white">Eco-Friendly Expertise</h4>
+                        <h1 class="display-4 mb-0">15 <span class="fs-4">Years</span></h1>
+                        <h4 class="">Eco-Friendly Expertise</h4>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6">
-                <h1 class="mb-4"><span class="text-primary">CarServ</span> Pioneering Eco-Friendly Car Wash Solutions</h1>
-                <p class="mb-4">At CarServ, we combine over 15 years of experience with a commitment to the environment. Our mission is to revolutionize car care by using sustainable practices that protect both your vehicle and the planet.</p>
-                <p class="mb-4">We don't just wash cars – we wash them responsibly. From water conservation to safe waste disposal and the use of biodegradable detergents, we ensure every aspect of our service is aligned with the principles of sustainability.</p>
+                <h1 class="mb-4"><span class="text-primary">CarServ</span> Pioneering Eco-Friendly Car Wash Solutions
+                </h1>
+                <p class="mb-4">At CarServ, we combine over 15 years of experience with a commitment to the environment.
+                    Our mission is to revolutionize car care by using sustainable practices that protect both your
+                    vehicle and the planet.</p>
+                <p class="mb-4">We don't just wash cars – we wash them responsibly. From water conservation to safe
+                    waste disposal and the use of biodegradable detergents, we ensure every aspect of our service is
+                    aligned with the principles of sustainability.</p>
                 <div class="row g-4 mb-3 pb-3">
                     <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
                         <div class="d-flex">
@@ -126,7 +137,8 @@
                             </div>
                             <div class="ps-3">
                                 <h6>15 Years of Experience</h6>
-                                <span>With over a decade of expertise, we’ve honed our techniques to deliver the best, most eco-friendly car wash experience.</span>
+                                <span>With over a decade of expertise, we’ve honed our techniques to deliver the best,
+                                    most eco-friendly car wash experience.</span>
                             </div>
                         </div>
                     </div>
@@ -138,7 +150,8 @@
                             </div>
                             <div class="ps-3">
                                 <h6>Eco-Friendly Approach</h6>
-                                <span>Our focus is on reducing environmental impact by using efficient water usage, biodegradable products, and responsible waste management.</span>
+                                <span>Our focus is on reducing environmental impact by using efficient water usage,
+                                    biodegradable products, and responsible waste management.</span>
                             </div>
                         </div>
                     </div>
@@ -150,7 +163,8 @@
                             </div>
                             <div class="ps-3">
                                 <h6>Safe for Your Car & the Planet</h6>
-                                <span>We prioritize both the health of your car and the environment. Our methods are safe, efficient, and eco-friendly.</span>
+                                <span>We prioritize both the health of your car and the environment. Our methods are
+                                    safe, efficient, and eco-friendly.</span>
                             </div>
                         </div>
                     </div>

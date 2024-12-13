@@ -431,4 +431,28 @@
     border-right: none;
 }
 
+/* Gradient Button Style */
+.btn-gradient {
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    color: white;
+    border: none;
+}
+
+.btn-gradient:hover {
+    background: linear-gradient(to right, #FF416C, #FF4B2B);
+    color: white;
+}
+
+/* Modal Customization */
+.modal-content {
+    border-radius: 15px;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card-img-top {
+    border-radius: 10px;
+}
 

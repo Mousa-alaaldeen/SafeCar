@@ -18,7 +18,7 @@ class PostController extends Controller
     
     public function index()
     {
-        $posts=Post::paginate(4);
+        $posts=Post::orderBy('created_at', direction: 'desc')->get();
         foreach ($posts as $post) {
             $post->formatted_date = Carbon::parse($post->created_at)->diffForHumans();
         }
