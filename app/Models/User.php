@@ -20,7 +20,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'car_size',
+        'car_type',
+        'car_model',
+        'car_license_plate',
+        'care_imge',
         'password',
+        
+
     ];
 
     /**
@@ -62,10 +70,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Subscription::class);
     }
-    public function car()
-    {
-        return $this->hasOne(Car::class);
-    }
+ 
     public function review(){
         return $this->hasOne(Review::class);
     }

@@ -17,23 +17,31 @@
             <table>
                 <thead>
                     <tr>
-        
+
                         <th>User Name</th>
                         <th>Service</th>
                         <th>Booking Date</th>
                         <th>Status</th>
-                  
+
                     </tr>
                 </thead>
                 <tbody>
                     @if (count($bookingServices) > 0)
                         @foreach ($bookingServices as $bookingService)
                             <tr>
-                            
-                                <td data-label="Customer Name">{{ $bookingService->booking->user->name }}</td>
-                                <td data-label="Service">{{ $bookingService->service->name }}</td>
-                                <td data-label="Booking Date">{{ $bookingService->booking->booking_date }}</td>
-                                <td data-label="Status">{{ $bookingService->booking->status }}</td>
+                                <td data-label="Customer Name">
+                                    {{ $bookingService->booking?->user?->name ?? 'N/A' }}
+                                </td>
+                                <td data-label="Service">
+                                    {{ $bookingService->service?->name ?? 'N/A' }}
+                                </td>
+                                <td data-label="Booking Date">
+                                    {{ $bookingService->booking?->booking_date ?? 'N/A' }}
+                                </td>
+                                <td data-label="Status">
+                                    {{ $bookingService->booking?->status ?? 'N/A' }}
+                                </td>
+
                                 <td class="actions-cell">
                                     <div class="buttons right nowrap">
                                         <button type="button" class="button small green"
