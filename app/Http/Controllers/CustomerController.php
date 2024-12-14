@@ -27,9 +27,10 @@ public function register()
     {
     
         
-        $users = User::paginate(5);;
+        $users = User::paginate(5);
+        $employees=Employee::count();
        
-        return view('customer.home',compact('users'));
+        return view('customer.home',compact('users','employees'));
     }
   
  

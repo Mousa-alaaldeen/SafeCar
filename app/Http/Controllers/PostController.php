@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePosts;
+use App\Models\comment;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -65,11 +66,14 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        return view('customer.post-view');
-    }
 
+        $posts = Post::with('comments.user')->get();
+        $comments = Comment::where('post_id', $id)->with('user')->get();
+        return view('posts.show', compact('post', 'comments'));
+    }
+    
     /**
      * Show the form for editing the specified resource.
      */

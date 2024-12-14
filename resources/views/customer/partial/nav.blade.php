@@ -33,7 +33,7 @@
 
 
             <!-- Logout button -->
-            <a href="{{ route('logout') }}" class="btn btn-danger py-4 px-lg-5 d-none d-lg-block"
+            <a href="{{ route('logout') }}" class="btn btn-danger py-4 px-lg-5 d-none d-lg-block "
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Logout <i class="fa fa-sign-out-alt ms-3"></i>
             </a>

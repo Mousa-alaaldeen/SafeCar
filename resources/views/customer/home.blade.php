@@ -6,45 +6,51 @@
 <div class="container-fluid p-0 mb-5">
     <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
+            <!-- First Item -->
             <div class="carousel-item active">
-                <img class="w-100" src="{{asset('assets')}}/img/carousel-bg-1.jpg" alt="Image">
+                <img class="w-100" src="https://velikorodnov.com/html/cleansy/images/1920x896_slide3.jpg" alt="Image">
                 <div class="carousel-caption d-flex align-items-center">
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
                             <div class="col-10 col-lg-7 text-center text-lg-start">
-                                <h6 class="text-white text-uppercase mb-3 animated slideInDown">// Car Servicing //</h6>
-                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Qualified Car Repair
-                                    Service Center</h1>
-                                <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Learn More<i
-                                        class="fa fa-arrow-right ms-3"></i></a>
-                            </div>
-                            <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                <img class="img-fluid" src="{{asset('assets')}}/img/carousel-1.png" alt="">
+                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Reliable Auto Repair Services</h1>
+                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Get Started<i class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Second Item -->
             <div class="carousel-item">
-                <img class="w-100" src="{{asset('assets')}}/img/carousel-bg-2.jpg" alt="Image">
+                <img class="w-100" src="https://velikorodnov.com/html/cleansy/images/1920x896_slide2.jpg" alt="Image">
                 <div class="carousel-caption d-flex align-items-center">
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
                             <div class="col-10 col-lg-7 text-center text-lg-start">
-                                <h6 class="text-white text-uppercase mb-3 animated slideInDown">// Car Servicing //</h6>
-                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Qualified Car Wash
-                                    Service Center</h1>
-                                <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Learn More<i
-                                        class="fa fa-arrow-right ms-3"></i></a>
+                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Professional Car Wash Services</h1>
+                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Explore More<i class="fa fa-arrow-right ms-3"></i></a>
                             </div>
-                            <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                <img class="img-fluid" src="{{asset('assets')}}/img/carousel-2.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Third Item -->
+            <div class="carousel-item">
+                <img class="w-100" src="https://velikorodnov.com/html/cleansy/images/1920x896_slide1.jpg" alt="Image">
+                <div class="carousel-caption d-flex align-items-center">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center justify-content-lg-start">
+                            <div class="col-10 col-lg-7 text-center text-lg-start">
+                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Expert Car Maintenance</h1>
+                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Find Out More<i class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Carousel Controls -->
         <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -55,6 +61,8 @@
         </button>
     </div>
 </div>
+
+
 <!-- Carousel End -->
 
 <!-- Service Start -->
@@ -112,9 +120,9 @@
                         alt="Eco-Friendly Expertise">
 
                     <div class="position-absolute top-0 end-0 mt-n4 me-n4 py-4 px-5"
-                        style="background: rgba(0, 0, 0, .08);">
-                        <h1 class="display-4 mb-0">15 <span class="fs-4">Years</span></h1>
-                        <h4 class="">Eco-Friendly Expertise</h4>
+                        style="background: rgba(0, 0, 0, .15);">
+                        <h1 class="display-4 mb-0 text-white">15 <span class="fs-4">Years</span></h1>
+                        <h4 class="text-white">Eco-Friendly Expertise</h4>
                     </div>
                 </div>
             </div>
@@ -180,22 +188,25 @@
     <div class="container">
         <div class="row g-4">
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
-                <i class="fa fa-check fa-2x text-white mb-3"></i>
+            <i class="fa fa-calendar-alt fa-2x text-white mb-3"></i>
                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
                 <p class="text-white mb-0">Years Experience</p>
             </div>
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
-                <i class="fa fa-users-cog fa-2x text-white mb-3"></i>
-                <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
+            <i class="fa fa-cogs fa-2x text-white mb-3"></i>
+
+                <h2 class="text-white mb-2" data-toggle="counter-up">{{$employees}}</h2>
                 <p class="text-white mb-0">Expert Technicians</p>
             </div>
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
-                <i class="fa fa-users fa-2x text-white mb-3"></i>
+            <i class="fa fa-smile fa-2x text-white mb-3"></i>
+
                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
                 <p class="text-white mb-0">Satisfied Clients</p>
             </div>
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
-                <i class="fa fa-car fa-2x text-white mb-3"></i>
+            <i class="fa fa-check-circle fa-2x text-white mb-3"></i>
+
                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
                 <p class="text-white mb-0">Compleate Projects</p>
             </div>

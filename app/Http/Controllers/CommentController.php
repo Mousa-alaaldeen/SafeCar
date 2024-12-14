@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCommentRequest;
 use App\Models\comment;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = comment::with(['user', 'post'])->orderBy('creates_at', 'desc')->get();
+
     }
 
     /**
@@ -26,10 +28,17 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCommentRequest $request)
     {
-        //
+        comment::created([
+            'comment_content' => $request->comment_content,
+            'post_id'=>$request->post_id,
+            'user_id'=>auth()->id(),
+            
+        ]);
+        return back()->with('success','Comment added successfully!');
     }
+
 
     /**
      * Display the specified resource.

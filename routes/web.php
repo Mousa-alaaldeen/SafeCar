@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminServicesController;
 use App\Http\Controllers\Admin\AdminSubscriptionController;
 use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerServiceController;
@@ -57,6 +58,7 @@ Route::get('/about',[AboutController::class,'index'])->name('about');
 //post Route
 Route::resource('posts',PostController::class);
 Route::resource('posts',PostController::class);
+Route::resource('comment',CommentController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -3,7 +3,7 @@
 
 <!-- Page Header Start -->
 <div class="container-fluid page-header mb-5 p-0"
-    style="background-image: url('{{ asset('assets/img/carousel-bg-1.jpg') }}');">
+style="background-image:  url('https://velikorodnov.com/html/cleansy/rtl/images/slide1.png');">
     <div class="container-fluid page-header-inner py-5">
         <div class="container text-center">
             <h1 class="display-3 text-white mb-3 animated slideInDown">Services</h1>
@@ -50,21 +50,22 @@
                             <button class="btn btn-light"><i class="fas fa-comment"></i> Comment</button>
                         </div>
                         <!-- Comments Section -->
-                        <div class="card shadow-sm my-2 mx-2" style="border-radius: 15px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <!-- Comment Textarea -->
-                                    <textarea class="form-control border-0 shadow-none" rows="3" placeholder="Add a comment..."
-                                        style="resize: none; width: 100%; border-radius: 30px; padding-left: 12px; padding-top: 8px; border: 1px solid #ced4da;"></textarea>
-
-                                    <!-- Post Button -->
-                                    <button class="btn btn-primary ms-2"
-                                        style="height: 100%; border-radius: 50%; padding: 8px 16px; background-color: #007bff;">
-                                        <i class="fas fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <form action="{{ route('comment.store') }}" method="post" class="d-flex">
+        @csrf
+        <input type="hidden" name="post_id" value="{{ $post->id }}">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <!-- Comment Textarea -->
+                <textarea class="form-control border-0 shadow-none" name="comment_content" rows="3"
+                    placeholder="Add a comment..."
+                    style="resize: none; width: 100%; border-radius: 30px; padding-left: 12px; padding-top: 8px; border: 1px solid #ced4da;"></textarea>
+                <button class="btn btn-primary ms-2"
+                    style="height: 100%; border-radius: 50%; padding: 8px 16px; background-color: #007bff;">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </form>
 
 
                     </div>

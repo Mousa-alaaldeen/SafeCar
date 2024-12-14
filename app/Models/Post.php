@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\CustomerController;
-use Egulias\EmailValidator\Parser\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +22,7 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class, 'post_id');
-    } 
+    }
+    
 
 }
