@@ -22,7 +22,7 @@
             </div>
             <!-- Second Item -->
             <div class="carousel-item">
-                <img class="w-100" src="https://velikorodnov.com/html/cleansy/images/1920x896_slide2.jpg" alt="Image">
+                <img class="w-100" src="https://velikorodnov.com/html/cleansy/images/688x480_img1.jpg" alt="Image">
                 <div class="carousel-caption d-flex align-items-center">
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
@@ -36,7 +36,7 @@
             </div>
             <!-- Third Item -->
             <div class="carousel-item">
-                <img class="w-100" src="https://velikorodnov.com/html/cleansy/images/1920x896_slide1.jpg" alt="Image">
+                <img class="w-100" src="https://velikorodnov.com/html/cleansy/images/1920x930_slide1.jpg" alt="Image">
                 <div class="carousel-caption d-flex align-items-center">
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
