@@ -128,9 +128,9 @@
             </div>
 
             <div class="col-lg-6">
-                <h1 class="mb-4"><span class="text-primary">CarServ</span> Pioneering Eco-Friendly Car Wash Solutions
+                <h1 class="mb-4"><span class="text-primary">SafeCar</span> Pioneering Eco-Friendly Car Wash Solutions
                 </h1>
-                <p class="mb-4">At CarServ, we combine over 15 years of experience with a commitment to the environment.
+                <p class="mb-4">At SafeCar, we combine over 15 years of experience with a commitment to the environment.
                     Our mission is to revolutionize car care by using sustainable practices that protect both your
                     vehicle and the planet.</p>
                 <p class="mb-4">We don't just wash cars – we wash them responsibly. From water conservation to safe

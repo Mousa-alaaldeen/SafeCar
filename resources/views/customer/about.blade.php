@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <h1 class="mb-4"><span class="text-primary">CarServ</span> is the Best Place for Your Auto Care</h1>
+                <h1 class="mb-4"><span class="text-primary">SafeCar</span> is the Best Place for Your Auto Care</h1>
                 <p class="mb-4">With over 15 years of experience in the auto care industry, we provide professional, reliable, and affordable services to our clients. We value quality, trust, and customer satisfaction.</p>
                 <div class="row g-4 mb-3 pb-3">
                     <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
