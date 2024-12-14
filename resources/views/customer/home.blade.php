@@ -13,8 +13,10 @@
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
                             <div class="col-10 col-lg-7 text-center text-lg-start">
-                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Reliable Auto Repair Services</h1>
-                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Get Started<i class="fa fa-arrow-right ms-3"></i></a>
+                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Reliable Auto Repair
+                                    Services</h1>
+                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Get Started<i
+                                        class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -27,8 +29,10 @@
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
                             <div class="col-10 col-lg-7 text-center text-lg-start">
-                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Professional Car Wash Services</h1>
-                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Explore More<i class="fa fa-arrow-right ms-3"></i></a>
+                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Professional Car Wash
+                                    Services</h1>
+                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Explore More<i
+                                        class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -41,8 +45,10 @@
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
                             <div class="col-10 col-lg-7 text-center text-lg-start">
-                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Expert Car Maintenance</h1>
-                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Find Out More<i class="fa fa-arrow-right ms-3"></i></a>
+                                <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Expert Car Maintenance
+                                </h1>
+                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Find Out More<i
+                                        class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -188,26 +194,26 @@
     <div class="container">
         <div class="row g-4">
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
-            <i class="fa fa-calendar-alt fa-2x text-white mb-3"></i>
+                <i class="fa fa-calendar-alt fa-2x text-white mb-3"></i>
                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
                 <p class="text-white mb-0">Years Experience</p>
             </div>
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
-            <i class="fa fa-cogs fa-2x text-white mb-3"></i>
+                <i class="fa fa-cogs fa-2x text-white mb-3"></i>
 
                 <h2 class="text-white mb-2" data-toggle="counter-up">{{$employees}}</h2>
                 <p class="text-white mb-0">Expert Technicians</p>
             </div>
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
-            <i class="fa fa-smile fa-2x text-white mb-3"></i>
+                <i class="fa fa-smile fa-2x text-white mb-3"></i>
 
                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
                 <p class="text-white mb-0">Satisfied Clients</p>
             </div>
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
-            <i class="fa fa-check-circle fa-2x text-white mb-3"></i>
+                <i class="fa fa-check-circle fa-2x text-white mb-3"></i>
 
-                <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
+                <h2 class="text-white mb-2" data-toggle="counter-up">{{$compleate}}</h2>
                 <p class="text-white mb-0">Compleate Projects</p>
             </div>
         </div>
@@ -390,55 +396,66 @@
 
 
 <!-- Testimonial Start -->
-<!-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+<section id="testimonials" class="testimonials py-5">
     <div class="container">
-        <div class="text-center">
-            <h6 class="text-primary text-uppercase">// Testimonial //</h6>
-            <h1 class="mb-5">Our Clients Say!</h1>
-        </div>
-        <div class="owl-carousel testimonial-carousel position-relative">
-            <div class="testimonial-item text-center">
-                <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{asset('assets')}}/img/testimonial-1.jpg"
-                    style="width: 80px; height: 80px;">
-                <h5 class="mb-0">Client Name</h5>
-                <p>Profession</p>
-                <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos.
-                        Clita erat ipsum et lorem et sit.</p>
+        <h2 class="text-center mb-4">What people think about our services</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+
+                    <p class="testimonial-text">"This service was amazing! I will definitely come back again."</p>
+                    <div class="row align-items-center my-4">
+                        <div class="col-auto">
+                            <img src="{{asset('assets')}}/img/team-3.jpg" alt="Client 1" class="testimonial-img">
+                        </div>
+                        <div class="col">
+                            <h5 class="client-name mb-1">John Doe</h5>
+                            <span class="client-position">CEO, Company X</span>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
-            <div class="testimonial-item text-center">
-                <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{asset('assets')}}/img/testimonial-2.jpg"
-                    style="width: 80px; height: 80px;">
-                <h5 class="mb-0">Client Name</h5>
-                <p>Profession</p>
-                <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos.
-                        Clita erat ipsum et lorem et sit.</p>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                  
+                    <p class="testimonial-text">"Fantastic experience! I highly recommend this service to everyone."</p>
+                
+
+                    <div class="row align-items-center my-4">
+                        <div class="col-auto">
+                            <img src="{{asset('assets')}}/img/team-4.jpg" alt="Client 1" class="testimonial-img">
+                        </div>
+                        <div class="col">
+                        <h5 class="client-name">Jane Smith</h5>
+                        <span class="client-position">Founder, Business Y</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="testimonial-item text-center">
-                <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{asset('assets')}}/img/testimonial-3.jpg"
-                    style="width: 80px; height: 80px;">
-                <h5 class="mb-0">Client Name</h5>
-                <p>Profession</p>
-                <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos.
-                        Clita erat ipsum et lorem et sit.</p>
-                </div>
-            </div>
-            <div class="testimonial-item text-center">
-                <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{asset('assets')}}/img/testimonial-4.jpg"
-                    style="width: 80px; height: 80px;">
-                <h5 class="mb-0">Client Name</h5>
-                <p>Profession</p>
-                <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos.
-                        Clita erat ipsum et lorem et sit.</p>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    
+                    <p class="testimonial-text">"Absolutely the best! The team did an outstanding job."</p>
+                  
+
+                    <div class="row align-items-center my-4">
+                        <div class="col-auto">
+                            <img src="{{asset('assets')}}/img/testimonial-4.jpg" alt="Client 1" class="testimonial-img">
+                        </div>
+                        <div class="col">
+                        <h5 class="client-name">Mark Johnson</h5>
+                    <span class="client-position">Manager, Company Z</span>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div> -->
+</section>
 <!-- Testimonial End -->
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\StoreContactRequest;
+use App\Models\Booking;
 use App\Models\Car;
 use App\Models\Contact;
 use App\Models\Employee;
@@ -29,8 +30,9 @@ public function register()
         
         $users = User::paginate(5);
         $employees=Employee::count();
+        $compleate=Booking::where('status','Compleate')->count();
        
-        return view('customer.home',compact('users','employees'));
+        return view('customer.home',compact('users','employees','compleate'));
     }
   
  

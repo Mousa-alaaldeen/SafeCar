@@ -169,15 +169,11 @@
                                     <img class="img-fluid"
                                         src="{{ $employee->image == null ? asset('assets/img/User_Icon.png') : asset('storage/employees/' . $employee->image) }}"
                                         alt="">
-                                    <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
-                                    </div>
+                                    
                                 </div>
-                                <div class="bg-light text-center p-4">
+                                <div class="text-center p-4">
                                     <h5 class="fw-bold mb-0">{{ $employee->name }}</h5>
-                                    <small>{{ $employee->service->name }}</small>
+                                    <small class="text-primary">{{ $employee->service->name }}</small>
                                     <p>Years Experience: {{ $employee->years_experience }}</p>
                                 </div>
                             </div>
@@ -189,6 +185,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 
 @endsection

@@ -65,7 +65,7 @@ $services = Services::orderBy('created_at', 'desc')->get();
                         <div class="card-footer bg-light text-center">
                             <button type="button" class="btn btn-outline-primary w-100" data-bs-toggle="modal"
                                 data-bs-target="#bookingModal{{ $service->id }}">
-                                Add to Cart <i class="fa fa-cart-plus ms-2"></i>
+                               booking <i class="fa fa-calendar-alt"></i> 
                             </button>
                         </div>
                     </div>

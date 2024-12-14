@@ -14,9 +14,9 @@
             <a href="{{route('about')}}" class="nav-item nav-link  @yield('about-active')">About</a>
             <a href="{{route('customer-services')}}" class="nav-item nav-link  @yield('services-active')">Services</a>
                      <!-- Button to create a new post -->
-           <a href="{{ route('posts.index') }}" class="nav-item nav-link  @yield('posts-active')">
+           <!-- <a href="{{ route('posts.index') }}" class="nav-item nav-link  @yield('posts-active')">
                 Post
-            </a>
+            </a> -->
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu fade-up m-0">
