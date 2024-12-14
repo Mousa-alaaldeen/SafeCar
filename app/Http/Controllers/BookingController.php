@@ -28,34 +28,26 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        if (!auth()->check()) {
+            return redirect()->back()->with('error', 'You need to log in to make a booking.');
+        }
+   
+        $validatedData = $request->validate([
             'service_id' => 'required|exists:services,id',
             'booking_date' => 'required|date|after_or_equal:today',
-
+            'time_slot' => 'required',
         ]);
-        $bookingDateTime = $request->booking_date . ' ' . $request->time_slot;
-        $existingBooking = Booking::where('service_id', $request->service_id)
-            ->whereDate('booking_date', $request->booking_date)
-            ->whereBetween('booking_date', [
-
-                Carbon::parse($bookingDateTime)->subMinutes(30),
-                Carbon::parse($bookingDateTime)->addMinutes(30)
-            ])
-            ->exists();
-
-        if ($existingBooking) {
-            return back()->withErrors(['error' => 'This service is already booked within 30 minutes of the selected time.']);
-        }
+    
         Booking::create([
-            'user_id' => Auth::id(),
+            'user_id' => auth()->id(),
             'service_id' => $request->service_id,
-            'booking_date' => $bookingDateTime,
+            'booking_date' => $request->booking_date,
             'time_slot' => $request->time_slot,
-            'status' => 'Scheduled',
         ]);
-
-        return redirect()->route('customer-bookings.index')->with('success', 'Booking successfully created.');
+    
+        return redirect()->back()->with('success', 'Your booking has been confirmed!');
     }
+    
     public function destroy($id)
     {
   

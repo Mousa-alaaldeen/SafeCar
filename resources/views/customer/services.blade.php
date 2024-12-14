@@ -32,6 +32,30 @@ $services = Services::orderBy('created_at', 'desc')->get();
         </ul>
     </div>
 @endif
+@if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ session('error') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+@endif
+
 
 <!-- Service Start -->
 <div class="container-xxl service py-5">
@@ -71,7 +95,7 @@ $services = Services::orderBy('created_at', 'desc')->get();
                     </div>
                 </div>
 
-                <!-- Modal لتحديد الموعد -->
+                <!-- Modal Select Booking Date-->
                 <div class="modal fade" id="bookingModal{{ $service->id }}" tabindex="-1"
                     aria-labelledby="bookingModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
