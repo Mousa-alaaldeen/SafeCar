@@ -8,6 +8,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
+        
+
             <a href="{{route('customer.home')}}" class="nav-item nav-link @yield('home-active')">Home</a>
             <a href="{{route('about')}}" class="nav-item nav-link  @yield('about-active')">About</a>
             <a href="{{route('customer-services')}}" class="nav-item nav-link  @yield('services-active')">Services</a>
@@ -27,11 +29,12 @@
             <a href="{{route('customer.contact')}}" class="nav-item nav-link  @yield('contact-active') ">Contact</a>
         </div>
         @if (auth()->check())
-            <!-- If the user is logged in -->
+        <a href="{{ route('customer-bookings.index') }}" class="nav-item nav-link @yield('bookings-active')">
+    <i class="fa fa-calendar-alt"></i>
+</a>
+
             <span class="navbar-text me-3">Welcome, {{ auth()->user()->name }}</span>
-
-
-
+            
             <!-- Logout button -->
             <a href="{{ route('logout') }}" class="btn btn-danger py-4 px-lg-5 d-none d-lg-block "
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -40,6 +43,9 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
+
+
+            
 
         @else
             <!-- If the user is not logged in -->

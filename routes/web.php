@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminServicesController;
 use App\Http\Controllers\Admin\AdminSubscriptionController;
 use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
@@ -69,7 +71,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('customer-bookings', [BookingController::class, 'index'])->name('customer-bookings.index');
+Route::get('customer-bookings/create', [BookingController::class, 'create'])->name('customer-bookings.create');
+Route::post('customer-bookings', [BookingController::class, 'store'])->name('customer-bookings.store');
+Route::post('customer-bookings/{id}/status', [BookingController::class, 'updateStatus'])->name('customer-bookings.updateStatus');
+Route::delete('customer-bookings/{id}', [BookingController::class, 'destroy'])->name('customer-bookings.destroy');
+Route::post('/customer-bookings', [BookingController::class, 'store'])->name('customer-bookings.store');
 
 
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {

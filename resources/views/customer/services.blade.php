@@ -23,6 +23,15 @@ $services = Services::orderBy('created_at', 'desc')->get();
     </div>
 </div>
 <!-- Page Header End -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <!-- Service Start -->
 <div class="container-xxl service py-5">
@@ -46,35 +55,64 @@ $services = Services::orderBy('created_at', 'desc')->get();
                             <!-- Price and Button -->
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="text-primary mb-0">JD {{ $service->price }}</h5>
-                                <button type="button" class="btn btn-sm btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#serviceModal-{{ $service->id }}">
+                                <button type="button" class="btn btn-sm btn-primary ms-3" data-bs-toggle="modal"
+                                    data-bs-target="#serviceModal-{{ $service->id }}">
                                     See More
                                 </button>
                             </div>
                         </div>
                         <!-- Card Footer -->
                         <div class="card-footer bg-light text-center">
-                            <a href="add-to-cart/{{ $service->id }}" class="btn btn-outline-primary w-100">
+                            <button type="button" class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+                                data-bs-target="#bookingModal{{ $service->id }}">
                                 Add to Cart <i class="fa fa-cart-plus ms-2"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Modal لتحديد الموعد -->
+                <div class="modal fade" id="bookingModal{{ $service->id }}" tabindex="-1"
+                    aria-labelledby="bookingModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="bookingModalLabel">Select Booking Date</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{ route('customer-bookings.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="service_id" value="{{ $service->id }}">
+                                <div class="mb-3">
+                                    <label for="booking_date" class="form-label">Booking Date</label>
+                                    <input type="date" name="booking_date" id="booking_date" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="time_slot" class="form-label">Time Slot</label>
+                                    <input type="time" name="time_slot" id="time_slot" class="form-control" required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <!-- Modal for Service Details -->
-                <div class="modal fade" id="serviceModal-{{ $service->id }}" tabindex="-1" aria-labelledby="serviceModalLabel-{{ $service->id }}" aria-hidden="true">
+                <div class="modal fade" id="serviceModal-{{ $service->id }}" tabindex="-1"
+                    aria-labelledby="serviceModalLabel-{{ $service->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content rounded-3">
-                            <!-- Modal Header -->
                             <div class="modal-header bg-primary text-white">
                                 <h5 class="modal-title" id="serviceModalLabel-{{ $service->id }}">Service Details</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <!-- Modal Body -->
                             <div class="modal-body">
                                 <div class="text-center mb-4">
-                                    <img src="{{ $service->image == null ? asset('assets/img/icon-service.jpg') : asset('storage/services/' . $service->image) }}" 
-                                         alt="{{ $service->name }}" 
-                                         style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+                                    <img src="{{ $service->image == null ? asset('assets/img/icon-service.jpg') : asset('storage/services/' . $service->image) }}"
+                                        alt="{{ $service->name }}"
+                                        style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
                                 </div>
                                 <h6 class="fw-bold">Service Name</h6>
                                 <p class="mb-3">{{ $service->name }}</p>
@@ -83,7 +121,6 @@ $services = Services::orderBy('created_at', 'desc')->get();
                                 <h6 class="fw-bold">Price</h6>
                                 <p class="text-primary fw-bold">JD {{ $service->price }}</p>
                             </div>
-                            <!-- Modal Footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
@@ -95,10 +132,5 @@ $services = Services::orderBy('created_at', 'desc')->get();
     </div>
 </div>
 <!-- Service End -->
-
-
-
-
-
 
 @endsection
