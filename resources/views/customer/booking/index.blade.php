@@ -10,7 +10,6 @@
                 <thead>
                     <tr>
                         <th>#</th>
-
                         <th>Service</th>
                         <th>Date</th>
                         <th>Status</th>
@@ -30,7 +29,6 @@
                             <td>{{ $booking->booking_date }}</td>
                             <td>{{ $booking->status }}</td>
                             <td>{{ $booking->service->getPriceByCarSize(auth()->user()->car_size) }}</td>
-
                             <td>
                                 <a href="{{ route('bookings.edit', $booking->id) }}" class="btn btn-primary">Edit</a>
                                 <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST"
@@ -46,7 +44,7 @@
                 </tbody>
             </table>
         @else
- <div class="alert alert-danger">
+            <div class="alert alert-danger">
                 <p class="text-center mb-5 text-primary fw-bold bg-light my-5">No bookings found.</p>
             </div>
         @endif

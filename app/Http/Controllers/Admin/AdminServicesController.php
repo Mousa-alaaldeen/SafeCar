@@ -44,26 +44,18 @@ class AdminServicesController extends Controller
         }
     
   
-        $service = Services::create([
-            'name' => $validatedData['name'],
-            'image' => $validatedData['image'] ?? null,
-            'price' => $validatedData['price'],
-            'description' => $validatedData['description'],
-        ]);
+        $service = Services::firstOrCreate(
+            ['name' => $validatedData['name']],
+            [
+                'image' => $validatedData['image'] ?? null,
+                'price_small' => $validatedData['price_small'],
+                'price_medium' => $validatedData['price_medium'],
+                'price_large' => $validatedData['price_large'],
+                'description' => $validatedData['description'],
+            ]
+        );
     
-        
-        if ($service) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Service added successfully!',
-                'service' => $service,
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to add the service.',
-            ], 500); 
-        }
+        return redirect()->route('services.index')->with('success', 'Service created successfully!');
     }
     
     
@@ -104,7 +96,9 @@ class AdminServicesController extends Controller
         $validatedData = $request->validated();
         $service = Services::findOrFail($id);
         $service->name = $validatedData['name'];
-        $service->price=$validatedData['price'];
+        $service->price_small=$validatedData['price_small'];
+        $service->price_medium=$validatedData['price_medium'];
+        $service->price_large=$validatedData['price_large'];
         $service->description=$validatedData['description'];
 
         if ($request->hasFile('image')) {
