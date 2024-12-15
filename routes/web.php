@@ -93,6 +93,7 @@ Route::get('/users/{id}', [CustomerController::class, 'show'])->name('users.show
 Route::put('/users/{id}', [CustomerController::class, 'update'])->name('users.update');
 Route::resource('bookings', AdminBookingController::class);
 Route::resource('/bookings-services',AdminBookingServiceController::class);
+Route::resource('/admin-bookings',AdminBookingController::class);
 
 
 Route::delete('booking-services/{booking_id}/{service_id}', [AdminBookingServiceController::class, 'destroy'])->name('booking-services.destroy');

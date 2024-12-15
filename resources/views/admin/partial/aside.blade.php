@@ -20,9 +20,9 @@
         </a>
       </li>
       <li>
-        <a href="{{route('bookings-services.index')}}">
+        <a href="{{route('admin-bookings.index')}}">
           <span class="icon"><i class="mdi mdi-calendar-multiple-check"></i></span>
-          <span class="menu-item-label">Booking Services</span>
+          <span class="menu-item-label">Booking </span>
         </a>
       </li>
       <li>
@@ -87,7 +87,7 @@
       </li>
     </ul>
 
-    <!-- قسم "حول" -->
+   
     <p class="menu-label">About</p>
     <ul class="menu-list">
       <li>
