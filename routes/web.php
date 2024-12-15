@@ -46,8 +46,9 @@ Route::controller(CustomerController::class)->name('customer.')->group(function(
     // Route::post('/contact/store','store')->name('contact.store');
     Route::get('/displayContacts','display')->name('display');
 
-    // Route::get('/login','login')->name('login');
-    // Route::get('/register','register')->name('register');
+    Route::get('/login','login')->name('login');
+    Route::get('/register','register')->name('register');
+    Route:
 
 });
 
@@ -71,6 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 Route::get('customer-bookings', [BookingController::class, 'index'])->name('customer-bookings.index');
 Route::get('customer-bookings/create', [BookingController::class, 'create'])->name('customer-bookings.create');
 Route::post('customer-bookings', [BookingController::class, 'store'])->name('customer-bookings.store');
@@ -94,6 +96,7 @@ Route::put('/users/{id}', [CustomerController::class, 'update'])->name('users.up
 Route::resource('bookings', AdminBookingController::class);
 Route::resource('/bookings-services',AdminBookingServiceController::class);
 Route::resource('/admin-bookings',AdminBookingController::class);
+
 
 
 Route::delete('booking-services/{booking_id}/{service_id}', [AdminBookingServiceController::class, 'destroy'])->name('booking-services.destroy');

@@ -14,14 +14,6 @@ use function Symfony\Component\String\b;
 class BookingController extends Controller
 {
    
-    public function index()
-    {
-        $bookings = Booking::with('service')
-            ->where('user_id', Auth::id())
-            ->orderBy('booking_date', 'desc')->get();
-        return view('customer.booking.index', compact('bookings'));
-    }
-
     public function create()
     {
         $services = Services::all(); 

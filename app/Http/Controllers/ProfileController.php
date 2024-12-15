@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Booking;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,17 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+       
+        $completedBookings = Booking::where('user_id', Auth::id())->where('status', 'Completed')->count();
+        $cancelledBookings = Booking::where('user_id', Auth::id())->where('status', 'Cancelled')->count();
+        $bookings = Booking::with('service')
+            ->where('user_id', Auth::id())
+            ->orderBy('booking_date', 'desc')->get();
+            return view('profile.edit', compact('bookings', 'completedBookings', 'cancelledBookings'))->with('user', $request->user());
+
+   
+   
+   
     }
 
     /**
@@ -26,17 +35,45 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user = $request->user();
+    
+     
+        if ($request->hasFile('car_image')) {
+           
+            if ($user->car_image && file_exists(storage_path('app/public/users/' . $user->car_image))) {
+                unlink(storage_path('app/public/users/' . $user->car_image));
+            }
+    
+      
+            $imagePath = $request->file('car_image')->store('users', 'public');
+            $user->car_image = $imagePath;
         }
-
-        $request->user()->save();
-
+    
+        $user->fill($request->validated());
+    
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+    
+      
+        $user->save();
+    
+      
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
-
+    
+    
+    public function showProfile(Request $request)
+    {
+    
+        $user = $request->user();
+        $bookings = $user->bookings;
+        $completedBookings = $bookings->where('status', 'Completed')->count();
+        $cancelledBookings = $bookings->where('status', 'Cancelled')->count();
+    
+        return view('profile.edit', compact('user', 'bookings', 'completedBookings', 'cancelledBookings'));
+    }
+    
     /**
      * Delete the user's account.
      */
@@ -57,4 +94,6 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
 }
