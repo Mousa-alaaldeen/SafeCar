@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                       
+
                         <th>Service</th>
                         <th>Date</th>
                         <th>Status</th>
@@ -29,14 +29,16 @@
                             <td>{{ $booking->service->name }}</td>
                             <td>{{ $booking->booking_date }}</td>
                             <td>{{ $booking->status }}</td>
-                            <td>{{ $booking->service->price }}</td>
+                            <td>{{ $booking->service->getPriceByCarSize(auth()->user()->car_size) }}</td>
+
                             <td>
                                 <a href="{{ route('bookings.edit', $booking->id) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST" style="display: inline-block;">
-    @csrf
-    @method('PUT') 
-    <button type="submit" class="btn btn-danger">Cancel Booking</button>
-</form>
+                                <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST"
+                                    style="display: inline-block;">
+                                    @csrf
+                                    @method('PUT') 
+                                    <button type="submit" class="btn btn-danger">Cancel Booking</button>
+                                </form>
 
                             </td>
                         </tr>
@@ -44,7 +46,9 @@
                 </tbody>
             </table>
         @else
-            <p>No bookings found.</p>
+ <div class="alert alert-danger">
+                <p class="text-center mb-5 text-primary fw-bold bg-light my-5">No bookings found.</p>
+            </div>
         @endif
         <!-- Fact End -->
     </div>

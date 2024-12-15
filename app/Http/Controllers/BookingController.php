@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function Symfony\Component\String\b;
+
 class BookingController extends Controller
 {
    
@@ -28,24 +30,36 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        if (!auth()->check()) {
-            return redirect()->back()->with('error', 'You need to log in to make a booking.');
-        }
-   
-        $validatedData = $request->validate([
+        $request->validate([
             'service_id' => 'required|exists:services,id',
             'booking_date' => 'required|date|after_or_equal:today',
-            'time_slot' => 'required',
         ]);
+    
+        $service = Services::find($request->service_id);
+        $price = $service->getPriceByCarSize(auth()->user()->car_size);
+        
+        $bookingDateTime = $request->booking_date . ' ' . $request->time_slot;
+        $existingBooking = Booking::where('user_id', Auth::id())
+            ->whereDate('booking_date', $request->booking_date)
+            ->whereBetween('booking_date', [
+                Carbon::parse($bookingDateTime)->subMinutes(30),
+                Carbon::parse($bookingDateTime)->addMinutes(30)
+            ])
+            ->exists();
+    
+        if ($existingBooking) {
+            return back()->withErrors(['error' => 'You already have a booking within 30 minutes of the selected time. Please choose a different time.']);
+        }
     
         Booking::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'service_id' => $request->service_id,
-            'booking_date' => $request->booking_date,
-            'time_slot' => $request->time_slot,
+            'booking_date' => $bookingDateTime,
+            'price' => $price,
+            'status' => 'Scheduled',
         ]);
     
-        return redirect()->back()->with('success', 'Your booking has been confirmed!');
+        return back()->with('success', 'Booking successfully created.');
     }
     
     public function destroy($id)
@@ -55,8 +69,7 @@ class BookingController extends Controller
     
         
         $booking->update(['status' => 'Cancelled']);
-    
-    
+
         return redirect()->route('bookings.index')->with('success', 'Booking cancelled successfully!');
     }
     

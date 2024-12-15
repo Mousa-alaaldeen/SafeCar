@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Services extends Model
 {
     use HasFactory;
-    
-    protected $fillable = ['name', 'image', 'price', 'description'];
 
-    public function contacts() 
+    protected $fillable = ['name', 'image', 'price_small', 'price_medium', 'price_large', 'description',];
+
+    public function contacts()
     {
         return $this->belongsTo(User::class, 'users_id');
     }
@@ -31,7 +31,22 @@ class Services extends Model
     {
         return $this->hasMany(Employee::class, 'service_id');
     }
-    
+
+// في ملف App\Models\Service.php
+
+public function getPriceByCarSize($carSize)
+{
+    switch ($carSize) {
+        case 'Small':
+            return $this->price_small;
+        case 'Medium':
+            return $this->price_medium;
+        case 'Large':
+            return $this->price_large;
+        default:
+            return $this->null; 
+    }
+}
 
 
 }
