@@ -24,43 +24,45 @@ class ProfileController extends Controller
             ->where('user_id', Auth::id())
             ->orderBy('booking_date', 'desc')->get();
             return view('profile.edit', compact('bookings', 'completedBookings', 'cancelledBookings'))->with('user', $request->user());
-
-   
-   
    
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $user = $request->user();
-    
-     
+  
+     public function update(ProfileUpdateRequest $request): RedirectResponse
+{
+    $user = $request->user();
+
+    try {
         if ($request->hasFile('car_image')) {
-           
             if ($user->car_image && file_exists(storage_path('app/public/users/' . $user->car_image))) {
                 unlink(storage_path('app/public/users/' . $user->car_image));
             }
-    
-      
-            $imagePath = $request->file('car_image')->store('users', 'public');
-            $user->car_image = $imagePath;
+
+            $car_imageName = time() . '.' . $request->car_image->extension();
+            $request->car_image->storeAs('public/users', $car_imageName);
+            $user->car_image = $car_imageName;
         }
-    
+
         $user->fill($request->validated());
-    
+
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }
-    
-      
+
         $user->save();
-    
-      
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+
+        session()->flash('status', 'Profile updated successfully!');
+    } catch (\Exception $e) {
+ 
+        session()->flash('error', 'There was an error updating the profile.');
     }
+
+    return Redirect::route('profile.edit');
+}
+
     
     
     public function showProfile(Request $request)

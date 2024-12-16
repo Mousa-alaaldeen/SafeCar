@@ -12,6 +12,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.7-beta.20/inputmask.min.js"></script>
+
 
 <!-- Template Javascript -->
 <script src="{{asset('assets/js/main.js')}}"></script>
@@ -52,6 +54,21 @@ var swiper = new Swiper('.swiper-container', {
     },
 });
 
+</script>
+<script>
+    document.getElementById('car_license_plate').addEventListener('input', function (e) {
+        let value = e.target.value;
+
+        // Remove all non-numeric characters
+        value = value.replace(/\D/g, '');
+
+        // Format as XX-XXXXX
+        if (value.length >= 3) {
+            value = value.substring(0, 2) + '-' + value.substring(2, 7);
+        }
+
+        e.target.value = value;
+    });
 </script>
 
 
