@@ -60,24 +60,49 @@
                         <!-- Car Type -->
                         <div class="mb-3">
                             <label for="car_type" class="form-label">{{ __('Car Type') }}</label>
-                            <input id="car_type" class="form-control @error('car_type') is-invalid @enderror" type="text" name="car_type" value="{{ old('car_type') }}" autocomplete="car_type">
+                            <select id="car_type" class="form-control @error('car_type') is-invalid @enderror"
+                                name="car_type">
+                                <option value="" disabled selected>{{ __('Select Car Type') }}</option>
+                                <option value="Toyota" {{ old('car_type') == 'Toyota' ? 'selected' : '' }}>Toyota</option>
+                                <option value="Honda" {{ old('car_type') == 'Honda' ? 'selected' : '' }}>Honda</option>
+                                <option value="Ford" {{ old('car_type') == 'Ford' ? 'selected' : '' }}>Ford</option>
+                                <option value="BMW" {{ old('car_type') == 'BMW' ? 'selected' : '' }}>BMW</option>
+                                <option value="Mercedes" {{ old('car_type') == 'Mercedes' ? 'selected' : '' }}>Mercedes
+                                </option>
+                                <option value="Audi" {{ old('car_type') == 'Audi' ? 'selected' : '' }}>Audi</option>
+                                <option value="Chevrolet" {{ old('car_type') == 'Chevrolet' ? 'selected' : '' }}>Chevrolet
+                                </option>
+                                <option value="Hyundai" {{ old('car_type') == 'Hyundai' ? 'selected' : '' }}>Hyundai
+                                </option>
+                                <option value="Kia" {{ old('car_type') == 'Kia' ? 'selected' : '' }}>Kia</option>
+                                <option value="Nissan" {{ old('car_type') == 'Nissan' ? 'selected' : '' }}>Nissan</option>
+                            </select>
                             @error('car_type')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <!-- Car Model -->
                         <div class="mb-3">
-                            <label for="car_model" class="form-label">{{ __('Car Model') }}</label>
-                            <input id="car_model" class="form-control @error('car_model') is-invalid @enderror" type="text" name="car_model" value="{{ old('car_model') }}" autocomplete="car_model">
+                            <label for="car_model" class="form-label">{{ __('Car Model (Year)') }}</label>
+                            <select id="car_model" class="form-control @error('car_model') is-invalid @enderror"
+                                name="car_model">
+                                <option value="" disabled selected>{{ __('Select Car Model (Year)') }}</option>
+                                @for ($year = date('Y'); $year >= 1980; $year--)
+                                    <option value="{{ $year }}" {{ old('car_model') == $year ? 'selected' : '' }}>{{ $year }}
+                                    </option>
+                                @endfor
+                            </select>
                             @error('car_model')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <!-- Car License Plate -->
                         <div class="mb-3">
                             <label for="car_license_plate" class="form-label">{{ __('Car License Plate') }}</label>
-                            <input id="car_license_plate" class="form-control @error('car_license_plate') is-invalid @enderror" type="text" name="car_license_plate" value="{{ old('car_license_plate') }}" autocomplete="car_license_plate">
+                            <input id="car_license_plate"
+                                class="form-control @error('car_license_plate') is-invalid @enderror" type="text"
+                                name="car_license_plate" value="{{ old('car_license_plate') }}"
+                                autocomplete="car_license_plate">
                             @error('car_license_plate')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
