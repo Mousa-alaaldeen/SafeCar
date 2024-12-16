@@ -27,6 +27,29 @@
         </script>
     @endif
 
+    <!-- Notification for Upcoming Booking -->
+    @foreach($bookings as $booking)
+        @php
+
+            $bookingDate = \Carbon\Carbon::parse($booking->booking_date);
+
+            $currentDate = \Carbon\Carbon::now();
+
+            $daysDifference = $bookingDate->diffInDays($currentDate);
+        @endphp
+
+        @if($daysDifference <= 2 && $booking->status == 'Confirmed')
+
+            <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert">
+                <strong>Reminder:</strong> Your booking for <strong>{{ $booking->service->name }}</strong> is in
+                <strong>{{ $daysDifference }} day(s)</strong> on
+                <strong>{{ $bookingDate->format('F j, Y') }}</strong>.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    @endforeach
+
+
     <!-- Profile Section -->
     <div class="card shadow-lg border-0 rounded-4 mb-5">
         <div class="card-body p-5">
@@ -34,10 +57,10 @@
                 <!-- Profile Image -->
                 <div class="col-lg-4 text-center">
                     <!-- Update Form Section (Modal Trigger) -->
-                    <div class=" d-flex justify-content-start">
-                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                    <div class="d-flex justify-content-start">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#updateModal">
-                            <i class="fa fa-edit "></i>
+                            <i class="fa fa-edit"></i>
                         </button>
                     </div>
                     <!-- Profile Image -->
@@ -72,6 +95,7 @@
             </div>
         </div>
     </div>
+
     <!-- Booking Stats Section -->
     <div class="bg-light rounded p-4 shadow-sm mb-5">
         <h3 class="mb-4 text-primary">Your Booking Statistics</h3>
@@ -134,27 +158,20 @@
                                                 <td>{{ $booking->booking_date }}</td>
                                                 <td>
                                                     <span class="badge bg-{{ 
-                                                                                                    $booking->status == 'Confirmed' ? 'success' :
+                                                                                $booking->status == 'Confirmed' ? 'success' :
                                 ($booking->status == 'Cancelled' ? 'secondary' :
                                     ($booking->status == 'Completed ' ? 'primary' :
                                         'warning')) 
-                                                                                                    }}">
+                                                                                }}">
                                                         {{ $booking->status }}
                                                     </span>
                                                 </td>
                                                 <td>JD {{ $booking->service->getPriceByCarSize(auth()->user()->car_size) }}</td>
                                                 <td>
-                                                    <a href="#editModal{{ $booking->id }}" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal">
+                                                    <a href="#editModal{{ $booking->id }}" class="btn btn-outline-primary btn-sm"
+                                                        data-bs-toggle="modal">
                                                         <i class="fa fa-edit"></i> Edit
                                                     </a>
-                                                    <!-- <form action="{{ route('customer-bookings.updateStatus', $booking->id) }}" method="POST"
-                                                        class="d-inline">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                            <i class="fa fa-trash"></i> Cancel
-                                                        </button>
-                                                    </form> -->
                                                 </td>
                                             </tr>
 
@@ -166,161 +183,104 @@
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="editModalLabel{{ $booking->id }}">Edit
                                                                 Booking</h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{ route('bookings.update', $booking->id) }}"
-                                                                method="POST">
+                                                            <form action="{{ route('bookings.update', $booking->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="mb-3">
-                                                                    <label for="booking_date"
-                                                                        class="form-label fw-bold">Booking Date</label>
-                                                                    <input type="date" name="booking_date"
-                                                                        class="form-control"
+                                                                    <label for="booking_date" class="form-label fw-bold">Booking
+                                                                        Date</label>
+                                                                    <input type="date" name="booking_date" class="form-control"
                                                                         value="{{ $booking->booking_date }}" required>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="time_slot"
-                                                                                                    
-                                                                        class="form-label fw-bold">Time Slot</label>
-                                                                    <input type="time" name="time_slot"
-                                                                        class="form-control"
+                                                                    <label for="time_slot" class="form-label fw-bold">Time Slot</label>
+                                                                    <input type="time" name="time_slot" class="form-control"
                                                                         value="{{ $booking->time_slot }}" required>
-                                                                </div>  
+                                                                </div>
                                                                 <div class="mb-3">
                                                                     <label for="status" class="form-label fw-bold">Status</label>
-                                                                    <select name="status" class="form-select" required>
-                                                                        <option value="Confirmed" {{old('status', $booking->status) == 'Confirmed' ? 'selected' : '' }}>Confirmed</option>
-                                                                        <option value="Cancelled" {{ old('status', $booking->status) == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                                                        <option value="Completed" {{ old('status', $booking->status)  == 'Completed' ? 'selected' : '' }}>Completed</option>
+                                                                    <select name="status" class="form-control">
+                                                                        <option value="Confirmed" @selected($booking->status == 'Confirmed')>
+                                                                            Confirmed</option>
+                                                                        <option value="Cancelled" @selected($booking->status == 'Cancelled')>
+                                                                            Cancelled</option>
+                                                                        <option value="Completed" @selected($booking->status == 'Completed')>
+                                                                            Completed</option>
                                                                     </select>
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Save
-                                                                        Changes</button>
+                                                                <div class="d-flex justify-content-center">
+                                                                    <button type="submit" class="btn btn-primary">Update Booking</button>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             @else
-                <div class="alert alert-warning text-center">
-                    <i class="fa fa-calendar-alt me-2"></i>No bookings found.
-                </div>
+                <p class="text-center">You have no bookings yet.</p>
             @endif
         </div>
     </div>
 </div>
 
-<!-- Update User Modal -->
+<!-- Modal for profile update -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Update Your Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PATCH')
-                <div class="modal-header">
-                    <h5 class="modal-title" id="updateModalLabel">Update Personal Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}"
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}"
                             required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                        <input type="email" class="form-control" name="email" value="{{ old('email', $user->email) }}"
+                            required>
                     </div>
-                    @error('email')
-                        <div class="invalid-feedback text-primary">{{ $message }}</div>
-                    @enderror
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="{{ $user->phone }}"
+                        <input type="text" class="form-control" name="phone" value="{{ old('phone', $user->phone) }}"
                             required>
                     </div>
                     <div class="mb-3">
                         <label for="car_image" class="form-label">Car Image</label>
-                        <input type="file" class="form-control" id="car_image" name="car_image">
+                        <input type="file" class="form-control" name="car_image">
                     </div>
-                    <!-- Car Size -->
-                    <div class="mb-3">
-                        <label for="car_size"
-                            style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Car
-                            Size:</label>
-                        <select id="car_size" name="car_size"
-                            class="form-control @error('car_size') is-invalid @enderror">
-                            <option value="Small" {{ old('car_size', $user->car_size) == 'Small' ? 'selected' : '' }}>
-                                Small</option>
-                            <option value="Medium" {{ old('car_size', $user->car_size) == 'Medium' ? 'selected' : '' }}>
-                                Medium</option>
-                            <option value="Large" {{ old('car_size', $user->car_size) == 'Large' ? 'selected' : '' }}>
-                                Large</option>
-                        </select>
-                        @error('car_size')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
                     <div class="mb-3">
                         <label for="car_type" class="form-label">Car Type</label>
-                        <select id="car_type" class="form-control @error('car_type') is-invalid @enderror"
-                            name="car_type">
-                            <option value="" disabled selected>{{ __('Select Car Type') }}</option>
-                            <option value="Toyota" {{ old('car_type', $user->car_type) == 'Toyota' ? 'selected' : '' }}>
-                                Toyota</option>
-                            <option value="Honda" {{ old('car_type', $user->car_type) == 'Honda' ? 'selected' : '' }}>
-                                Honda</option>
-                            <option value="Ford" {{ old('car_type', $user->car_type) == 'Ford' ? 'selected' : '' }}>Ford
-                            </option>
-                            <option value="BMW" {{ old('car_type', $user->car_type) == 'BMW' ? 'selected' : '' }}>BMW
-                            </option>
-                            <option value="Mercedes" {{ old('car_type', $user->car_type) == 'Mercedes' ? 'selected' : '' }}>Mercedes</option>
-                            <option value="Audi" {{ old('car_type', $user->car_type) == 'Audi' ? 'selected' : '' }}>Audi
-                            </option>
-                            <option value="Chevrolet" {{ old('car_type', $user->car_type) == 'Chevrolet' ? 'selected' : '' }}>Chevrolet</option>
-                            <option value="Hyundai" {{ old('car_type', $user->car_type) == 'Hyundai' ? 'selected' : '' }}>
-                                Hyundai</option>
-                            <option value="Kia" {{ old('car_type', $user->car_type) == 'Kia' ? 'selected' : '' }}>Kia
-                            </option>
-                            <option value="Nissan" {{ old('car_type', $user->car_type) == 'Nissan' ? 'selected' : '' }}>
-                                Nissan</option>
-                        </select>
+                        <input type="text" class="form-control" name="car_type"
+                            value="{{ old('car_type', $user->car_type) }}" required>
                     </div>
-
                     <div class="mb-3">
-                        <label for="car_model" class="form-label">Car Model (Year)</label>
-                        <select id="car_model" class="form-control @error('car_model') is-invalid @enderror"
-                            name="car_model">
-                            <option value="{{ $user->car_model }}" disabled selected>{{ $user->car_model }}</option>
-                            @for ($year = date('Y'); $year >= 1980; $year--)
-                                <option value="{{ $year }}" {{ old('car_model', $user->car_model) == $year ? 'selected' : '' }}>{{ $year }}</option>
-                            @endfor
-                        </select>
-                        @error('car_model')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <label for="car_model" class="form-label">Car Model</label>
+                        <input type="text" class="form-control" name="car_model"
+                            value="{{ old('car_model', $user->car_model) }}" required>
                     </div>
-
+                    <div class="mb-3">
+                        <label for="car_size" class="form-label">Car Size</label>
+                        <input type="text" class="form-control" name="car_size"
+                            value="{{ old('car_size', $user->car_size) }}" required>
+                    </div>
                     <div class="mb-3">
                         <label for="car_license_plate" class="form-label">Car License Plate</label>
-                        <input type="text" class="form-control" id="car_license_plate" name="car_license_plate"
-                            value="{{ old('car_license_plate', $user->car_license_plate) }}" required maxlength="8"
-                            placeholder="XX-XXXXX">
+                        <input type="text" class="form-control" name="car_license_plate"
+                            value="{{ old('car_license_plate', $user->car_license_plate) }}" required>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

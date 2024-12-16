@@ -48,7 +48,7 @@ class BookingController extends Controller
             'service_id' => $request->service_id,
             'booking_date' => $bookingDateTime,
             'price' => $price,
-            'status' => 'Scheduled',
+            'status' => 'Confirmed',
         ]);
     
         return back()->with('success', 'Booking successfully created.');
