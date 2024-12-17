@@ -158,11 +158,11 @@
                                                 <td>{{ $booking->booking_date }}</td>
                                                 <td>
                                                     <span class="badge bg-{{ 
-                                                                                $booking->status == 'Confirmed' ? 'success' :
+                                                                                                    $booking->status == 'Confirmed' ? 'success' :
                                 ($booking->status == 'Cancelled' ? 'secondary' :
                                     ($booking->status == 'Completed ' ? 'primary' :
                                         'warning')) 
-                                                                                }}">
+                                                                                                    }}">
                                                         {{ $booking->status }}
                                                     </span>
                                                 </td>
@@ -241,6 +241,7 @@
             </div>
             <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PATCH')
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="name" class="form-label">Full Name</label>

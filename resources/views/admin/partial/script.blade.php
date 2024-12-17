@@ -34,7 +34,26 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
+<script>
+    function confirmLogout(event) {
+        event.preventDefault(); // Prevent the default link behavior
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be logged out of your account!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, log me out!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit the logout form if confirmed
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>
 <!------------------------------- Start employee   ---------------------->
 <script>
   function confirmDelete(employeeId) {

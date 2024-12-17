@@ -44,7 +44,7 @@
         data-bs-target="#viewUserModal-{{ $user->id }}">
         <i class="mdi mdi-eye"></i>
         </button>
-        <form id="delete-form-{{ $user->id }}" action="{{ route('customer.destroy', $user->id) }}" method="POST"
+        <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST"
         class="inline">
         @csrf
         @method('DELETE')

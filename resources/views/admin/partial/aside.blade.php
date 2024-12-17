@@ -53,17 +53,25 @@
     <p class="menu-label">User Management</p>
     <ul class="menu-list">
       <li>
-        <a href="{{route('customer.index')}}">
+        <a href="{{route('users.index')}}">
           <span class="icon"><i class="mdi mdi-account-group"></i></span>
           <span class="menu-item-label">Users</span>
         </a>
       </li>
-      <li>
-        <a href="login.html">
-          <span class="icon"><i class="mdi mdi-lock"></i></span>
-          <span class="menu-item-label">Login</span>
-        </a>
-      </li>
+   <li>
+    <a href="#" onclick="confirmLogout(event);">
+        <span class="icon"><i class="mdi mdi-lock"></i></span>
+        <span class="menu-item-label">Logout</span>
+    </a>
+
+    <!-- نموذج الخروج -->
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+</li>
+
+
+
       <li>
         <a class="dropdown">
           <span class="icon"><i class="mdi mdi-menu"></i></span>
@@ -87,7 +95,7 @@
       </li>
     </ul>
 
-   
+
     <p class="menu-label">About</p>
     <ul class="menu-list">
       <li>

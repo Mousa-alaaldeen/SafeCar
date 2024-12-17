@@ -16,7 +16,7 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>Service</th>
+         
             <th>Email</th>
             <th>subject</th>
             <th>message</th>
@@ -27,7 +27,7 @@
             @foreach ($contacts as $contact)
               <tr>
                 <td data-label="Name">{{ $contact->name }}</td>
-                <td data-label="Name">{{ $contact->services->name }}</td>
+           
                 <td data-label="Name">{{ $contact->email }}</td>
                 <td data-label="Phone">{{ $contact->subject }}</td>
                 <td data-label="Email">{{ $contact->message }}</td>
