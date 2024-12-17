@@ -17,7 +17,7 @@ $services = Services::orderBy('created_at', 'desc')->get();
     </div>
 </div>
 <!-- Page Header End -->
-<!-- Alerts for Errors and Success -->
+
 @if (session('success'))
     <script>
         Swal.fire({
@@ -41,6 +41,23 @@ $services = Services::orderBy('created_at', 'desc')->get();
         });
     </script>
 @endif
+<script>
+    function showLoginAlert() {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Login Required',
+            text: 'Please log in to book a service.',
+            showConfirmButton: true,
+            confirmButtonText: 'Login',
+            confirmButtonColor: '#3085d6'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('login') }}"; 
+            }
+        });
+    }
+</script>
+
 <!-- Service Start -->
 <div class="container-xxl service py-5">
     <div class="container">
@@ -70,11 +87,18 @@ $services = Services::orderBy('created_at', 'desc')->get();
                             </div>
                         </div>
                         <div class="card-footer bg-light text-center">
-                            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-                                data-bs-target="#bookingModal{{ $service->id }}">
-                                Booking <i class="fa fa-calendar-alt"></i>
-                            </button>
-                        </div>
+    @if(auth()->check())
+        <button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+            data-bs-target="#bookingModal{{ $service->id }}">
+            Booking <i class="fa fa-calendar-alt"></i>
+        </button>
+    @else
+        <button class="btn btn-outline-primary w-100" onclick="showLoginAlert()">
+            Booking <i class="fa fa-calendar-alt"></i>
+        </button>
+    @endif
+</div>
+
                     </div>
                 </div>
                 <!-- Booking Modal -->
@@ -90,7 +114,7 @@ $services = Services::orderBy('created_at', 'desc')->get();
                                 @csrf
                                 <input type="hidden" name="service_id" value="{{ $service->id }}">
                                 <input type="hidden" name="price"
-                                    value="{{ $service->getPriceByCarSize(auth()->user()->car_size) }}">
+                                    value="{{auth()->check()? $service->getPriceByCarSize(auth()->user()->car_size):'' }}">
                                 <input type="hidden" name="booking_datetime" id="booking_datetime_{{ $service->id }}">
                                 <!-- Modal Body -->
                                 <div class="modal-body">

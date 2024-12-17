@@ -121,7 +121,7 @@
             <div class="col-lg-6 pt-4" style="min-height: 400px;">
                 <div class="position-relative h-100 wow fadeIn" data-wow-delay="0.1s">
 
-                    <img class="position-absolute img-fluid w-100 h-100"
+                    <img class="position-absolute img-fluid w-100 h-80"
                         src="https://velikorodnov.com/html/cleansy/images/982x905_img1.png"
                         alt="Eco-Friendly Expertise">
 
