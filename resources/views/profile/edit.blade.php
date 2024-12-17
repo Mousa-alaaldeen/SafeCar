@@ -262,21 +262,54 @@
                         <label for="car_image" class="form-label">Car Image</label>
                         <input type="file" class="form-control" name="car_image">
                     </div>
-                    <div class="mb-3">
-                        <label for="car_type" class="form-label">Car Type</label>
-                        <input type="text" class="form-control" name="car_type"
-                            value="{{ old('car_type', $user->car_type) }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="car_model" class="form-label">Car Model</label>
-                        <input type="text" class="form-control" name="car_model"
-                            value="{{ old('car_model', $user->car_model) }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="car_size" class="form-label">Car Size</label>
-                        <input type="text" class="form-control" name="car_size"
-                            value="{{ old('car_size', $user->car_size) }}" required>
-                    </div>
+                <!-- Car Size -->
+<div class="mb-3">
+    <label for="car_size" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Car Size:</label>
+    <select id="car_size" name="car_size" class="form-control @error('car_size') is-invalid @enderror">
+        <option value="Small" {{ old('car_size', $user->car_size) == 'Small' ? 'selected' : '' }}>Small</option>
+        <option value="Medium" {{ old('car_size', $user->car_size) == 'Medium' ? 'selected' : '' }}>Medium</option>
+        <option value="Large" {{ old('car_size', $user->car_size) == 'Large' ? 'selected' : '' }}>Large</option>
+    </select>
+    @error('car_size')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Car Type -->
+<div class="mb-3">
+    <label for="car_type" class="form-label">{{ __('Car Type') }}</label>
+    <select id="car_type" class="form-control @error('car_type') is-invalid @enderror" name="car_type">
+        <option value="" disabled selected>{{ __('Select Car Type') }}</option>
+        <option value="Toyota" {{ old('car_type', $user->car_type) == 'Toyota' ? 'selected' : '' }}>Toyota</option>
+        <option value="Honda" {{ old('car_type', $user->car_type) == 'Honda' ? 'selected' : '' }}>Honda</option>
+        <option value="Ford" {{ old('car_type', $user->car_type) == 'Ford' ? 'selected' : '' }}>Ford</option>
+        <option value="BMW" {{ old('car_type', $user->car_type) == 'BMW' ? 'selected' : '' }}>BMW</option>
+        <option value="Mercedes" {{ old('car_type', $user->car_type) == 'Mercedes' ? 'selected' : '' }}>Mercedes</option>
+        <option value="Audi" {{ old('car_type', $user->car_type) == 'Audi' ? 'selected' : '' }}>Audi</option>
+        <option value="Chevrolet" {{ old('car_type', $user->car_type) == 'Chevrolet' ? 'selected' : '' }}>Chevrolet</option>
+        <option value="Hyundai" {{ old('car_type', $user->car_type) == 'Hyundai' ? 'selected' : '' }}>Hyundai</option>
+        <option value="Kia" {{ old('car_type', $user->car_type) == 'Kia' ? 'selected' : '' }}>Kia</option>
+        <option value="Nissan" {{ old('car_type', $user->car_type) == 'Nissan' ? 'selected' : '' }}>Nissan</option>
+    </select>
+    @error('car_type')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Car Model (Year) -->
+<div class="mb-3">
+    <label for="car_model" class="form-label">{{ __('Car Model (Year)') }}</label>
+    <select id="car_model" class="form-control @error('car_model') is-invalid @enderror" name="car_model">
+        <option value="" disabled selected>{{ __('Select Car Model (Year)') }}</option>
+        @for ($year = date('Y'); $year >= 1980; $year--)
+            <option value="{{ $year }}" {{ old('car_model', $user->car_model) == $year ? 'selected' : '' }}>{{ $year }}</option>
+        @endfor
+    </select>
+    @error('car_model')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
                     <div class="mb-3">
                         <label for="car_license_plate" class="form-label">Car License Plate</label>
                         <input type="text" class="form-control" name="car_license_plate"
