@@ -8,6 +8,12 @@
     <p class="menu-label">Admin Management</p>
     <ul class="menu-list">
       <li>
+        <a href="{{ route('dashboard.index') }}">
+          <span class="icon"><i class="mdi mdi-account-tie"></i></span>
+          <span class="menu-item-label">Dashboa</span>
+        </a>
+      </li>
+      <li>
         <a href="{{ route('employees.index') }}">
           <span class="icon"><i class="mdi mdi-account-tie"></i></span>
           <span class="menu-item-label">Employees</span>
@@ -58,64 +64,38 @@
           <span class="menu-item-label">Users</span>
         </a>
       </li>
-   <li>
-    <a href="#" onclick="confirmLogout(event);">
-        <span class="icon"><i class="mdi mdi-lock"></i></span>
-        <span class="menu-item-label">Logout</span>
-    </a>
-
-    <!-- نموذج الخروج -->
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-</li>
-
-
-
       <li>
-        <a class="dropdown">
-          <span class="icon"><i class="mdi mdi-menu"></i></span>
-          <span class="menu-item-label">Submenus</span>
-          <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
+        <a href="#" onclick="confirmLogout(event);">
+          <span class="icon"><i class="mdi mdi-lock"></i></span>
+          <span class="menu-item-label">Logout</span>
         </a>
-        <ul>
-          <li>
-            <a href="#void">
-              <span class="icon"><i class="mdi mdi-subdirectory-arrow-right"></i></span>
-              <span>Sub-item One</span>
-            </a>
-          </li>
-          <li>
-            <a href="#void">
-              <span class="icon"><i class="mdi mdi-subdirectory-arrow-right"></i></span>
-              <span>Sub-item Two</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
 
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
 
-    <p class="menu-label">About</p>
-    <ul class="menu-list">
-      <li>
-        <a href="https://justboil.me" onclick="alert('Coming soon'); return false" target="_blank" class="has-icon">
-          <span class="icon"><i class="mdi mdi-credit-card"></i></span>
-          <span class="menu-item-label">Premium Demo</span>
-        </a>
+        <script>
+          function confirmLogout(event) {
+            event.preventDefault(); // Prevent the default link behavior (navigation)
+
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+              title: 'Are you sure?',
+              text: 'Do you really want to log out?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Yes, log out',
+              cancelButtonText: 'Cancel',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // If confirmed, submit the logout form
+                document.getElementById('logout-form').submit();
+              }
+            });
+          }
+        </script>
       </li>
-      <li>
-        <a href="https://justboil.me/tailwind-admin-templates" class="has-icon">
-          <span class="icon"><i class="mdi mdi-information"></i></span>
-          <span class="menu-item-label">About</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/justboil/admin-one-tailwind" class="has-icon">
-          <span class="icon"><i class="mdi mdi-github"></i></span>
-          <span class="menu-item-label">GitHub</span>
-        </a>
-      </li>
+
     </ul>
   </div>
 </aside>

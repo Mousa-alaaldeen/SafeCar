@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminBookingController;
 use App\Http\Controllers\Admin\AdminBookingServiceController;
 use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminEmployeeController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminServicesController;
@@ -77,7 +78,7 @@ Route::get('/customer-services', [CustomerServiceController::class, 'index'])->n
 // Admin routes (protected by auth and is_admin middleware)
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     // Admin dashboard
-    Route::resource('dashboard', AdminController::class);
+    Route::resource('dashboard', AdminDashboardController::class);
     
     // Admin services and subscriptions
     Route::resource('/services', AdminServicesController::class);

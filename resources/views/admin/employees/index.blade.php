@@ -1,10 +1,14 @@
 @extends('admin.master')
-<section class="is-hero-bar">
+@section('contact')
+
+
+<section class="is-title-bar">
   <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-    <h1 class="title">
-      Employees
-    </h1>
-    <button class="button light" id="addEmployeeBtn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+    <ul>
+      <li>Admin</li>
+      <li>Employee</li>
+    </ul>
+    <button class="button blue" id="addEmployeeBtn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
       Add Employee
     </button>
   </div>
@@ -220,3 +224,4 @@
     </div>
   </div>
 </div>
+@endsection

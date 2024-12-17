@@ -7,9 +7,13 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
+  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
   <!-- Tailwind is included -->
   <link rel="stylesheet" href="{{asset('assets')}}/css/main.css?v=1628755089081">
+  <link rel="stylesheet" href="{{asset('assets')}}/css/admin.css">
 
   <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets')}}/apple-touch-icon.png"/>
   <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets')}}/favicon-32x32.png"/>
@@ -51,4 +55,4 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-</head>
+</h>

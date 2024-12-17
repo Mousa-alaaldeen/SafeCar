@@ -32,4 +32,13 @@ class Booking extends Model
     {
         return $this->belongsTo(Subscription::class,);
     }
+    // في نموذج Booking
+public function getPriceByCarSize()
+{
+    if ($this->service) {
+        return $this->service->getPriceByCarSize($this->car_size); 
+    }
+    return 0; 
+}
+
 }
