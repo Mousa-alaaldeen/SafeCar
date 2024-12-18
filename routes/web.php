@@ -115,6 +115,7 @@ Route::get('/contacts/{contact}', [AdminContactController::class, 'show'])->name
     Route::resource('/package',PackageController::class);
     Route::resource('/users',AdminAllUsersController::class);
     Route::resource('/bookings-services',AdminBookingServiceController::class);
+    Route::get('/admin-users', [AdminAllUsersController::class, 'search'])->name('users.search');
 });
 
 

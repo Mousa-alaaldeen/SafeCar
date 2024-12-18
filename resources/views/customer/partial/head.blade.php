@@ -29,4 +29,6 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('assets')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('assets')}}/css/register.css" rel="stylesheet">
+
 </head>
