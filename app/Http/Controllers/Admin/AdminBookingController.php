@@ -92,30 +92,20 @@ class AdminBookingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBookingRequest $request, string $id)
+    public function update(Request $request, $id)
     {
-
-        $validatedData = $request->validated();
-
-
         $booking = Booking::findOrFail($id);
-
-
-        $booking->user_id = $validatedData['user_id'];
-        $booking->service_id = $validatedData['service_id'];
-        $booking->booking_date = $validatedData['booking_date'];
-        $booking->status = $validatedData['status'];
-
-
+    
+        $validated = $request->validate([
+            'status' => 'required|string|in:Completed,Pending,Cancelled',
+        ]);
+       
+        $booking->status = $request->status;
         $booking->save();
 
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Booking updated successfully!',
-            'booking' => $booking,
-        ]);
+        return redirect()->route('bookings.index')->with('success', 'Booking updated successfully');
     }
+    
 
     /**
      * Remove the specified resource from storage.

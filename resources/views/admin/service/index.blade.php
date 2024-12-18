@@ -1,11 +1,14 @@
 @extends('admin.master')
 @section('contact')
 <section class="is-hero-bar">
+
+<section class="is-title-bar">
   <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-    <h1 class="title">
-      Services
-    </h1>
-    <button class="button light" id="addServiceBtn" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+    <ul class="breadcrumb">
+      <li>Admin</li>
+      <li>Services</li>
+    </ul>
+    <button class="button Blue" id="addServiceBtn" data-bs-toggle="modal" data-bs-target="#addServiceModal">
       Add Services
     </button>
   </div>
