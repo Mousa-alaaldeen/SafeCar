@@ -77,9 +77,7 @@
 
         <script>
           function confirmLogout(event) {
-            event.preventDefault(); // Prevent the default link behavior (navigation)
-
-            // Show SweetAlert confirmation dialog
+            event.preventDefault(); 
             Swal.fire({
               title: 'Are you sure?',
               text: 'Do you really want to log out?',
@@ -89,7 +87,7 @@
               cancelButtonText: 'Cancel',
             }).then((result) => {
               if (result.isConfirmed) {
-                // If confirmed, submit the logout form
+                
                 document.getElementById('logout-form').submit();
               }
             });
