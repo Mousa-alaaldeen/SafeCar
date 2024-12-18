@@ -19,4 +19,9 @@ public function subscriptions()
 {
     return $this->hasOne(Subscription::class);
 }
+public function services()
+{
+    return $this->hasMany(Services::class, 'package_service');
+}
+
 }

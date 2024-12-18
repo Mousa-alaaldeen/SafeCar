@@ -5,6 +5,11 @@
 <section class="is-title-bar">
   <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
     <ul class="breadcrumb">
+    <li class="-item">
+        <span class="icon text-success">
+          <i class="mdi mdi-calendar-multiple-check"></i>
+        </span>
+      </li>
       <li>Bookings</li>
     </ul>
   </div>
@@ -54,7 +59,7 @@
 
       <td>
         <div class="buttons">
-        <button type="button" class="button small green" data-bs-toggle="modal"
+        <button type="button" class="button small green bg-success" data-bs-toggle="modal"
         data-bs-target="#bookingModal-{{ $booking->id }}">
         <span class="icon"><i class="mdi mdi-eye"></i></span>
         </button>

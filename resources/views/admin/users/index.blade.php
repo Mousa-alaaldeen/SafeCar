@@ -1,9 +1,17 @@
 @extends('admin.master')
 @section('contact')
-<section class="is-hero-bar">
+<section class="is-title-bar">
   <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-    <h1 class="text-3xl font-semibold text-gray-800">Users</h1>
-    <form action="{{ route('users.search') }}" method="GET" class="d-flex align-items-center">
+    <ul class="breadcrumb">
+    <li class="-item">
+        <span class="icon text-primary">
+          <i class="mdi mdi-car mdi-48px"></i>
+        </span>
+      </li>
+
+      <li>Cars</li>
+    </ul>
+    <form action="{{ route(name: 'users.search') }}" method="GET" class="d-flex align-items-center">
   <div class="input-group">
     <input type="text" name="query" value="{{ old('query', $query ?? '') }}" placeholder="Search users..." class="form-control">
     <button type="submit" class="btn btn-primary mx-2">
@@ -19,8 +27,7 @@
 <section class="section main-section">
   <div class="card has-table">
     <div class="card-content">
-      
-      <table>
+    <table class="table table-striped table-bordered">
         <thead>
           <tr>
             <th class="image-cell"></th>
@@ -28,6 +35,7 @@
             <th>Model</th>
             <th>Size</th>
             <th>License Plate</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -49,9 +57,9 @@
 
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
-                    <button class="p-2 m-2 text-white button green" data-bs-toggle="modal"
+                      <button type="button" class="button small bg-success" data-bs-toggle="modal"
                             data-bs-target="#viewUserModal-{{ $user->id }}">
-                      <i class="mdi mdi-eye"></i>
+                            <span class="icon text-white"><i class="mdi mdi-eye"></i></span>
                     </button>
                     <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST"
                           class="inline">

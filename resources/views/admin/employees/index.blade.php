@@ -5,9 +5,10 @@
 <section class="is-title-bar">
   <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
     <ul class="breadcrumb">
-      <li>Admin</li>
+
       <li>Employees</li>
     </ul>
+    
     <button class="button blue" id="addEmployeeBtn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
       Add Employee
     </button>
@@ -44,9 +45,9 @@
                 <td>{{ $employee->phone }}</td>
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
-                    <button type="button" class="button small green" data-bs-toggle="modal"
+                    <button type="button" class="button small bg-success" data-bs-toggle="modal"
                             data-bs-target="#editEmployeeModal-{{ $employee->id }}">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
+                      <span class="icon text-white"><i class="mdi mdi-eye"></i></span>
                     </button>
                     <form id="delete-form-{{ $employee->id }}" action="{{ route('employees.destroy', $employee->id) }}"
                           method="POST" class="inline">
@@ -103,12 +104,6 @@
                           <label for="employee_phone" class="form-label">Phone</label>
                           <input type="text" name="phone" class="form-control" value="{{ $employee->phone }}" required>
                         </div>
-                        <!-- Position -->
-                        <div class="mb-3">
-                          <label for="employee_position" class="form-label">Position</label>
-                          <input type="text" name="position" class="form-control" value="{{ $employee->position }}" required>
-                        </div>
-                        
                         <!-- Salary -->
                         <div class="mb-3">
                           <label for="employee_salary" class="form-label">Salary</label>

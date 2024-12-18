@@ -3,15 +3,24 @@
 <section class="is-hero-bar">
 
 <section class="is-title-bar">
-  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-    <ul class="breadcrumb">
-      <li>Admin</li>
-      <li>Services</li>
-    </ul>
-    <button class="button Blue" id="addServiceBtn" data-bs-toggle="modal" data-bs-target="#addServiceModal">
-      Add Services
-    </button>
-  </div>
+<div class="d-flex flex-column flex-md-row align-items-center justify-content-between py-3">
+  <!-- Breadcrumb -->
+  <div aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0">
+      <li class="-item">
+        <span class="icon text-danger">
+          <i class="mdi mdi-tools mdi-48px"></i>
+        </span>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Services</li>
+    </ol>
+</div>
+  <!-- Add Service Button -->
+  <button class="btn btn-primary" id="addServiceBtn" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+    Add Service
+  </button>
+</div>
+
 </section>
 
 <section class="section main-section">
@@ -24,6 +33,7 @@
             <th>Name</th>
       
             <th>Description</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>

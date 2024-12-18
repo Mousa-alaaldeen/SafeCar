@@ -1,11 +1,16 @@
 @extends('admin.master')
 
 @section('contact')
-<section class="is-hero-bar">
+<section class="is-title-bar">
   <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-    <h1 class="title">
-      Contacts
-    </h1>
+    <ul class="breadcrumb">
+    <li class="-item">
+        <span class="icon text-warning">
+          <i class="mdi mdi-email"></i>
+        </span>
+      </li>
+      <li>Contact</li>
+    </ul>
   </div>
 </section>
 
@@ -33,9 +38,9 @@
       <td data-label="Actions">
         <div class="buttons">
 
-        <button type="button" class="button small green " data-bs-toggle="modal" data-bs-target="#contactModal"
+        <button type="button" class="button small bg-success " data-bs-toggle="modal" data-bs-target="#contactModal"
         onclick="showContactDetails({{ json_encode($contact) }})" title="View Details">
-        <span class="icon"><i class="mdi mdi-eye"></i></span>
+        <span class="icon text-white"><i class="mdi mdi-eye"></i></span>
         </button>
         <a href="mailto:{{ $contact->email }}" class="button small blue" title="Send Email">
         <span class="icon"><i class="mdi mdi-email-outline"></i></span>

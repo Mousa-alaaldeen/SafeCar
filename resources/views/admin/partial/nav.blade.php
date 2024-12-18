@@ -1,7 +1,7 @@
 <!-- Main Navigation Bar -->
-<nav id="navbar-main" class="bg-secondary  ">
+
   <!-- Left Section: Search and Menu Button -->
-  <div class="navbar-brand">
+  <div class="m-0">
     <!-- Mobile Menu Toggle -->
     <a class="navbar-item mobile-aside-button">
       <span class="icon ">
@@ -14,4 +14,4 @@
 
 
 
-</nav>
+

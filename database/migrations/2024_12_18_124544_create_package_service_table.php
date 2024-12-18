@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('packages', function (Blueprint $table) {
+        Schema::create('package_service', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100); 
-            $table->text('description')->nullable(); 
-            $table->enum('duration', ['Monthly', 'Yearly']);
-            $table->decimal('price', 10, 2);
+            $table->foreignId('package_id')->constrained()->onDelete('cascade');
+            $table->foreignId('service_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-           
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('packages');
+        Schema::dropIfExists('package_service');
     }
 };

@@ -31,8 +31,11 @@ class Services extends Model
     {
         return $this->hasMany(Employee::class, 'service_id');
     }
-
-// في ملف App\Models\Service.php
+    public function packages()
+    {
+        return $this->hasMany(Package::class, 'package_service');
+    }
+    
 
 public function getPriceByCarSize($carSize)
 {
