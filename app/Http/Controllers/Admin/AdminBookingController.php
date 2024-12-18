@@ -16,7 +16,8 @@ class AdminBookingController extends Controller
     public function index()
     {
         $services = Services::all();
-        $bookings = Booking::paginate(20);
+        $bookings = Booking::orderBy('booking_date', 'desc')->paginate(25);
+
         return view('admin.bookings.index', compact('bookings', 'services'));
     }
 
