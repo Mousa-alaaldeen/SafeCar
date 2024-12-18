@@ -14,7 +14,7 @@
 <section class="section main-section">
   <div class="card has-table">
     <div class="card-content">
-      <table>
+    <table class="table table-striped table-bordered">
         <thead>
           <tr>
             <th class="image-cell"></th>
@@ -152,7 +152,7 @@
         </tbody>
       </table>
 
-      <div class="pagination">
+      <div class="pagination ">
         {{ $bookings->links('pagination::bootstrap-4') }}
       </div>
     </div>

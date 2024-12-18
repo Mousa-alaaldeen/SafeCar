@@ -12,7 +12,7 @@
 <section class="section main-section">
     <div class="card has-table">
         <div class="card-content">
-            <table>
+            <table >
                 <thead>
                     <tr>
                         <th>Name</th>

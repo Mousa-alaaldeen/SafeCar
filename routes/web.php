@@ -97,7 +97,8 @@ Route::get('/contacts/{contact}', [AdminContactController::class, 'show'])->name
     
     // Custom route to delete booking services
     Route::delete('booking-services/{booking_id}/{service_id}', [AdminBookingServiceController::class, 'destroy'])->name('booking-services.destroy');
-    
+    Route::get('/admin/users/search', [AdminAllUsersController::class, 'search'])->name('users.search');
+
     // Show and update booking services
     Route::get('/booking-services/{bookingId}/{serviceId}', [AdminBookingServiceController::class, 'show'])->name('booking-services.show');
     Route::put('/booking-services/{bookingId}/{serviceId}', [AdminBookingServiceController::class, 'update'])->name('booking-services.update');

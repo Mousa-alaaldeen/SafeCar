@@ -27,4 +27,15 @@ public function index()
    
     return view('admin.users.index',compact('users'));
 }
+public function search(Request $request)
+{
+    $query = $request->input('query');
+    $users = User::where('name', 'like', "%$query%")
+                 ->orWhere('email', 'like', "%$query%")
+                 ->paginate(5)
+                 ->appends(['query' => $query]);
+
+    return view('admin.users.index', compact('users', 'query'));
+}
+
 }
