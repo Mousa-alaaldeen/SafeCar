@@ -9,11 +9,7 @@
     </ul>
   </div>
 </section>
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+
 
 <section class="section main-section">
   <div class="card has-table">
@@ -47,7 +43,7 @@
     <span class="badge text-white
         @if($booking->status == 'Completed') 
             bg-success 
-        @elseif($booking->status == 'Pending') 
+        @elseif($booking->status == 'Confirmed') 
             bg-warning 
         @else 
             bg-danger 
@@ -129,7 +125,7 @@
             <label class="form-label font-weight-bold" style="font-size: 14px; color: #333;">Status</label>
             <select name="status" class="form-select" style="font-size: 14px; border-radius: 8px;">
               <option value="Completed" @if($booking->status == 'Completed') selected @endif>Completed</option>
-              <option value="Pending" @if($booking->status == 'Pending') selected @endif>Pending</option>
+              <option value="Confirmed" @if($booking->status == 'Confirmed') selected @endif>Confirmed</option>
               <option value="Cancelled" @if($booking->status == 'Cancelled') selected @endif>Cancelled</option>
             </select>
           </div>

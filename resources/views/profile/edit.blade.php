@@ -165,6 +165,8 @@
                                                                                                     }}">
                                                         {{ $booking->status }}
                                                     </span>
+
+                                                    
                                                 </td>
                                                 <td>JD {{ $booking->service->getPriceByCarSize(auth()->user()->car_size) }}</td>
                                                 <td>

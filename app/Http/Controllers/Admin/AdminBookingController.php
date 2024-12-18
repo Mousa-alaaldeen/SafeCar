@@ -97,13 +97,13 @@ class AdminBookingController extends Controller
         $booking = Booking::findOrFail($id);
     
         $validated = $request->validate([
-            'status' => 'required|string|in:Completed,Pending,Cancelled',
+            'status' => 'required|string|in:Completed,Confirmed,Cancelled',
         ]);
        
         $booking->status = $request->status;
         $booking->save();
 
-        return redirect()->route('bookings.index')->with('success', 'Booking updated successfully');
+        return back()->with('success', 'Booking updated successfully');
     }
     
 
