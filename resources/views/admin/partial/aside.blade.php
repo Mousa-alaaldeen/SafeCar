@@ -9,13 +9,14 @@
     <ul class="menu-list">
       <li>
         <a href="{{ route('dashboard.index') }}">
-          <span class="icon"><i class="mdi mdi-account-tie"></i></span>
+        <span class="icon"><i class="mdi mdi-view-dashboard"></i></span>
+
           <span class="menu-item-label">Dashboa</span>
         </a>
       </li>
       <li>
         <a href="{{ route('employees.index') }}">
-          <span class="icon"><i class="mdi mdi-account-tie"></i></span>
+          <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
           <span class="menu-item-label">Employees</span>
         </a>
       </li>
@@ -60,13 +61,13 @@
     <ul class="menu-list">
       <li>
         <a href="{{route('users.index')}}">
-          <span class="icon"><i class="mdi mdi-account-group"></i></span>
-          <span class="menu-item-label">Users</span>
+          <span class="icon"><i class="mdi mdi-car"></i></span>
+          <span class="menu-item-label">cars</span>
         </a>
       </li>
       <li>
         <a href="#" onclick="confirmLogout(event);">
-          <span class="icon"><i class="mdi mdi-lock"></i></span>
+          <span class="icon"><i class="mdi mdi-logout"></i></span>
           <span class="menu-item-label">Logout</span>
         </a>
 
