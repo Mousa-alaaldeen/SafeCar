@@ -89,7 +89,9 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::resource('/booking-services', AdminBookingServiceController::class);
     Route::resource('/employees', AdminEmployeeController::class);
     Route::get('admin/contact', [AdminContactController::class, 'index'])->name('admin-contact');
-    
+    // Route to show the contact details
+Route::get('/contacts/{contact}', [AdminContactController::class, 'show'])->name('admin-contact.show');
+
     // Review routes for admin
     Route::resource('/review', ReviewController::class);
     

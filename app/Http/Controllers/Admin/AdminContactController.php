@@ -15,5 +15,10 @@ class AdminContactController extends Controller
         return view('admin.contact.index', compact('contacts'));
     }
 
-    // Other methods for handling contact forms or any other logic
+    public function show($id)
+    {
+        $contact = Contact::findOrFail($id);
+        return view('admin.contacts.show', compact('contact'));
+    }
+    
 }

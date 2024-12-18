@@ -33,175 +33,12 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.
-
-<!------------------------------- Start employee   ---------------------->
-<script>
-  function confirmDelete(employeeId) {
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "This action cannot be undone!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        document.getElementById(`delete-form-${employeeId}`).submit();
-      }
-    });
-  }
-</script>
-<!------------------------------- End employee   ---------------------->
+net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
 
-
-
-<!------------------------------- Start Users   ---------------------->
-
-<script>
-  function showUserDetails(userId) {
-    $.ajax({
-      url: `/users/${userId}`,
-      method: 'GET',
-      success: function (response) {
-        if (response.success) {
-          let userImage = response.user.image
-            ? `/storage/${response.user.image}`
-            : '/assets/img/user-placeholder.png';
-          Swal.fire({
-            title: 'User Details',
-            html: `
-            <div style="text-align: left;">
-              <table style="width: 100%; border-spacing: 0 10px;">
-                <tr>
-                  <td style="text-align: center; vertical-align: middle; width: 100px;">
-                    <img src="${userImage}" 
-                      alt="${response.user.name}" 
-                      style="max-width: 100px; height: 100px; border-radius: 10px; object-fit: cover;">
-                  </td>
-                  <td>
-                    <input type="file" id="userImage" accept="image/*" style="display: block; width: 100%; padding: 8px;">
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="userName">User Name:</label>
-                    <input type="text" id="userName" value="${response.user.name}" style="width: 100%; padding: 8px;">
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="carModel">carModel:</label>
-                    <input type="text" id="carModel" value="${response.user.car.model}" style="width: 100%; padding: 8px;">
-                  </td>
-                </tr>
-                 <tr>
-                  <td colspan="2">
-                    <label for="carSize">carSize:</label>
-                    <input type="text" id="carSize" value="${response.user.car.size}" style="width: 100%; padding: 8px;">
-                  </td>
-                </tr>
-                </tr>
-                 <tr>
-                  <td colspan="2">
-                    <label for="carId">carId:</label>
-                    <input type="text" id="carId" value="${response.user.car.carCode}" style="width: 100%; padding: 8px;">
-
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="userEmail">Email:</label>
-                    <input type="email" id="userEmail" value="${response.user.email}" style="width: 100%; padding: 8px;">
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="userPhone">Phone:</label>
-                    <input type="text" id="userPhone" value="${response.user.phone}" style="width: 100%; padding: 8px;">
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="registrationDate">Registration Date:</label>
-                    <input type="date" id="registrationDate" value="${response.user.registration_date}" style="width: 100%; padding: 8px;">
-                  </td>
-                </tr>
-              </table>
-            </div>
-          `,
-            showCancelButton: true,
-            confirmButtonText: 'Update',
-            cancelButtonText: 'Close',
-            preConfirm: () => {
-              let updatedData = new FormData();
-              updatedData.append('name', document.getElementById('userName').value);
-              updatedData.append('email', document.getElementById('userEmail').value);
-              updatedData.append('phone', document.getElementById('userPhone').value);
-              updatedData.append('registration_date', document.getElementById('registrationDate').value);
-
-              let imageFile = document.getElementById('userImage').files[0];
-              if (imageFile) {
-                updatedData.append('image', imageFile);
-              }
-
-              updatedData.append('_method', 'PUT');
-
-              return $.ajax({
-                url: `/users/${userId}`,
-                method: 'POST',
-                data: updatedData,
-                processData: false,
-                contentType: false,
-                success: function (updateResponse) {
-                  if (updateResponse.success) {
-                    Swal.fire('Success', 'User updated successfully!', 'success');
-                  }
-                },
-                error: function (xhr) {
-                  Swal.fire('Error', xhr.responseJSON.message || 'Failed to update user.', 'error');
-                }
-              });
-            }
-          });
-        }
-      },
-      error: function () {
-        Swal.fire('Error', 'User not found.', 'error');
-      }
-    });
-  }
-
-</script>
-
-<script>
-  function confirmDelete(userId) {
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "This action cannot be undone!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        document.getElementById(`delete-form-${userId}`).submit();
-      }
-    });
-  }
-</script>
-<!------------------------------- End Users   ---------------------->
 
 
 <!------------------------------- Start services   ---------------------->
-
-
 <script>
   function confirmDelete(serviceId) {
 
@@ -507,12 +344,6 @@
 <!------------------------------- end  SubscriptionBtn  ---------------------->
 
 
-<!------------------------------- start  Booking  ---------------------->
-
-
-
-
-<!------------------------------- End  Booking  ---------------------->
 
 
 <!----------------------------------  Booking Service   --------------------------- -->

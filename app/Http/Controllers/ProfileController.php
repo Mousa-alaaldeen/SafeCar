@@ -20,7 +20,7 @@ class ProfileController extends Controller
        
         $completedBookings = Booking::where('user_id', Auth::id())->where('status', 'Completed')->count();
         $cancelledBookings = Booking::where('user_id', Auth::id())->where('status', 'Cancelled')->count();
-        $bookings = Booking::with('service')
+        $bookings = Booking::orderBy('booking_date', 'desc')->with('service')
             ->where('user_id', Auth::id())
             ->orderBy('booking_date', 'desc')->get();
             return view('profile.edit', compact('bookings', 'completedBookings', 'cancelledBookings'))->with('user', $request->user());

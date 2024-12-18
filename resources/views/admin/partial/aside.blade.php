@@ -1,11 +1,10 @@
 <aside class="aside is-placed-left is-expanded">
   <div class="aside-tools">
     <div>
-      Admin <b class="font-black">One</b>
+      Admin <b class="font-black"></b>
     </div>
   </div>
   <div class="menu is-menu-main" style="max-height: 90vh; overflow-y: auto;">
-    <p class="menu-label">Admin Management</p>
     <ul class="menu-list">
       <li>
         <a href="{{ route('dashboard.index') }}">
@@ -18,6 +17,12 @@
         <a href="{{ route('employees.index') }}">
           <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
           <span class="menu-item-label">Employees</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{route('users.index')}}">
+          <span class="icon"><i class="mdi mdi-car"></i></span>
+          <span class="menu-item-label">cars</span>
         </a>
       </li>
       <li>
@@ -52,19 +57,14 @@
       </li>
       <li>
         <a href="{{ route('admin-contact') }}">
-          <span class="icon"><i class="mdi mdi-package"></i></span>
+          <span class="icon"><i class="mdi mdi-email-outline"></i></span>
           <span class="menu-item-label">Contact</span>
         </a>
       </li>
     </ul>
-    <p class="menu-label">User Management</p>
+  
     <ul class="menu-list">
-      <li>
-        <a href="{{route('users.index')}}">
-          <span class="icon"><i class="mdi mdi-car"></i></span>
-          <span class="menu-item-label">cars</span>
-        </a>
-      </li>
+     
       <li>
         <a href="#" onclick="confirmLogout(event);">
           <span class="icon"><i class="mdi mdi-logout"></i></span>
