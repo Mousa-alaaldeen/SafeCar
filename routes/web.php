@@ -70,6 +70,7 @@ Route::get('customer-bookings/create', [BookingController::class, 'create'])->na
 Route::post('customer-bookings', [BookingController::class, 'store'])->name('customer-bookings.store');
 Route::post('customer-bookings/{id}/status', [BookingController::class, 'updateStatus'])->name('customer-bookings.updateStatus');
 Route::delete('customer-bookings/{id}', [BookingController::class, 'destroy'])->name('customer-bookings.destroy');
+Route::put('customer-bookings/{id}', [BookingController::class, 'update'])->name('customer-bookings.update');
 
 
 // Customer Services

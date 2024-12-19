@@ -8,7 +8,7 @@
         <div class="carousel-inner">
             <!-- First Item -->
             <div class="carousel-item active">
-                <img class="w-100" src="https://velikorodnov.com/html/cleansy/images/1920x896_slide3.jpg" alt="Image">
+                <img class="w-100" src="https://cripar-html.netlify.app/assets/img/service_img_10.jpg" alt="Image">
                 <div class="carousel-caption d-flex align-items-center">
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
@@ -24,7 +24,7 @@
             </div>
             <!-- Second Item -->
             <div class="carousel-item">
-                <img class="w-100" src="https://velikorodnov.com/html/cleansy/images/688x480_img1.jpg" alt="Image">
+                <img class="w-100" src="https://peacefulqode.co.in/themes/carcareful/html/image/service/service-single.jpg" alt="Image">
                 <div class="carousel-caption d-flex align-items-center">
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">

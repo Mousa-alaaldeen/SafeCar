@@ -5,6 +5,9 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
+<!-- Include Bootstrap Toggle CSS and JS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap4-toggle/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
     <!-- Favicon -->
     <link href="{{asset('assets')}}/img/favicon.ico" rel="icon">
 

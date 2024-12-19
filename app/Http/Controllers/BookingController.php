@@ -54,26 +54,13 @@ class BookingController extends Controller
         return back()->with('success', 'Booking successfully created.');
     }
     
-    public function updateStatus(Request $request, $id)
-{
-    // Validate the incoming request (optional)
-    $request->validate([
-        'status' => 'required|in:Confirmed,Cancelled,Completed', // Adjust status options as needed
-    ]);
+    public function update(Request $request, $id){
+        $booking = Booking::findOrFail($id);
+        $booking->update($request->all());
+        return back()->with('success', 'Booking updated successfully!');
 
-    // Find the booking by ID
-    $booking = Booking::findOrFail($id);
+    }
 
-    // Update the status of the booking
-    $booking->status = $request->input('status');
-    $booking->save();
-
-    // Flash a success message
-    session()->flash('status', 'Booking status updated successfully!');
-
-    // Redirect back or to a specific route
-    return redirect()->route('your.booking.route'); // Adjust to your desired redirect route
-}
     public function destroy($id)
     {
   

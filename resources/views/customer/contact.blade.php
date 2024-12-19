@@ -4,7 +4,7 @@
 
 <!-- Page Header Start -->
 <div class="container-fluid page-header mb-5 p-0"
-    style="background-image: url('https://velikorodnov.com/html/cleansy/rtl/images/slide1.png');">
+    style="background-image: url('https://htmlbeans.com/html/carwash/images/img08.jpg');">
 
     <div class="container-fluid page-header-inner py-5">
         <div class="container text-center">

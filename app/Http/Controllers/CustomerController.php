@@ -30,7 +30,7 @@ public function register()
         
         $users = User::paginate(5);
         $employees=Employee::count();
-        $compleate=Booking::where('status','Compleate')->count();
+        $compleate=Booking::where('status','Completed')->count();
        
         return view('customer.home',compact('users','employees','compleate'));
     }

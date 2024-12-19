@@ -65,7 +65,7 @@
                     </div>
                     <!-- Profile Image -->
                     <img src="{{ $user->car_image == null ? asset('assets/img/icon_car.jpg') : asset('storage/users/' . $user->car_image) }}"
-                        class="rounded-circle shadow img-fluid mb-3" alt="User Profile" style="max-width: 250px;">
+                        class="rounded-circle shadow img-fluid mb-3" alt="User Profile" style="max-width: 120px;">
                     <!-- User Name -->
                     <h2 class="text-primary">{{ ucwords($user->name) }}</h2>
                 </div>
@@ -128,7 +128,7 @@
     </div>
 
     <!-- Booking Section -->
-    <div class="card shadow-lg border-0 rounded-4 mx-5">
+    <div class="mx-5">
         <div class="card-header bg-primary text-white text-center rounded-top-4">
             <h3>My Bookings</h3>
         </div>
@@ -165,8 +165,6 @@
                                                                                                     }}">
                                                         {{ $booking->status }}
                                                     </span>
-
-                                                    
                                                 </td>
                                                 <td>JD {{ $booking->service->getPriceByCarSize(auth()->user()->car_size) }}</td>
                                                 <td>
@@ -189,20 +187,11 @@
                                                                 aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{ route('bookings.update', $booking->id) }}" method="POST">
+                                                            <form action="{{ route('customer-bookings.update', $booking->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('PUT')
-                                                                <div class="mb-3">
-                                                                    <label for="booking_date" class="form-label fw-bold">Booking
-                                                                        Date</label>
-                                                                    <input type="date" name="booking_date" class="form-control"
-                                                                        value="{{ $booking->booking_date }}" required>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="time_slot" class="form-label fw-bold">Time Slot</label>
-                                                                    <input type="time" name="time_slot" class="form-control"
-                                                                        value="{{ $booking->time_slot }}" required>
-                                                                </div>
+                                                                
+                                                            
                                                                 <div class="mb-3">
                                                                     <label for="status" class="form-label fw-bold">Status</label>
                                                                     <select name="status" class="form-control">
@@ -210,8 +199,7 @@
                                                                             Confirmed</option>
                                                                         <option value="Cancelled" @selected($booking->status == 'Cancelled')>
                                                                             Cancelled</option>
-                                                                        <option value="Completed" @selected($booking->status == 'Completed')>
-                                                                            Completed</option>
+                                                                      
                                                                     </select>
                                                                 </div>
                                                                 <div class="d-flex justify-content-center">
