@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Booking;
+use App\Models\Package;
+use App\Models\Subscription;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,11 +21,13 @@ class ProfileController extends Controller
     {
        
         $completedBookings = Booking::where('user_id', Auth::id())->where('status', 'Completed')->count();
+        $subscriptions=Subscription::where('users_id', Auth::id())->get();
         $cancelledBookings = Booking::where('user_id', Auth::id())->where('status', 'Cancelled')->count();
         $bookings = Booking::orderBy('booking_date', 'desc')->with('service')
             ->where('user_id', Auth::id())
             ->orderBy('booking_date', 'desc')->get();
-            return view('profile.edit', compact('bookings', 'completedBookings', 'cancelledBookings'))->with('user', $request->user());
+            
+            return view('profile.edit', compact('bookings', 'subscriptions','completedBookings', 'cancelledBookings'))->with('user', $request->user(),);
    
     }
 

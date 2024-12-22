@@ -158,11 +158,11 @@
                                                 <td>{{ $booking->booking_date }}</td>
                                                 <td>
                                                     <span class="badge bg-{{ 
-                                                                                                    $booking->status == 'Confirmed' ? 'success' :
+                                                                                                                        $booking->status == 'Confirmed' ? 'success' :
                                 ($booking->status == 'Cancelled' ? 'secondary' :
                                     ($booking->status == 'Completed ' ? 'primary' :
                                         'warning')) 
-                                                                                                    }}">
+                                                                                                                        }}">
                                                         {{ $booking->status }}
                                                     </span>
                                                 </td>
@@ -187,11 +187,12 @@
                                                                 aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{ route('customer-bookings.update', $booking->id) }}" method="POST">
+                                                            <form action="{{ route('customer-bookings.update', $booking->id) }}"
+                                                                method="POST">
                                                                 @csrf
                                                                 @method('PUT')
-                                                                
-                                                            
+
+
                                                                 <div class="mb-3">
                                                                     <label for="status" class="form-label fw-bold">Status</label>
                                                                     <select name="status" class="form-control">
@@ -199,7 +200,7 @@
                                                                             Confirmed</option>
                                                                         <option value="Cancelled" @selected($booking->status == 'Cancelled')>
                                                                             Cancelled</option>
-                                                                      
+
                                                                     </select>
                                                                 </div>
                                                                 <div class="d-flex justify-content-center">
@@ -252,53 +253,69 @@
                         <label for="car_image" class="form-label">Car Image</label>
                         <input type="file" class="form-control" name="car_image">
                     </div>
-                <!-- Car Size -->
-<div class="mb-3">
-    <label for="car_size" style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Car Size:</label>
-    <select id="car_size" name="car_size" class="form-control @error('car_size') is-invalid @enderror">
-        <option value="Small" {{ old('car_size', $user->car_size) == 'Small' ? 'selected' : '' }}>Small</option>
-        <option value="Medium" {{ old('car_size', $user->car_size) == 'Medium' ? 'selected' : '' }}>Medium</option>
-        <option value="Large" {{ old('car_size', $user->car_size) == 'Large' ? 'selected' : '' }}>Large</option>
-    </select>
-    @error('car_size')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
+                    <!-- Car Size -->
+                    <div class="mb-3">
+                        <label for="car_size"
+                            style="font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;">Car
+                            Size:</label>
+                        <select id="car_size" name="car_size"
+                            class="form-control @error('car_size') is-invalid @enderror">
+                            <option value="Small" {{ old('car_size', $user->car_size) == 'Small' ? 'selected' : '' }}>
+                                Small</option>
+                            <option value="Medium" {{ old('car_size', $user->car_size) == 'Medium' ? 'selected' : '' }}>
+                                Medium</option>
+                            <option value="Large" {{ old('car_size', $user->car_size) == 'Large' ? 'selected' : '' }}>
+                                Large</option>
+                        </select>
+                        @error('car_size')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-<!-- Car Type -->
-<div class="mb-3">
-    <label for="car_type" class="form-label">{{ __('Car Type') }}</label>
-    <select id="car_type" class="form-control @error('car_type') is-invalid @enderror" name="car_type">
-        <option value="" disabled selected>{{ __('Select Car Type') }}</option>
-        <option value="Toyota" {{ old('car_type', $user->car_type) == 'Toyota' ? 'selected' : '' }}>Toyota</option>
-        <option value="Honda" {{ old('car_type', $user->car_type) == 'Honda' ? 'selected' : '' }}>Honda</option>
-        <option value="Ford" {{ old('car_type', $user->car_type) == 'Ford' ? 'selected' : '' }}>Ford</option>
-        <option value="BMW" {{ old('car_type', $user->car_type) == 'BMW' ? 'selected' : '' }}>BMW</option>
-        <option value="Mercedes" {{ old('car_type', $user->car_type) == 'Mercedes' ? 'selected' : '' }}>Mercedes</option>
-        <option value="Audi" {{ old('car_type', $user->car_type) == 'Audi' ? 'selected' : '' }}>Audi</option>
-        <option value="Chevrolet" {{ old('car_type', $user->car_type) == 'Chevrolet' ? 'selected' : '' }}>Chevrolet</option>
-        <option value="Hyundai" {{ old('car_type', $user->car_type) == 'Hyundai' ? 'selected' : '' }}>Hyundai</option>
-        <option value="Kia" {{ old('car_type', $user->car_type) == 'Kia' ? 'selected' : '' }}>Kia</option>
-        <option value="Nissan" {{ old('car_type', $user->car_type) == 'Nissan' ? 'selected' : '' }}>Nissan</option>
-    </select>
-    @error('car_type')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
+                    <!-- Car Type -->
+                    <div class="mb-3">
+                        <label for="car_type" class="form-label">{{ __('Car Type') }}</label>
+                        <select id="car_type" class="form-control @error('car_type') is-invalid @enderror"
+                            name="car_type">
+                            <option value="" disabled selected>{{ __('Select Car Type') }}</option>
+                            <option value="Toyota" {{ old('car_type', $user->car_type) == 'Toyota' ? 'selected' : '' }}>
+                                Toyota</option>
+                            <option value="Honda" {{ old('car_type', $user->car_type) == 'Honda' ? 'selected' : '' }}>
+                                Honda</option>
+                            <option value="Ford" {{ old('car_type', $user->car_type) == 'Ford' ? 'selected' : '' }}>Ford
+                            </option>
+                            <option value="BMW" {{ old('car_type', $user->car_type) == 'BMW' ? 'selected' : '' }}>BMW
+                            </option>
+                            <option value="Mercedes" {{ old('car_type', $user->car_type) == 'Mercedes' ? 'selected' : '' }}>Mercedes</option>
+                            <option value="Audi" {{ old('car_type', $user->car_type) == 'Audi' ? 'selected' : '' }}>Audi
+                            </option>
+                            <option value="Chevrolet" {{ old('car_type', $user->car_type) == 'Chevrolet' ? 'selected' : '' }}>Chevrolet</option>
+                            <option value="Hyundai" {{ old('car_type', $user->car_type) == 'Hyundai' ? 'selected' : '' }}>
+                                Hyundai</option>
+                            <option value="Kia" {{ old('car_type', $user->car_type) == 'Kia' ? 'selected' : '' }}>Kia
+                            </option>
+                            <option value="Nissan" {{ old('car_type', $user->car_type) == 'Nissan' ? 'selected' : '' }}>
+                                Nissan</option>
+                        </select>
+                        @error('car_type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-<!-- Car Model (Year) -->
-<div class="mb-3">
-    <label for="car_model" class="form-label">{{ __('Car Model (Year)') }}</label>
-    <select id="car_model" class="form-control @error('car_model') is-invalid @enderror" name="car_model">
-        <option value="" disabled selected>{{ __('Select Car Model (Year)') }}</option>
-        @for ($year = date('Y'); $year >= 1980; $year--)
-            <option value="{{ $year }}" {{ old('car_model', $user->car_model) == $year ? 'selected' : '' }}>{{ $year }}</option>
-        @endfor
-    </select>
-    @error('car_model')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
+                    <!-- Car Model (Year) -->
+                    <div class="mb-3">
+                        <label for="car_model" class="form-label">{{ __('Car Model (Year)') }}</label>
+                        <select id="car_model" class="form-control @error('car_model') is-invalid @enderror"
+                            name="car_model">
+                            <option value="" disabled selected>{{ __('Select Car Model (Year)') }}</option>
+                            @for ($year = date('Y'); $year >= 1980; $year--)
+                                <option value="{{ $year }}" {{ old('car_model', $user->car_model) == $year ? 'selected' : '' }}>{{ $year }}</option>
+                            @endfor
+                        </select>
+                        @error('car_model')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     <div class="mb-3">
                         <label for="car_license_plate" class="form-label">Car License Plate</label>
@@ -313,5 +330,67 @@
             </form>
         </div>
     </div>
+</div>
+
+<div class="subscription-section mx-5">
+    <div class="card-header bg-primary text-white text-center rounded-top-4 mb-4">
+        <h3><i class="fas fa-star me-2"></i>My Subscribed Packages</h3>
+    </div>
+
+    @if($subscriptions->count() > 0)
+        <div class="row g-4">
+            @foreach($subscriptions as $subscription)
+                <div class="col-lg-4 col-md-6">
+                    <div class="subscription-card">
+                        <div class="package-header text-white text-center">
+
+                            <h5 class="package-title text-white">{{$subscription->package->name }}</h5>
+
+                            <h5 class=" mb-0 text-white">
+                                <i class="fas fa-tag me-2"></i>
+                                JD {{ $subscription->package->price }}
+                            </h5>
+
+                        </div>
+
+                        <div class="card-body">
+                            <div class="package-info">
+
+
+                                <div class="service-list">
+                                    @foreach($subscription->package->services as $service)
+                                        <div class="service-item">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>{{ $service->name }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-label">Start Date</div>
+                                    <div class="info-value">{{ $subscription->start_date->format('M d, Y') }}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">End Date</div>
+                                    <div class="info-value">{{ $subscription->end_date->format('M d, Y') }}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Duration</div>
+                                    <div class="info-value">{{ $subscription->package->duration }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @else
+        <div class="text-center py-4">
+            <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">You haven't subscribed to any packages yet.</h5>
+
+        </div>
+    @endif
 </div>
 @endsection
