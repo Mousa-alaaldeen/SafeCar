@@ -134,6 +134,131 @@
     top: -100px;
     transition: .5s;
 }
+.service-packages {
+    background: #f8f9fa;
+    padding: 40px 0;
+}
+
+.package-card {
+    background: white;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    position: relative;
+}
+
+.package-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.package-header {
+    background: linear-gradient(45deg, #1a237e, #3949ab);
+    padding: 25px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.package-header::before {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 100px;
+    height: 100px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+}
+
+.package-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #ffd700;
+}
+
+.price-tag {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #1a237e;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.price-tag small {
+    font-size: 1rem;
+    color: #666;
+}
+
+.service-list {
+    padding: 20px;
+}
+
+.service-item {
+    padding: 10px 15px;
+    margin: 8px 0;
+    border-radius: 8px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.service-item:hover {
+    background: #e9ecef;
+}
+
+.service-item i {
+    color: #1a237e;
+    font-size: 1.1rem;
+}
+
+.package-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ffd700;
+    color: #1a237e;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.select-package-btn {
+    background: linear-gradient(45deg, #1a237e, #3949ab);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 80%;
+    margin: 20px auto;
+    display: block;
+}
+
+.select-package-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(26,35,126,0.3);
+}
+
+.feature-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    background: rgba(26,35,126,0.1);
+    color: #1a237e;
+    border-radius: 15px;
+    margin: 5px;
+    font-size: 0.9rem;
+}
 
 @media (min-width: 992px) {
     .navbar .nav-item .dropdown-menu {

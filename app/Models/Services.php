@@ -35,6 +35,10 @@ class Services extends Model
     {
         return $this->hasMany(Package::class, 'package_service');
     }
+    public function packageServices()
+    {
+        return $this->hasMany(PackageServices::class);
+    }
     
 
 public function getPriceByCarSize($carSize)

@@ -13,6 +13,7 @@
             <a href="{{route('customer.home')}}" class="nav-item nav-link @yield('home-active')">Home</a>
             <a href="{{route('about')}}" class="nav-item nav-link  @yield('about-active')">About</a>
             <a href="{{route('customer-services')}}" class="nav-item nav-link  @yield('services-active')">Services</a>
+            <a href="{{route('customer-packages')}}" class="nav-item nav-link  @yield('packages-active')">Packages</a>
             <!-- Button to create a new post -->
             <!-- <a href="{{ route('posts.index') }}" class="nav-item nav-link  @yield('posts-active')">
                 Post

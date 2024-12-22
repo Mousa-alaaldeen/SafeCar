@@ -18,6 +18,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerServiceController;
+use App\Http\Controllers\CustomerSubscriptionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewController;
@@ -73,9 +74,13 @@ Route::delete('customer-bookings/{id}', [BookingController::class, 'destroy'])->
 Route::put('customer-bookings/{id}', [BookingController::class, 'update'])->name('customer-bookings.update');
 
 
+
 // Customer Services
 Route::get('/customer-services', [CustomerServiceController::class, 'index'])->name('customer-services');
-
+// Customer Packages
+Route::get('/customer-packages', [CustomerServiceController::class, 'indexPackages'])->name('customer-packages');
+// Customer Subscriptions
+Route::resource('/customer-subscriptions', CustomerSubscriptionController::class);
 // Admin routes (protected by auth and is_admin middleware)
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     // Admin dashboard
@@ -95,6 +100,8 @@ Route::get('/contacts/{contact}', [AdminContactController::class, 'show'])->name
 
     // Review routes for admin
     Route::resource('/review', ReviewController::class);
+
+    
     
     // Custom route to delete booking services
     Route::delete('booking-services/{booking_id}/{service_id}', [AdminBookingServiceController::class, 'destroy'])->name('booking-services.destroy');

@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageRequest;
 use App\Models\Car;
 use App\Models\Package;
+use App\Models\Services;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
+use function Symfony\Component\String\b;
 
 class PackageController extends Controller
 {
@@ -16,7 +20,8 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::paginate(20);
-        return view('admin.package.index', compact('packages'));
+        $services= Services::all();
+        return view('admin.package.index', compact('packages','services'));
     }
 
     /**
@@ -24,37 +29,54 @@ class PackageController extends Controller
      */
     public function create()
     {
-        
-      
+
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PackageRequest $request)
-    {
-        $validatedData=$request->validated();
+    // Controller code
+
+    public function store(Request $request)
+{
+    // Validate the request data
+    $request->validate([
+        'name' => 'required|string|max:255',
+       
+        'duration' => 'required|string',
+        'size' => 'required|string',
+        'price' => 'required|numeric',
+        'service_id' => 'required|array', // Ensure it's an array
+        'service_id.*' => 'exists:services,id', // Validate each service ID
+    ]);
+
+    try {
+        // Create the package
         $package = Package::create([
-            'name' => $validatedData['name'],
-            'size' => $validatedData['size'],
-            'price' => $validatedData['price'],
-            'description' => $validatedData['description'],
+            'name' => $request->name,
+            'description' => $request->description,
+            'duration' => $request->duration,
+            'size' => $request->size,
+            'price' => $request->price,
         ]);
-    
-        
-        if ($package) {
-            return response()->json([
-                'success' => true,
-                'message' => 'package added successfully!',
-                'service' => $package,
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to add the package.',
-            ], 500); 
-        }
+
+        // Attach services to the package
+        $package->services()->attach($request->service_id);
+
+        // Return back with a success message
+        return back()->with('success', 'Package and services added successfully!');
+    } catch (\Exception $e) {
+        // Log the error for debugging
+        Log::error('Error adding package: ' . $e->getMessage());
+
+        // Return back with an error message
+        return back()->withErrors(['error' => 'Failed to add package. Please try again.']);
     }
+}
+    
+    
+
 
     /**
      * Display the specified resource.
@@ -63,18 +85,18 @@ class PackageController extends Controller
     {
         $car = Car::all();
         $package = Package::find($id);
-    
+
         if (!$package) {
             return response()->json(['error' => 'Package not found.'], 404);
         }
-    
+
         return response()->json([
             'success' => 'Package loaded successfully',
             'package' => $package,
             'car' => $car,
         ]);
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -91,15 +113,15 @@ class PackageController extends Controller
         $validatedData = $request->validated();
         $package = Package::findOrFail($id);
         $package->name = $validatedData['name'];
-        $package->price=$validatedData['price'];
-        $package->description=$validatedData['description'];
-        $package->size=$validatedData['size'];
-        $package->duration=$validatedData['duration'];
+        $package->price = $validatedData['price'];
+        $package->description = $validatedData['description'];
+        $package->size = $validatedData['size'];
+        $package->duration = $validatedData['duration'];
         $package->save();
         return response()->json([
             'success' => true,
             'message' => 'Service updated successfully!',
-            'package' => $package  
+            'package' => $package
         ]);
     }
 

@@ -52,7 +52,7 @@ $services = Services::orderBy('created_at', 'desc')->get();
             confirmButtonColor: '#3085d6'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "{{ route('login') }}"; 
+                window.location.href = "{{ route('login') }}";
             }
         });
     }
@@ -87,17 +87,17 @@ $services = Services::orderBy('created_at', 'desc')->get();
                             </div>
                         </div>
                         <div class="card-footer bg-light text-center">
-    @if(auth()->check())
-        <button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-            data-bs-target="#bookingModal{{ $service->id }}">
-            Booking <i class="fa fa-calendar-alt"></i>
-        </button>
-    @else
-        <button class="btn btn-outline-primary w-100" onclick="showLoginAlert()">
-            Booking <i class="fa fa-calendar-alt"></i>
-        </button>
-    @endif
-</div>
+                            @if(auth()->check())
+                                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+                                    data-bs-target="#bookingModal{{ $service->id }}">
+                                    Booking <i class="fa fa-calendar-alt"></i>
+                                </button>
+                            @else
+                                <button class="btn btn-outline-primary w-100" onclick="showLoginAlert()">
+                                    Booking <i class="fa fa-calendar-alt"></i>
+                                </button>
+                            @endif
+                        </div>
 
                     </div>
                 </div>
@@ -114,7 +114,7 @@ $services = Services::orderBy('created_at', 'desc')->get();
                                 @csrf
                                 <input type="hidden" name="service_id" value="{{ $service->id }}">
                                 <input type="hidden" name="price"
-                                    value="{{auth()->check()? $service->getPriceByCarSize(auth()->user()->car_size):'' }}">
+                                    value="{{auth()->check() ? $service->getPriceByCarSize(auth()->user()->car_size) : '' }}">
                                 <input type="hidden" name="booking_datetime" id="booking_datetime_{{ $service->id }}">
                                 <!-- Modal Body -->
                                 <div class="modal-body">
@@ -149,7 +149,7 @@ $services = Services::orderBy('created_at', 'desc')->get();
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content rounded-3 shadow">
                             <!-- Header -->
-                             
+
                             <div class="modal-header bg-primary text-white">
                                 <h5 class="modal-title" id="serviceModalLabel-{{ $service->id }}">Service Details</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

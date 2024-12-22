@@ -10,7 +10,7 @@ class Package extends Model
     use HasFactory;
     protected $fillable=[ 
     'name',
-    'description',
+
     'duration',
     'price',
      'size'
@@ -19,9 +19,15 @@ public function subscriptions()
 {
     return $this->hasOne(Subscription::class);
 }
+
 public function services()
 {
-    return $this->hasMany(Services::class, 'package_service');
+    return $this->belongsToMany(Services::class, 'package_services', 'package_id', 'service_id');
 }
 
+
+public function packageServices()
+{
+    return $this->hasMany(PackageServices::class);
+}
 }
