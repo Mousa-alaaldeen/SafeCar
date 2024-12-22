@@ -35,7 +35,7 @@
                     class="rounded-circle shadow img-fluid mx-3" alt="User Profile" style="max-width: 50px;">
             </a>
             <!-- Logout button -->
-            <a href="{{ route('logout') }}" class="btn btn-danger py-4 px-lg-5 d-none d-lg-block "
+            <a href="{{ route('logout') }}"  class="auth-btn login-btn mx-3"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Logout <i class="fa fa-sign-out-alt "></i>
             </a>
@@ -48,10 +48,16 @@
 
         @else
             <!-- If the user is not logged in -->
-            <a href="{{ route('login') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Login <i
-                    class="fa fa-sign-in-alt ms-3"></i></a>
-            <a href="{{ route('register') }}" class="btn btn-secondary py-4 px-lg-5 d-none d-lg-block ms-3">Register <i
-                    class="fa fa-user-plus ms-3"></i></a>
+            <div class="auth-buttons">
+        <a href="{{ route('login') }}" class="auth-btn login-btn">
+            Login
+            <i class="fas fa-sign-in-alt"></i>
+        </a>
+        <a href="{{ route('register') }}" class="auth-btn register-btn">
+            Register
+            <i class="fas fa-user-plus"></i>
+        </a>
+    </div>
         @endif
 
     </div>
