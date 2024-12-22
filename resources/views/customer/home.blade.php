@@ -15,8 +15,7 @@
                             <div class="col-10 col-lg-7 text-center text-lg-start">
                                 <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Reliable Auto Repair
                                     Services</h1>
-                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Get Started<i
-                                        class="fa fa-arrow-right ms-3"></i></a>
+                             
                             </div>
                         </div>
                     </div>
@@ -31,8 +30,7 @@
                             <div class="col-10 col-lg-7 text-center text-lg-start">
                                 <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Professional Car Wash
                                     Services</h1>
-                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Explore More<i
-                                        class="fa fa-arrow-right ms-3"></i></a>
+                                
                             </div>
                         </div>
                     </div>
@@ -47,8 +45,7 @@
                             <div class="col-10 col-lg-7 text-center text-lg-start">
                                 <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Expert Car Maintenance
                                 </h1>
-                                <a href="#" class="btn btn-primary py-3 px-5 animated slideInDown">Find Out More<i
-                                        class="fa fa-arrow-right ms-3"></i></a>
+                               
                             </div>
                         </div>
                     </div>
