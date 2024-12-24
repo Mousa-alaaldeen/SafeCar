@@ -20,9 +20,18 @@
     Add Service
   </button>
 </div>
-
 </section>
-
+@if ($errors->any())
+<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '{{ $errors->first() }}',
+            showConfirmButton: false,
+            timer: 4000
+        });
+    </script>    
+@endif
 <section class="section main-section">
   <div class="card has-table">
     <div class="card-content">
@@ -31,8 +40,8 @@
           <tr>
             <th class="image-cell"></th>
             <th>Name</th>
-      
             <th>Description</th>
+            <th>Booking Count</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -48,8 +57,8 @@
                   </div>
                 </td>
                 <td data-label="Name">{{$service->name}}</td>
-          
                 <td data-label="Description">{{$service->description}}</td>
+                <td>{{ $bookings->where('service_id', $service->id)->count() }}</td>
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button type="button" class="button small green" data-bs-toggle="modal"

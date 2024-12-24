@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Models\Booking;
 use App\Models\Services;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class AdminServicesController extends Controller
     {
 
         $services = Services::orderBy('created_at', direction: 'desc')-> paginate(20);
-        return view('admin.service.index', compact('services'));
+        $bookings = Booking::all();
+        return view('admin.service.index', compact('services', 'bookings'));
     }
 
     /**
@@ -30,23 +32,27 @@ class AdminServicesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UpdateServiceRequest $request)
-    {
-    
-        $validatedData = $request->validated();
-        
-     
+  
+     public function store(UpdateServiceRequest $request)
+{
+    $validatedData = $request->validated();
+
+    try {
+      
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $newImageName = time() . '-' . $image->getClientOriginalName();
+            
             $image->storeAs('services', $newImageName, 'public');
+         
             $validatedData['image'] = $newImageName;
         }
-    
-  
+
+      
         $service = Services::firstOrCreate(
-            ['name' => $validatedData['name']],
+            
             [
+                'name' => $validatedData['name'],
                 'image' => $validatedData['image'] ?? null,
                 'price_small' => $validatedData['price_small'],
                 'price_medium' => $validatedData['price_medium'],
@@ -54,9 +60,15 @@ class AdminServicesController extends Controller
                 'description' => $validatedData['description'],
             ]
         );
-    
+
+        
         return redirect()->route('services.index')->with('success', 'Service created successfully!');
+    } catch (\Illuminate\Database\QueryException $e) {
+      
+        return redirect()->route('services.index')->with('error', 'Database error: ' . $e->getMessage());
     }
+}
+
     
     
 
@@ -87,35 +99,44 @@ class AdminServicesController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateServiceRequest $request, string $id)
     {
+
      
         $validatedData = $request->validated();
         $service = Services::findOrFail($id);
-        $service->name = $validatedData['name'];
-        $service->price_small=$validatedData['price_small'];
-        $service->price_medium=$validatedData['price_medium'];
-        $service->price_large=$validatedData['price_large'];
-        $service->description=$validatedData['description'];
-
-        if ($request->hasFile('image')) {
-            if ($service->image && file_exists(storage_path('app/public/services/' . $service->image))) {
-                unlink(storage_path('app/public/services/' . $service->image));
-            }
-            $imageName = time() . '.' . $request->image->extension(); 
-            $request->image->storeAs('public/services', $imageName);  
-            $service->image = $imageName; 
-        }
+        try{
+            $service->name = $validatedData['name'];
+            $service->price_small=$validatedData['price_small'];
+            $service->price_medium=$validatedData['price_medium'];
+            $service->price_large=$validatedData['price_large'];
+            $service->description=$validatedData['description'];
     
-        $service->save();
-        return redirect()->route('services.index')->with('success', 'Service updated successfully!');
+            if ($request->hasFile('image')) {
+                if ($service->image && file_exists(storage_path('app/public/services/' . $service->image))) {
+                    unlink(storage_path('app/public/services/' . $service->image));
+                }
+                $imageName = time() . '.' . $request->image->extension(); 
+                $request->image->storeAs('public/services', $imageName);  
+                $service->image = $imageName; 
+            }
+        
+            $service->save();
+            return redirect()->route('services.index')->with('success', 'Service updated successfully!');
+
+        }catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('services.index')->with('error', 'Database error: ' . $e->getMessage());
+        }
+       
         
         
     }
 
+
+    /**
+     * Update the specified resource in storage.
+     */
+  
     /**
      * Remove the specified resource from storage.
      */

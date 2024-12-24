@@ -13,13 +13,20 @@ class AdminBookingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        
+        $query = Booking::query();
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status', $request->status);
+        }
         $services = Services::all();
-        $bookings = Booking::orderBy('booking_date', 'desc')->paginate(25);
+        $bookings =  $query->orderBy('booking_date', 'desc')->paginate(25);
 
         return view('admin.bookings.index', compact('bookings', 'services'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
