@@ -174,7 +174,7 @@
                                 <div class="text-center p-4">
                                     <h5 class="fw-bold mb-0">{{ $employee->name }}</h5>
                                     <small class="text-primary">{{ $employee->service->name }}</small>
-                                    <p>Years Experience: {{ $employee->years_experience }}</p>
+                                    
                                 </div>
                             </div>
                         </div>

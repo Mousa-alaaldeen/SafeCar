@@ -37,55 +37,53 @@ class AdminEmployeeController extends Controller
         ], 200);
     }
 
-
     public function store(EmployeeRequest $request)
     {
         $validatedData = $request->validated();
     
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '-' . $image->getClientOriginalName();
-            $image->storeAs('employees', $imageName, 'public');
-            $validatedData['image'] = 'employees/' . $imageName;
+        try {
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '-' . preg_replace('/[^a-zA-Z0-9\.\-_]/', '', $image->getClientOriginalName());
+                $image->storeAs('employees', $imageName, 'public');
+                $validatedData['image'] = 'employees/' . $imageName;
+            }
+    
+            $validatedData['start_date'] = $validatedData['start_date'] ?? '2020-01-01';
+            Employee::create($validatedData);
+    
+            return redirect()->back()->with('success', 'Employee added successfully!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('error', 'Database error: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add employee: ' . $e->getMessage());
         }
-    
-        $validatedData['start_date'] = $validatedData['start_date'] ?? '2020-01-01';
-    
-        Employee::create($validatedData);
-    
-        return redirect()->route('employees.index')->with('success', 'Employee added successfully!');
     }
-    
-    
-
-
-
 
     public function update(EmployeeRequest $request, string $id)
     {
+        
         $validatedData = $request->validated();
-        $employee = Employee::findOrFail($id);
-    
-        $employee->name = $validatedData['name'];
-        $employee->salary = $validatedData['salary'];
-        $employee->email = $validatedData['email'];
-        $employee->phone = $validatedData['phone'];
-        $employee->service_id = $validatedData['service_id'];
-        $employee->start_date = $validatedData['start_date'] ?? $employee->start_date;
-    
-        if ($request->hasFile('image')) {
-            if ($employee->image && file_exists(storage_path('app/public/employees/' . $employee->image))) {
-                unlink(storage_path('app/public/employees/' . $employee->image));
+
+        try {
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '-' . preg_replace('/[^a-zA-Z0-9\.\-_]/', '', $image->getClientOriginalName());
+                $image->storeAs('employees', $imageName, 'public');
+                $validatedData['image'] = 'employees/' . $imageName;
             }
     
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->storeAs('public/employees', $imageName);
-            $employee->image = $imageName;
+            $validatedData['start_date'] = $validatedData['start_date'] ?? '2020-01-01';
+            $employee = Employee::findOrFail($id);
+            $employee->update($validatedData);
+    
+            return redirect()->back()->with('success', 'Employee updated successfully!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('error', 'Database error: ' . $e->getMessage());    
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update employee: ' . $e->getMessage());
         }
-    
-        $employee->save();
-    
-        return redirect()->route('employees.index')->with('success', 'Employee updated successfully!');
+      
     }
     
 

@@ -1,3 +1,4 @@
+
 @extends('admin.master')
 @section('contact')
 
@@ -14,6 +15,25 @@
     </button>
   </div>
 </section>
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if ($errors->any())
+<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '{{ $errors->first() }}',
+            showConfirmButton: false,
+            timer: 4000
+        });
+    </script>    
+@endif
+
 <section class="section main-section">
   <div class="card has-table">
     <div class="card-content">
@@ -109,9 +129,15 @@
                           <label for="employee_salary" class="form-label">Salary</label>
                           <input type="number" name="salary" class="form-control" value="{{ $employee->salary }}" required>
                         </div>
+                        <!-- Start Date  -->
+                        <div class="mb-3">
+                          <label for="employee_start_date" class="form-label">Start Date</label>
+                          <input type="date" name="start_date" class="form-control"
+                                 value="{{ $employee->start_date }}" required>
+                        </div>
                         <!-- Service -->
+                        <label for="employee_service" class="form-label">Service</label>
                         <div class="mb-3 card p-3">
-                          <label for="employee_service" class="form-label">Service</label>
                           <div class="d-flex align-items-center gap-3">
                             <select name="service_id" class="form-select" required>
                               @foreach ($services as $service)
@@ -193,8 +219,9 @@
             <input type="number" name="salary" class="form-control" required>
           </div>
           <!-- Service -->
+          <label for="employee_service" class="form-label">Service</label>
           <div class="mb-3 card p-3">
-            <label for="employee_service" class="form-label">Service</label>
+        
             <select name="service_id" class="form-select" required>
               @foreach ($services as $service)
                 <option value="{{ $service->id }}">{{ $service->name }}</option>
