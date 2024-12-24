@@ -23,7 +23,7 @@ class AdminAllUsersController extends Controller
 public function index()
 {
     
-    $users = User::paginate(5);
+    $users = User::paginate(25);
    
     return view('admin.users.index',compact('users'));
 }
@@ -32,7 +32,7 @@ public function search(Request $request)
     $query = $request->input('query');
     $users = User::where('name', 'like', "%$query%")
                  ->orWhere('email', 'like', "%$query%")
-                 ->paginate(5)
+                 ->paginate(25)
                  ->appends(['query' => $query]);
 
     return view('admin.users.index', compact('users', 'query'));
