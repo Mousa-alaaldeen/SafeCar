@@ -49,12 +49,12 @@
           <span class="menu-item-label">Subscription</span>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="{{ route('review.index') }}">
           <span class="icon"><i class="mdi mdi-newspaper"></i></span>
           <span class="menu-item-label">Reviews</span>
         </a>
-      </li>
+      </li> -->
       <li>
         <a href="{{ route('admin-contact') }}">
           <span class="icon"><i class="mdi mdi-email-outline"></i></span>

@@ -24,7 +24,7 @@
         <div class="row g-4">
         <div class="col-12">
     <div class="row gy-4">
-        <!-- قسم رقم الهاتف -->
+    
         <div class="col-md-4">
             <div class="bg-light d-flex flex-column justify-content-center align-items-start p-4">
                 <p class="m-0">
@@ -33,7 +33,7 @@
                 </p>
             </div>
         </div>
-        <!-- قسم البريد الإلكتروني -->
+       
         <div class="col-md-4">
             <div class="bg-light d-flex flex-column justify-content-center align-items-start p-4">
                 <p class="m-0">

@@ -66,7 +66,7 @@ $services = Services::orderBy('created_at', 'desc')->get();
         </div>
         <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
             @foreach($services as $service)
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="card h-100 border-0 shadow-sm rounded overflow-hidden">
                         <img src="{{ $service->image ? asset('storage/services/' . $service->image) : asset('assets/img/icon-service.jpg') }}"
                             class="card-img-top" alt="{{ $service->name }}" style="object-fit: cover; height: 250px;">

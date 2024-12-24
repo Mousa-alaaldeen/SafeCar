@@ -15,7 +15,7 @@
                             <div class="col-10 col-lg-7 text-center text-lg-start">
                                 <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Reliable Auto Repair
                                     Services</h1>
-                             
+
                             </div>
                         </div>
                     </div>
@@ -23,14 +23,16 @@
             </div>
             <!-- Second Item -->
             <div class="carousel-item">
-                <img class="w-100" src="https://peacefulqode.co.in/themes/carcareful/html/image/service/service-single.jpg" alt="Image">
+                <img class="w-100"
+                    src="https://peacefulqode.co.in/themes/carcareful/html/image/service/service-single.jpg"
+                    alt="Image">
                 <div class="carousel-caption d-flex align-items-center">
                     <div class="container">
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
                             <div class="col-10 col-lg-7 text-center text-lg-start">
                                 <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Professional Car Wash
                                     Services</h1>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -45,7 +47,7 @@
                             <div class="col-10 col-lg-7 text-center text-lg-start">
                                 <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Expert Car Maintenance
                                 </h1>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -192,7 +194,7 @@
         <div class="row g-4">
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
                 <i class="fa fa-calendar-alt fa-2x text-white mb-3"></i>
-                <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
+                <h2 class="text-white mb-2" id="years-experience"></h2>
                 <p class="text-white mb-0">Years Experience</p>
             </div>
             <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
@@ -416,17 +418,17 @@
             </div>
             <div class="col-md-4">
                 <div class="testimonial-card">
-                  
+
                     <p class="testimonial-text">"Fantastic experience! I highly recommend this service to everyone."</p>
-                
+
 
                     <div class="row align-items-center my-4">
                         <div class="col-auto">
                             <img src="{{asset('assets')}}/img/team-4.jpg" alt="Client 1" class="testimonial-img">
                         </div>
                         <div class="col">
-                        <h5 class="client-name">Jane Smith</h5>
-                        <span class="client-position">Founder, Business Y</span>
+                            <h5 class="client-name">Jane Smith</h5>
+                            <span class="client-position">Founder, Business Y</span>
                         </div>
                     </div>
 
@@ -434,17 +436,17 @@
             </div>
             <div class="col-md-4">
                 <div class="testimonial-card">
-                    
+
                     <p class="testimonial-text">"Absolutely the best! The team did an outstanding job."</p>
-                  
+
 
                     <div class="row align-items-center my-4">
                         <div class="col-auto">
                             <img src="{{asset('assets')}}/img/testimonial-4.jpg" alt="Client 1" class="testimonial-img">
                         </div>
                         <div class="col">
-                        <h5 class="client-name">Mark Johnson</h5>
-                    <span class="client-position">Manager, Company Z</span>
+                            <h5 class="client-name">Mark Johnson</h5>
+                            <span class="client-position">Manager, Company Z</span>
 
                         </div>
                     </div>

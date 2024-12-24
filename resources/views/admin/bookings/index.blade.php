@@ -152,9 +152,7 @@
         </div>
 
     @endforeach
-    <div class="pagination ">
-        {{ $bookings->links('pagination::bootstrap-4') }}
-      </div>
+    
       @else
       <tr>
       <td colspan="6" class="has-text-centered">No bookings found.</td>
@@ -162,6 +160,9 @@
     @endif
         </tbody>
       </table>
+      <div class="pagination justify-content-center ">
+        {{ $bookings->links('pagination::bootstrap-4') }}
+      </div>
 
      
     </div>

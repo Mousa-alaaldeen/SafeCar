@@ -73,3 +73,9 @@ var swiper = new Swiper('.swiper-container', {
 
 
 
+<script>
+    const startYear = 2009;
+    const currentYear = new Date().getFullYear();
+    const yearsExperience = currentYear - startYear;
+    document.getElementById('years-experience').textContent = yearsExperience;
+</script>
