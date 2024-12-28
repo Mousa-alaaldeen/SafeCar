@@ -29,14 +29,16 @@
   @endif
 
 
+  <section class="section main-section">
   <div class="card has-table">
     <div class="card-content">
-      <table>
+    <table class="table table-striped table-bordered">
         <thead>
           <tr>
 
             <th>Name</th>
             <th>Price</th>
+            <th>Actions</th>
    
           </tr>
         </thead>
@@ -50,9 +52,10 @@
       
       <td class="actions-cell">
         <div class="buttons right nowrap">
-        <button type="button" class="button small green" onclick="showPackageDetails('{{ $package->id }}')">
-        <span class="icon"><i class="mdi mdi-eye"></i></span>
-        </button>
+        <button type="button" class="button small green" data-bs-toggle="modal"
+                            data-bs-target="#editPackageModal-{{ $package->id }}">
+                      <span class="icon"><i class="mdi mdi-eye"></i></span>
+                    </button>
         <form id="delete-form-{{ $package->id }}" action="{{ route('package.destroy', $package->id) }}"
         method="POST" class="inline">
         @csrf
@@ -64,6 +67,70 @@
         </div>
       </td>
       </tr>
+<!-- Modal for Viewing Package (Read-only) -->
+<div class="modal fade" id="editPackageModal-{{ $package->id }}" tabindex="-1" aria-labelledby="packageModalLabel-{{ $package->id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="packageModalLabel-{{ $package->id }}">Package Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          @csrf
+          @method('GET')
+
+          <!-- Package Name -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" value="{{ $package->name }}" readonly>
+          </div>
+
+          <!-- Package Price -->
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" name="price" value="{{ $package->price }}" readonly>
+          </div>
+
+          <!-- Services Selection -->
+          <div class="mb-3">
+            <label for="service_id" class="form-label">Selected Services</label>
+            <div class="form-check border py-3 px-5">
+              @foreach($services as $service)
+                <input class="form-check-input" type="checkbox" value="{{ $service->id }}" id="service{{ $service->id }}"
+                {{ in_array($service->id, $package->services->pluck('id')->toArray()) ? 'checked' : '' }} disabled>
+                <label class="form-check-label" for="service{{ $service->id }}">
+                  {{ $service->name }}
+                </label>
+                <br>
+              @endforeach
+            </div>
+          </div>
+
+          <!-- Car Size -->
+          <div class="mb-3">
+            <label for="size" class="form-label">Car Size</label>
+            <input type="text" class="form-control" value="{{ $package->size }}" readonly>
+          </div>
+
+          <!-- Duration -->
+          <div class="mb-3">
+            <label for="duration" class="form-label">Duration</label>
+            <input type="text" class="form-control" value="{{ $package->duration }}" readonly>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+      
     @endforeach
       @else
       <tr>
