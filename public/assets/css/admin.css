@@ -9,6 +9,11 @@
     justify-content: space-between;
     margin-top: 30px;
 }
+.menu-list .active {
+    background-color: #f9f9f9 !important;
+    color: white !important;
+}
+
 
 .stat-item {
     width: 30%;
@@ -18,3 +23,20 @@
     text-align: center;
 }
 
+.navbar-light .navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+.package-info .info-item:active {
+    background-color: #0e0; /* active item */
+    
+}
+
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+    background: var(--primary);
+}
+
+.testimonial-carousel .owl-dot.active {
+    background: var(--primary);
+    border-color: var(--primary);
+}

@@ -1,4 +1,7 @@
-@extends('admin.master');
+@extends('admin.master')
+
+@section('contact')
+@section('users', 'active')
 <section class="is-hero-bar">
     <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
         <h1 lass="title">
@@ -60,3 +63,4 @@
         </div>
     </div>
 </section>
+@endsection

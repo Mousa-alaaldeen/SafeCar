@@ -6,43 +6,43 @@
   </div>
   <div class="menu is-menu-main" style="max-height: 90vh; overflow-y: auto;">
     <ul class="menu-list">
-      <li class="{{ Request::is('dashboard*') ? 'active' : '' }}">
+    <li class="@yield('dashboard')">
         <a href="{{ route('dashboard.index') }}">
           <span class="icon"><i class="mdi mdi-view-dashboard"></i></span>
           <span class="menu-item-label">Dashboard</span>
         </a>
       </li>
-      <li class="{{ Request::is('employees*') ? 'active' : '' }}">
+      <li class="@yield('employees')">
         <a href="{{ route('employees.index') }}">
           <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
-          <span class="menu-item-label">Employees</span>
+          <span class="menu-item-label ">Employees</span>
         </a>
       </li>
-      <li class="{{ Request::is('users*') ? 'active' : '' }}">
+      <li class="@yield('users')">
         <a href="{{ route('users.index') }}">
           <span class="icon"><i class="mdi mdi-car"></i></span>
           <span class="menu-item-label">Cars</span>
         </a>
       </li>
-      <li class="{{ Request::is('services*') ? 'active' : '' }}">
+      <li class="@yield('services')">
         <a href="{{ route('services.index') }}">
           <span class="icon"><i class="mdi mdi-tools"></i></span>
-          <span class="menu-item-label">Services</span>
+          <span class="menu-item-label ">Services</span>
         </a>
       </li>
-      <li class="{{ Request::is('admin-bookings*') ? 'active' : '' }}">
+      <li class="@yield('booking')" >
         <a href="{{ route('admin-bookings.index') }}">
           <span class="icon"><i class="mdi mdi-calendar-multiple-check"></i></span>
-          <span class="menu-item-label">Booking</span>
+          <span class="menu-item-label ">Booking</span>
         </a>
       </li>
-      <li class="{{ Request::is('package*') ? 'active' : '' }}">
+      <li class="@yield('packages')">
         <a href="{{ route('package.index') }}">
           <span class="icon"><i class="mdi mdi-package"></i></span>
           <span class="menu-item-label">Packages</span>
         </a>
       </li>
-      <li class="{{ Request::is('subscription*') ? 'active' : '' }}">
+     <li class="@yield('subscriptions')">
         <a href="{{ route('subscription.index') }}">
           <span class="icon"><i class="mdi mdi-newspaper"></i></span>
           <span class="menu-item-label">Subscription</span>
@@ -54,10 +54,10 @@
           <span class="menu-item-label">Reviews</span>
         </a>
       </li> -->
-      <li class="{{ Request::is('admin-contact*') ? 'active' : '' }}">
+      <li class="@yield('contactus')" >
         <a href="{{ route('admin-contact') }}">
           <span class="icon"><i class="mdi mdi-email-outline"></i></span>
-          <span class="menu-item-label">Contact</span>
+          <span class="menu-item-label ">Contact</span>
         </a>
       </li>
     </ul>

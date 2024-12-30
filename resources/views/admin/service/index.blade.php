@@ -1,5 +1,6 @@
 @extends('admin.master')
 @section('contact')
+@section('services', 'active')
 <section class="is-hero-bar">
 
 <section class="is-title-bar">

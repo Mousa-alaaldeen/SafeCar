@@ -1,7 +1,8 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h2 class="m-0 text-primary"><i class="fa fa-car me-3"></i>SafeCar</h2>
+    <a href="{{route('customer.home')}}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+      <img src="{{  asset('assets/img/logo.png') }}"
+      alt="User Profile" style="max-width: 100px;"> 
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -37,7 +38,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <img src="{{ Auth::user()->car_image == null ? asset('assets/img/icon_car.jpg') : asset('storage/users/' . Auth::user()->car_image) }}"
-                            class="rounded-circle shadow img-fluid mx-3" alt="User Profile" style="max-width: 50px;">
+                            class="rounded-circle shadow img-fluid " alt="User Profile" style="max-width: 50px;">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item"  href="{{ route('profile.edit') }}">Profile</a></li>

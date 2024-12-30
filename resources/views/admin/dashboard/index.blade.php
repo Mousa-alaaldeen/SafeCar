@@ -1,6 +1,7 @@
-@extends('admin.master')
 
+@extends('admin.master')
 @section('contact')
+@section('dashboard', 'active')
     <div class="dashboard">
         <div class="stats">
             <div class="stat-item">
@@ -35,6 +36,4 @@
             </table>
         </div>
     </div>
-
-    
-@endsection
+    @endsection
