@@ -23,4 +23,7 @@ class BookingService extends Model
     {
         return $this->belongsTo(Services::class,'service_id');
     }
+   
+
+
 }

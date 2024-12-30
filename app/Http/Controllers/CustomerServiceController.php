@@ -16,12 +16,6 @@ class CustomerServiceController extends Controller
         $services = Services::orderBy('created_at', direction: 'desc')->get();
         return view("customer.services",compact('packages','services'));
     }
-    public function indexPackages()
-    {
-        
-        $packages = Package::with('services')->get();
-        $services = Services::orderBy('created_at', direction: 'desc')->get();
-        return view("customer.packages",compact('packages','services'));
-    }
+   
     
 }

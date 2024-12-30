@@ -74,5 +74,19 @@ class User extends Authenticatable
     public function review(){
         return $this->hasOne(Review::class);
     }
+  
+    
+    
+// App\Models\User.php
+public function bookings()
+{
+    return $this->hasMany(Booking::class);
+}
 
+public function hasUsedService($serviceId)
+{
+    return $this->bookings()->where('service_id', $serviceId)->exists();
+}
+
+    
 }

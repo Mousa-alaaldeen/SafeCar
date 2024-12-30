@@ -65,6 +65,7 @@ $services = Services::orderBy('created_at', 'desc')->get();
             <h1 class="mb-5">Explore Our Services</h1>
         </div>
         <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
+
             @foreach($services as $service)
                 <div class="col-lg-4 col-md-6">
                     <div class="card h-100 border-0 shadow-sm rounded overflow-hidden">
@@ -72,6 +73,8 @@ $services = Services::orderBy('created_at', 'desc')->get();
                             class="card-img-top" alt="{{ $service->name }}" style="object-fit: cover; height: 250px;">
                         <div class="card-body text-center">
                             <h5 class="card-title text-dark mb-2">{{ $service->name }}</h5>
+
+
                             <p class="card-text text-muted small mb-3">{{ Str::limit($service->description, 80) }}</p>
                             <div class="d-flex flex-column justify-content-between align-items-start">
                                 <h5 class="text-muted mb-0">Small: <span class="text-primary">JD
@@ -80,10 +83,21 @@ $services = Services::orderBy('created_at', 'desc')->get();
                                         {{ $service->price_medium }}</span></h5>
                                 <h5 class="text-muted mb-0">Large: <span class="text-primary">JD
                                         {{ $service->price_large }}</span></h5>
+
+                            </div>
+                            <div class="d-flex flex-row align-items-center justify-content-between">
                                 <button class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal"
                                     data-bs-target="#serviceModal-{{ $service->id }}">
                                     See More
                                 </button>
+                                @auth
+                                    @if(auth()->user()->hasUsedService($service->id))
+                                        <div class="text-success d-flex align-items-center ms-3">
+                                            <i class="fa fa-check-circle me-1"></i>
+                                            <span>Used</span>
+                                        </div>
+                                    @endif
+                                @endauth
                             </div>
                         </div>
                         <div class="card-footer bg-light text-center">
@@ -137,7 +151,8 @@ $services = Services::orderBy('created_at', 'desc')->get();
                                 <div class="modal-footer d-flex justify-content-between">
                                     <button type="button" class="btn btn-secondary px-4 rounded-pill"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary px-4 rounded-pill">Confirm Booking</button>
+                                    <button type="submit" class="btn btn-primary px-4 rounded-pill">Confirm
+                                        Booking</button>
                                 </div>
                             </form>
                         </div>

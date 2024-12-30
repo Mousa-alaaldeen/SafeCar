@@ -17,6 +17,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerPackageController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\CustomerSubscriptionController;
 use App\Http\Controllers\ProfileController;
@@ -78,7 +79,7 @@ Route::put('customer-bookings/{id}', [BookingController::class, 'update'])->name
 // Customer Services
 Route::get('/customer-services', [CustomerServiceController::class, 'index'])->name('customer-services');
 // Customer Packages
-Route::get('/customer-packages', [CustomerServiceController::class, 'indexPackages'])->name('customer-packages');
+Route::get('/customer-packages', [CustomerPackageController::class, 'index'])->name('customer-packages');
 // Customer Subscriptions
 Route::resource('/customer-subscriptions', CustomerSubscriptionController::class);
 // Admin routes (protected by auth and is_admin middleware)

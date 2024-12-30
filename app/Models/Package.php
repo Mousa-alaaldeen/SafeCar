@@ -26,8 +26,6 @@ public function services()
 }
 
 
-public function packageServices()
-{
-    return $this->hasMany(PackageServices::class);
-}
+
+
 }

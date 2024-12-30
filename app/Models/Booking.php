@@ -24,6 +24,7 @@ class Booking extends Model
         return $this->belongsTo(Services::class, 'service_id');
     }
   
+    
     public function bookingServices()
     {
         return $this->hasMany(BookingService::class);
@@ -32,7 +33,7 @@ class Booking extends Model
     {
         return $this->belongsTo(Subscription::class,);
     }
-    // في نموذج Booking
+    
 public function getPriceByCarSize()
 {
     if ($this->service) {
@@ -40,5 +41,9 @@ public function getPriceByCarSize()
     }
     return 0; 
 }
+
+
+
+
 
 }
