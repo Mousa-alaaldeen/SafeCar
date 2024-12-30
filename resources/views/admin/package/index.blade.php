@@ -72,34 +72,34 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="packageModalLabel-{{ $package->id }}">Package Details</h5>
+        <h5 class="modal-title" id="packageModalLabel-{{ $package->id }}">Edit Package</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="{{ route('package.update', $package->id) }}" method="POST">
           @csrf
-          @method('GET')
+          @method('PUT')
 
           <!-- Package Name -->
           <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" name="name" value="{{ $package->name }}" readonly>
+            <label for="name-{{ $package->id }}" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name-{{ $package->id }}" name="name" value="{{ $package->name }}" required>
           </div>
 
           <!-- Package Price -->
           <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control" name="price" value="{{ $package->price }}" readonly>
+            <label for="price-{{ $package->id }}" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price-{{ $package->id }}" name="price" value="{{ $package->price }}" required>
           </div>
 
           <!-- Services Selection -->
           <div class="mb-3">
-            <label for="service_id" class="form-label">Selected Services</label>
+            <label for="service_id-{{ $package->id }}" class="form-label">Select Services</label>
             <div class="form-check border py-3 px-5">
               @foreach($services as $service)
-                <input class="form-check-input" type="checkbox" value="{{ $service->id }}" id="service{{ $service->id }}"
-                {{ in_array($service->id, $package->services->pluck('id')->toArray()) ? 'checked' : '' }} disabled>
-                <label class="form-check-label" for="service{{ $service->id }}">
+                <input class="form-check-input" type="checkbox" name="service_id[]" value="{{ $service->id }}" id="service{{ $package->id }}-{{ $service->id }}"
+                {{ in_array($service->id, $package->services->pluck('id')->toArray()) ? 'checked' : '' }}>
+                <label class="form-check-label" for="service{{ $package->id }}-{{ $service->id }}">
                   {{ $service->name }}
                 </label>
                 <br>
@@ -109,24 +109,34 @@
 
           <!-- Car Size -->
           <div class="mb-3">
-            <label for="size" class="form-label">Car Size</label>
-            <input type="text" class="form-control" value="{{ $package->size }}" readonly>
+            <label for="size-{{ $package->id }}" class="form-label">Car Size</label>
+            <select class="form-select" id="size-{{ $package->id }}" name="size" required>
+              <option value="Small" {{ $package->size == 'Small' ? 'selected' : '' }}>Small</option>
+              <option value="Medium" {{ $package->size == 'Medium' ? 'selected' : '' }}>Medium</option>
+              <option value="Large" {{ $package->size == 'Large' ? 'selected' : '' }}>Large</option>
+            </select>
           </div>
 
           <!-- Duration -->
           <div class="mb-3">
-            <label for="duration" class="form-label">Duration</label>
-            <input type="text" class="form-control" value="{{ $package->duration }}" readonly>
+            <label for="duration-{{ $package->id }}" class="form-label">Duration</label>
+            <select class="form-select" id="duration-{{ $package->id }}" name="duration" required>
+              <option value="Monthly" {{ $package->duration == 'Monthly' ? 'selected' : '' }}>Monthly</option>
+              <option value="Yearly" {{ $package->duration == 'Yearly' ? 'selected' : '' }}>Yearly</option>
+            </select>
           </div>
 
+          <!-- Buttons -->
+          <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
+
 
 
 
@@ -146,6 +156,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- Add Packages Modal -->
 <div class="modal fade" id="addPackagesModal" tabindex="-1" aria-labelledby="addPackagesModalLabel" aria-hidden="true">

@@ -113,6 +113,7 @@
                                     @csrf
                                     <input type="hidden" name="package_id" value="{{ $package->id }}">
                                     <input type="hidden" name="plan_type" value="{{ $package->plan_type }}">
+                                   
                                     <button class="select-package-btn">
                                         <i class="fas fa-tools me-2"></i>Select Package
                                     </button>

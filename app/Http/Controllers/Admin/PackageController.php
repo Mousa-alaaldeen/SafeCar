@@ -108,22 +108,46 @@ class PackageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PackageRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
-        $validatedData = $request->validated();
-        $package = Package::findOrFail($id);
-        $package->name = $validatedData['name'];
-        $package->price = $validatedData['price'];
-        $package->description = $validatedData['description'];
-        $package->size = $validatedData['size'];
-        $package->duration = $validatedData['duration'];
-        $package->save();
-        return response()->json([
-            'success' => true,
-            'message' => 'Service updated successfully!',
-            'package' => $package
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'nullable|string',
+            'size' => 'required|string',
+            'duration' => 'required|string',
+            'service_id' => 'required|array', // Ensure it's an array
+            'service_id.*' => 'exists:services,id', // Validate each service ID
         ]);
+    
+        try {
+            // Find the package by ID
+            $package = Package::findOrFail($id);
+    
+            // Update package details
+            $package->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'size' => $request->size,
+                'duration' => $request->duration,
+                'price' => $request->price,
+            ]);
+    
+            // Sync the services with the package (remove old and add new ones)
+            $package->services()->sync($request->service_id);
+    
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Package updated successfully.');
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Error updating package: ' . $e->getMessage());
+    
+            // Redirect back with error message
+            return redirect()->back()->withErrors(['error' => 'Failed to update package. Please try again.']);
+        }
     }
+    
 
     /**
      * Remove the specified resource from storage.

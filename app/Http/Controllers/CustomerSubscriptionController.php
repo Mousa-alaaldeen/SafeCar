@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubscriptionRequest;
+use App\Models\Package;
 use App\Models\Subscription;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -33,25 +34,46 @@ class CustomerSubscriptionController extends Controller
      */
   
 
-public function store(Request $request)
-{
-    $request->validate([
-        'package_id' => 'required|exists:packages,id',
+     public function store(Request $request)
+     {
+         $request->validate([
+             'package_id' => 'required|exists:packages,id',
+         
+         ]);
+     
+         $userId = Auth::id();
+         $packageId = $request->package_id;
+         $requestedSize =Auth::user()->car_size;
+     
         
-    ]);
-    
-  
-
-    Subscription::create([
-        'users_id' => Auth::id(),
-        'package_id' => $request->package_id,
-        'start_date' => Carbon::now(),
-        'end_date' => Carbon::now()->addMonth(),  
-        'plan_type' => 'Monthly', 
-    ]);
-  
-    return back()->with('success', 'Subscription successfully created.');
-}
+         $package = Package::find($packageId);
+     
+         if (!$package || $package->size != $requestedSize) {
+             return back()->withErrors(['error' => 'The selected package size does not match the required size.']);
+         }
+     
+        
+         $activeSubscription = Subscription::where('users_id', $userId)
+             ->where('package_id', $packageId)
+             ->where('end_date', '>=', Carbon::now()) 
+             ->first();
+     
+         if ($activeSubscription) {
+             return back()->withErrors(['error' => 'You already have an active subscription for this package.']);
+         }
+     
+         // إنشاء الاشتراك الجديد
+         Subscription::create([
+             'users_id' => $userId,
+             'package_id' => $packageId,
+             'start_date' => Carbon::now(),
+             'end_date' => Carbon::now()->addMonth(),
+             'plan_type' => 'Monthly',
+         ]);
+     
+         return back()->with('success', 'Subscription successfully created.');
+     }
+     
 
     
     
