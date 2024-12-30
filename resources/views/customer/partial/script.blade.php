@@ -79,3 +79,21 @@ var swiper = new Swiper('.swiper-container', {
     const yearsExperience = currentYear - startYear;
     document.getElementById('years-experience').textContent = yearsExperience;
 </script>
+
+
+
+<script>
+
+    document.getElementById('serviceSearch').addEventListener('keyup', function () {
+        const searchQuery = this.value.toLowerCase();
+        const serviceItems = document.querySelectorAll('.service-item');
+        serviceItems.forEach(item => {
+            const serviceName = item.querySelector('.card-title').textContent.toLowerCase();
+            if (serviceName.includes(searchQuery)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>

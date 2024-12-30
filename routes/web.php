@@ -62,8 +62,11 @@ Route::get('/dashboard', function () {
 // Profile routes (protected by auth middleware)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/myBookings', [ProfileController::class, 'myBookings'])->name('my-bookings');
+    Route::get('/mySubscriptions', [ProfileController::class, 'myPackages'])->name('my-subscriptions');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 // Customer bookings routes
@@ -78,6 +81,7 @@ Route::put('customer-bookings/{id}', [BookingController::class, 'update'])->name
 
 // Customer Services
 Route::get('/customer-services', [CustomerServiceController::class, 'index'])->name('customer-services');
+
 // Customer Packages
 Route::get('/customer-packages', [CustomerPackageController::class, 'index'])->name('customer-packages');
 // Customer Subscriptions

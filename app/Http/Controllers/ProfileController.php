@@ -30,6 +30,28 @@ class ProfileController extends Controller
             return view('profile.edit', compact('bookings', 'subscriptions','completedBookings', 'cancelledBookings'))->with('user', $request->user(),);
    
     }
+    public function myBookings(Request $request)
+    {
+        $completedBookings = Booking::where('user_id', Auth::id())->where('status', 'Completed')->count();
+        $subscriptions=Subscription::where('users_id', Auth::id())->get();
+        $cancelledBookings = Booking::where('user_id', Auth::id())->where('status', 'Cancelled')->count();
+        $bookings = Booking::orderBy('booking_date', 'desc')->with('service')
+            ->where('user_id', Auth::id())
+            ->orderBy('booking_date', 'desc')->get();
+            return view('profile.booking', compact('bookings', 'subscriptions','completedBookings', 'cancelledBookings'))->with('user', $request->user(),);
+    }
+
+    public function myPackages(Request $request)
+    {
+        $completedBookings = Booking::where('user_id', Auth::id())->where('status', 'Completed')->count();
+        $subscriptions=Subscription::where('users_id', Auth::id())->get();
+        $cancelledBookings = Booking::where('user_id', Auth::id())->where('status', 'Cancelled')->count();
+        $bookings = Booking::orderBy('booking_date', 'desc')->with('service')
+            ->where('user_id', Auth::id())
+            ->orderBy('booking_date', 'desc')->get();
+
+        return view('profile.subscription', compact('bookings', 'subscriptions','completedBookings', 'cancelledBookings'))->with('user', $request->user(),);
+    }
 
     /**
      * Update the user's profile information.

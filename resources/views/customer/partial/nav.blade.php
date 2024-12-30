@@ -8,8 +8,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-
-
             <a href="{{route('customer.home')}}" class="nav-item nav-link @yield('home-active')">Home</a>
             <a href="{{route('about')}}" class="nav-item nav-link  @yield('about-active')">About</a>
             <a href="{{route('customer-services')}}" class="nav-item nav-link  @yield('services-active')">Services</a>
@@ -30,34 +28,45 @@
             <a href="{{route('customer.contact')}}" class="nav-item nav-link  @yield('contact-active') ">Contact</a>
         </div>
         @if (auth()->check())
-            <a href="{{ route('profile.edit') }}" class="nav-item nav-link @yield('bookings-active')">
-                <img src="{{ Auth::user()->car_image == null ? asset('assets/img/icon_car.jpg') : asset('storage/users/' . Auth::user()->car_image) }}"
-                    class="rounded-circle shadow img-fluid mx-3" alt="User Profile" style="max-width: 50px;">
+         
+               
             </a>
+            <div class="" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="{{ Auth::user()->car_image == null ? asset('assets/img/icon_car.jpg') : asset('storage/users/' . Auth::user()->car_image) }}"
+                            class="rounded-circle shadow img-fluid mx-3" alt="User Profile" style="max-width: 50px;">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"  href="{{ route('profile.edit') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('my-bookings') }}">My Booking</a></li>
+                            <li><a class="dropdown-item" href="{{ route('my-subscriptions') }}">My Subscriptions</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
             <!-- Logout button -->
-            <a href="{{ route('logout') }}"  class="auth-btn login-btn mx-3"
+            <a href="{{ route('logout') }}" class="auth-btn login-btn mx-3"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Logout <i class="fa fa-sign-out-alt "></i>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-
-
-
-
         @else
             <!-- If the user is not logged in -->
             <div class="auth-buttons">
-        <a href="{{ route('login') }}" class="auth-btn login-btn">
-            Login
-            <i class="fas fa-sign-in-alt"></i>
-        </a>
-        <a href="{{ route('register') }}" class="auth-btn register-btn">
-            Register
-            <i class="fas fa-user-plus"></i>
-        </a>
-    </div>
+                <a href="{{ route('login') }}" class="auth-btn login-btn">
+                    Login
+                    <i class="fas fa-sign-in-alt"></i>
+                </a>
+                <a href="{{ route('register') }}" class="auth-btn register-btn">
+                    Register
+                    <i class="fas fa-user-plus"></i>
+                </a>
+            </div>
         @endif
 
     </div>

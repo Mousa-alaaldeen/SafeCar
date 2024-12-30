@@ -17,5 +17,19 @@ class CustomerServiceController extends Controller
         return view("customer.services",compact('packages','services'));
     }
    
+    public function showServices(Request $request)
+{
+    $search = $request->input('search');
     
+    if ($search) {
+        $services = Services::where('name', 'LIKE', "%$search%")
+                            ->orWhere('description', 'LIKE', "%$search%")
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+    } else {
+        $services = Services::orderBy('created_at', 'desc')->get();
+    }
+
+    return view('customer.services', compact('services'));
+}
 }
