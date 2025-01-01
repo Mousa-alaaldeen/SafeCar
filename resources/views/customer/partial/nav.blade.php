@@ -7,7 +7,7 @@
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="collapse navbar-collapse mx-3" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="{{route('customer.home')}}" class="nav-item nav-link @yield('home-active')">Home</a>
             <a href="{{route('about')}}" class="nav-item nav-link  @yield('about-active')">About</a>
@@ -63,7 +63,7 @@
                     Login
                     <i class="fas fa-sign-in-alt"></i>
                 </a>
-                <a href="{{ route('register') }}" class="auth-btn register-btn">
+                <a href="{{ route('register') }}" class="auth-btn register-btn ">
                     Register
                     <i class="fas fa-user-plus"></i>
                 </a>

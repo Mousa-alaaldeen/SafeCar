@@ -62,7 +62,7 @@ class CustomerSubscriptionController extends Controller
              return back()->withErrors(['error' => 'You already have an active subscription for this package.']);
          }
      
-         // إنشاء الاشتراك الجديد
+     
          Subscription::create([
              'users_id' => $userId,
              'package_id' => $packageId,

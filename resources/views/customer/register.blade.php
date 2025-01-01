@@ -119,7 +119,8 @@
         <div class="registration-wrapper">
             <div class="registration-info">
                 <div class="registration-info-icon">
-                    <i class="fas fa-car-alt"></i>
+                <img src="{{  asset('assets/img/logo.png') }}"
+                alt="User Profile" style="max-width: 150px;"> 
                 </div>
                 <h2>Welcome to Our Platform</h2>
                 <p>Register and get access to exclusive car services and features. Join our community today!</p>

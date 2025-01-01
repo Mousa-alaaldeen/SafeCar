@@ -10,7 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
     <!-- Favicon -->
     <link href="{{asset('assets')}}/img/favicon.ico" rel="icon">
-
+<link rel="icon" href="{{asset('assets')}}/img/logo.png" type="image/png">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

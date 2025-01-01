@@ -17,13 +17,13 @@ public function index()
     $services = Services::count();
     $employeesCount = Employee::count();
 
-    // الحصول على بيانات الحجوزات حسب الشهر
+
     $monthlyBookings = Booking::selectRaw('MONTH(booking_date) as month, COUNT(*) as count')
         ->groupBy('month')
         ->orderBy('month', 'asc')
         ->get();
 
-    // تحويل البيانات إلى مصفوفات يمكن استخدامها في JavaScript
+   
     $months = $monthlyBookings->pluck('month')->toArray();
     $bookingCounts = $monthlyBookings->pluck('count')->toArray();
 

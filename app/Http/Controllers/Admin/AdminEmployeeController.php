@@ -62,29 +62,39 @@ class AdminEmployeeController extends Controller
 
     public function update(EmployeeRequest $request, string $id)
     {
-        
         $validatedData = $request->validated();
-
+    
         try {
+            $employee = Employee::findOrFail($id);
+    
+          
             if ($request->hasFile('image')) {
+               
+                if ($employee->image && Storage::disk('public')->exists($employee->image)) {
+                    Storage::disk('public')->delete($employee->image);
+                }
+    
+           
                 $image = $request->file('image');
                 $imageName = time() . '-' . preg_replace('/[^a-zA-Z0-9\.\-_]/', '', $image->getClientOriginalName());
                 $image->storeAs('employees', $imageName, 'public');
-                $validatedData['image'] = 'employees/' . $imageName;
+                $validatedData['image'] = $imageName;
+            } else {
+              
+                $validatedData['image'] = $employee->image;
             }
     
             $validatedData['start_date'] = $validatedData['start_date'] ?? '2020-01-01';
-            $employee = Employee::findOrFail($id);
             $employee->update($validatedData);
     
             return redirect()->back()->with('success', 'Employee updated successfully!');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->with('error', 'Database error: ' . $e->getMessage());    
+            return redirect()->back()->with('error', 'Database error: ' . $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to update employee: ' . $e->getMessage());
         }
-      
     }
+    
     
 
     public function destroy(string $id)
